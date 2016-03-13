@@ -1,0 +1,29 @@
+---------------------------------------
+[2016-03-13]
+---------------------------------------
+Q: how to provide to solver a kakuro puzzle (via text file) ?
+- First idea:
+'space' : is used as a separator between cells (any number of 'space' are allowed to be used)
+'_' : will indicate cell MUST be solved
+'\' : indicates cell must NOT be solved
+numbers are allowed to be on both sides of '\'
+'\x' : indicates cells on right side must be solved
+'x\' : indicates cells below must be solved
+'x\x' : cells below must be solved as well as cells on right side
+
+validation checks:
+- in every row equal amount of cells
+
+
+simple example:
+\  4\  9\  \   \
+\4 _   _   21\ \
+\7 _   _   _   16\
+\  \23 _   _   _
+\  \   \16 _   _
+
+
+
+Q: how solver would store a puzzle (in memory)?
+- Two dimensional array of cells will be used.
+=======================================

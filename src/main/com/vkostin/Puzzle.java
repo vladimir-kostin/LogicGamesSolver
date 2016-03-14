@@ -1,5 +1,8 @@
 package com.vkostin;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Puzzle {
   final private Cell[][] cells;
 
@@ -10,4 +13,9 @@ public class Puzzle {
   public Cell[][] getCells() {
     return cells;
   }
+
+  public List<Cell> getRow(int index) {
+    return Arrays.asList(cells[index]);
+  }
+
 }

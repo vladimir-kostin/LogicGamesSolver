@@ -15,17 +15,18 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParse3x4Puzzle() {
-    final String input = String.join("\n"
-            , "\\  3\\ 4\\ 6\\"
-            , "\\6 _   _   _"
-            , "\\7 _   _   _"
-    );
 
-    Puzzle result = puzzleParser.parse(input);
+    Puzzle result = puzzleParser.parse(TestData.PUZZLE_3_X_4);
 
-    assertRow(result.getCells()[0], tC(0, 0), tC(3, 0), tC(4, 0), tC(6, 0));
-    assertRow(result.getCells()[1], tC(0, 6), vC(), vC(), vC());
-    assertRow(result.getCells()[2], tC(0, 7), vC(), vC(), vC());
+    Puzzle expected = PuzzleBuilder.aPuzzle()
+            .addRow(tC(), tC(3,0), tC(4,0), tC(6,0))
+            .addRow(tC(0,6), vC(), vC(), vC())
+            .addRow(tC(0,7), vC(), vC(), vC())
+            .build();
+
+    System.out.println(result);
+
+    Assert.assertEquals(expected, result);
   }
 
   private TaskCell tC() { return tC(0,0); }
@@ -37,32 +38,22 @@ public class PuzzleParserTest {
     return new ValueCell();
   }
 
-  private void assertRow(Cell[] line, Cell... expectedCells) {
-    Assert.assertEquals(expectedCells.length, line.length);
-
-    for (int j = 0; j < expectedCells.length; j++) {
-      Assert.assertEquals(expectedCells[j], line[j]);
-    }
-  }
-
   @Test
   public void shouldParse5x5Puzzle() {
 
-    final String input = String.join("\r\n"
-            , "\\  4\\  9\\  \\   \\"
-            , "\\4 _    _    21\\ \\"
-            , "\\7 _    _    _    16\\"
-            , "\\  \\23 _    _    _"
-            , "\\  \\   \\16 _    _"
-    );
+    Puzzle result = puzzleParser.parse(TestData.PUZZLE_5_X_5);
 
-    Puzzle result = puzzleParser.parse(input);
+    Puzzle expected = PuzzleBuilder.aPuzzle()
+            .addRow(tC(), tC(4,0), tC(9,0), tC(), tC())
+            .addRow(tC(0,4), vC(), vC(), tC(21,0), tC())
+            .addRow(tC(0,7), vC(), vC(), vC(), tC(16,0))
+            .addRow(tC(), tC(0, 23), vC(), vC(), vC())
+            .addRow(tC(), tC(), tC(0,16), vC(), vC())
+            .build();
+    System.out.println(result);
 
-    assertRow(result.getCells()[0], tC(), tC(4, 0), tC(9, 0), tC(), tC());
-    assertRow(result.getCells()[1], tC(0, 4), vC(), vC(), tC(21, 0), tC());
-    assertRow(result.getCells()[2], tC(0,7), vC(), vC(), vC(), tC(16,0));
-    assertRow(result.getCells()[3], tC(), tC(0,23), vC(), vC(), vC());
-    assertRow(result.getCells()[4], tC(), tC(), tC(0,16), vC(), vC());
+    Assert.assertEquals(expected, result);
   }
 
+  // TODO test parsing with values in value cells
 }

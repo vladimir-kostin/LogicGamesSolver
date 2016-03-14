@@ -3,8 +3,7 @@ package com.vkostin;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Assert;
 
 public class PuzzleParserTest {
 
@@ -36,18 +35,18 @@ public class PuzzleParserTest {
   }
 
   private void assertTaskCell(Cell cell, int expectedSumOfValueBelow, int expectedSumOfValuesOnTheRight) {
-    assertTrue(cell instanceof TaskCell);
+    Assert.assertTrue(cell instanceof TaskCell);
     TaskCell taskCell = (TaskCell) cell;
 
-    assertEquals(expectedSumOfValueBelow, taskCell.getSumOfValuesBelow());
-    assertEquals(expectedSumOfValuesOnTheRight, taskCell.getSumOfValueOnTheRight());
+    Assert.assertEquals(expectedSumOfValueBelow, taskCell.getSumOfValuesBelow());
+    Assert.assertEquals(expectedSumOfValuesOnTheRight, taskCell.getSumOfValueOnTheRight());
   }
 
   private void assertEmptyValueCell(Cell cell) {
-    assertTrue(cell instanceof  ValueCell);
+    Assert.assertTrue(cell instanceof  ValueCell);
     ValueCell valueCell = (ValueCell) cell;
 
-    assertEquals(-1, valueCell.getValue());
+    Assert.assertEquals(-1, valueCell.getValue());
   }
 
   private void assertLine1(Cell[] line) {

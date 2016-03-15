@@ -3,7 +3,16 @@ package com.vkostin;
 import java.util.Objects;
 
 public class ValueCell implements Cell {
-  private int value = -1;
+  private final static int UNSOLVED_VALUE = -1;
+
+  public static ValueCell newValueCell(int value) { return new ValueCell(value); }
+
+  private int value;
+
+  public ValueCell() { this(UNSOLVED_VALUE); }
+  public ValueCell(int value) {
+    this.value = value;
+  }
 
   public int getValue() {
     return value;

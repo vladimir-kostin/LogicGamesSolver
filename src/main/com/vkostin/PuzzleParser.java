@@ -1,14 +1,16 @@
 package com.vkostin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class PuzzleParser {
 
   private final static String NEW_LINE_REGEX = "[\\r\\n]+";
   private final static String WHITE_SPACE_REGEX = "[\\s]+";
   private final static String BACKSLASH_REGEX = "\\\\";
+
+  private final static String UNSOLVED_VALUE = "_";
 
   public Puzzle parse(String task) {
 
@@ -31,13 +33,13 @@ public class PuzzleParser {
 
       switch (sums.length) {
         case 1: {
-          cellsInLine.add(new ValueCell());
+          Optional.of(sums[0])
+                  .map(this::parseValueCell)
+                  .ifPresent(cellsInLine::add);
         } break;
 
         case 2: {
-          int sumBelow = sums[0].isEmpty() ? 0 : Integer.parseInt(sums[0]);
-          int sumRight = sums[1].isEmpty() ? 0 : Integer.parseInt(sums[1]);
-          cellsInLine.add(new TaskCell(sumBelow, sumRight));
+          cellsInLine.add(mapStringsToTaskCell(sums[0], sums[1]));
         } break;
 
         default: {
@@ -47,6 +49,21 @@ public class PuzzleParser {
     }
 
     return cellsInLine;
+  }
+
+  private ValueCell parseValueCell(String input) {
+    if (UNSOLVED_VALUE.equals(input)) { return new ValueCell(); }
+
+    return Optional.of(input)
+            .map(Integer::parseInt)
+            .map(ValueCell::newValueCell)
+            .orElseThrow(RuntimeException::new);
+  }
+
+  private TaskCell mapStringsToTaskCell(String below, String right) {
+    int sumBelow = below.isEmpty() ? 0 : Integer.parseInt(below);
+    int sumRight = right.isEmpty() ? 0 : Integer.parseInt(right);
+    return new TaskCell(sumBelow, sumRight);
   }
 
 }

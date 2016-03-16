@@ -43,19 +43,16 @@ public class Puzzle3 implements IPuzzle {
   public boolean hasErrors() {
     for (int j = 0; j < cells.size(); j++) {
       for (int k = 0; k < cells.get(0).size(); k++) {
-        if (doesCellHaveAnyErrors(j, k)) {
-          return true;
-        }
+        if (doesCellHaveAnyErrors(j, k)) return true;
       }
     }
     return false;
   }
 
-
   private boolean doesCellHaveAnyErrors(int cellRowIndex, int cellColumnIndex) {
     Cell cell = cells.get(cellRowIndex).get(cellColumnIndex);
-    if(cell instanceof ValueCell) { return false; }
-    if(cell instanceof TaskCell) {
+    if (cell instanceof ValueCell) return false;
+    if (cell instanceof TaskCell) {
       return hasErrorsBelow((TaskCell) cell, cellRowIndex, cellColumnIndex)
               || hasErrorsOnTheRight((TaskCell) cell, cellRowIndex, cellColumnIndex);
     }
@@ -63,14 +60,13 @@ public class Puzzle3 implements IPuzzle {
     return true;
   }
 
-
   private boolean hasErrorsBelow(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
-    if (0 == taskCell.getSumOfValuesBelow()) { return false; }
+    if (0 == taskCell.getSumOfValuesBelow()) return false;
     return containsErrors(valueCellsBelowCell(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesBelow());
   }
 
   private boolean hasErrorsOnTheRight(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
-    if (0 == taskCell.getSumOfValueOnTheRight()) { return false; }
+    if (0 == taskCell.getSumOfValueOnTheRight()) return false;
     return containsErrors(valueCellsOnTheRightFromCell(cellRowIndex, cellColumnIndex), taskCell.getSumOfValueOnTheRight());
   }
 
@@ -80,12 +76,12 @@ public class Puzzle3 implements IPuzzle {
             .mapToInt(ValueCell::getValue)
             .sum();
 
-    if(expectedSumOfValues < actualSumOfValues) { return true; }
+    if (expectedSumOfValues < actualSumOfValues) return true;
 
     boolean containsUnresolvedValueCells = valueCells.stream()
             .anyMatch(ValueCell::isUnsolved);
 
-    if(!containsUnresolvedValueCells && expectedSumOfValues != actualSumOfValues) { return  true; }
+    if (!containsUnresolvedValueCells && expectedSumOfValues != actualSumOfValues) return true;
 
     long properValuesCount = valueCells.stream()
             .filter(ValueCell::hasProperValue)
@@ -102,8 +98,8 @@ public class Puzzle3 implements IPuzzle {
 
   private List<ValueCell> valueCellsBelowCell(int cellRowIndex, int cellColumnIndex) {
     List<ValueCell> valueCells = new ArrayList<>();
-    for (int rowIndex = cellRowIndex+1; rowIndex < cells.size(); rowIndex++) {
-      if(cells.get(rowIndex).get(cellColumnIndex) instanceof ValueCell) {
+    for (int rowIndex = cellRowIndex + 1; rowIndex < cells.size(); rowIndex++) {
+      if (cells.get(rowIndex).get(cellColumnIndex) instanceof ValueCell) {
         valueCells.add((ValueCell) cells.get(rowIndex).get(cellColumnIndex));
       } else {
         break;
@@ -112,18 +108,17 @@ public class Puzzle3 implements IPuzzle {
     return valueCells;
   }
 
-
   private List<ValueCell> valueCellsOnTheRightFromCell(int cellRowIndex, int cellColumnIndex) {
     List<ValueCell> valueCells = new ArrayList<>();
 
     for (int columnIndex = cellColumnIndex + 1; columnIndex < cells.get(cellRowIndex).size(); columnIndex++) {
-      if(cells.get(cellRowIndex).get(columnIndex) instanceof ValueCell) {
+      if (cells.get(cellRowIndex).get(columnIndex) instanceof ValueCell) {
         valueCells.add((ValueCell) cells.get(cellRowIndex).get(columnIndex));
       } else {
         break;
       }
     }
-   return valueCells;
+    return valueCells;
   }
 
 }

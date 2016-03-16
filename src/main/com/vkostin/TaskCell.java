@@ -11,10 +11,7 @@ public class TaskCell implements Cell {
     this.sumOfValueOnTheRight = sumOfValueOnTheRight;
   }
 
-  public int getSumOfValuesBelow() {
-    return sumOfValuesBelow;
-  }
-
+  public int getSumOfValuesBelow() { return sumOfValuesBelow; }
   public int getSumOfValueOnTheRight() {
     return sumOfValueOnTheRight;
   }

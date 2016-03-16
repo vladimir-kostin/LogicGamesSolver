@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Puzzle implements Cloneable {
+public class Puzzle implements IPuzzle {
   final private Cell[][] cells;
 
   public Puzzle(Cell[][] cells) {
@@ -31,32 +31,25 @@ public class Puzzle implements Cloneable {
             '}';
   }
 
+  @Override
   public ValueCell findFirstUnsolvedValueCellOrNull() {
-    for (int j = 0; j < cells.length; j++) {
-      for (int k = 0; k < cells[j].length; k++) {
-        if (cells[j][k] instanceof ValueCell) {
-          if (((ValueCell)cells[j][k]).isUnsolved()) { return (ValueCell)cells[j][k]; }
+    for (Cell[] row : cells) {
+      for (Cell cell : row) {
+        if (cell instanceof ValueCell) {
+          ValueCell valueCell = (ValueCell) cell;
+          if (valueCell.isUnsolved()) { return valueCell; }
         }
       }
     }
+
     return null;
   }
 
-  public boolean hasAnyUnsolvedValueCells() {
-    for (int j = 0; j < cells.length; j++) {
-      for (int k = 0; k < cells[j].length; k++) {
-        if (cells[j][k] instanceof ValueCell) {
-          if (((ValueCell)cells[j][k]).isUnsolved()) { return true; }
-        }
-      }
-    }
-    return false;
-  }
-
+  @Override
   public boolean hasErrors() {
     for (int j = 0; j < cells.length; j++) {
       for (int k = 0; k < cells[j].length; k++) {
-        if (doesCellHasAnyErrors(j, k)) {
+        if (doesCellHaveAnyErrors(j, k)) {
           return true;
         }
       }
@@ -64,7 +57,7 @@ public class Puzzle implements Cloneable {
     return false;
   }
 
-  private boolean doesCellHasAnyErrors(int cellRowIndex, int cellColumnIndex) {
+  private boolean doesCellHaveAnyErrors(int cellRowIndex, int cellColumnIndex) {
     Cell cell = cells[cellRowIndex][cellColumnIndex];
     if(cell instanceof ValueCell) { return false; }
     if(cell instanceof TaskCell) {

@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 public class PuzzleSolverTest {
 
   private PuzzleSolver puzzleSolver;
@@ -20,7 +22,7 @@ public class PuzzleSolverTest {
     Puzzle input = parser.parse(TestData.PUZZLE_3_X_4);
 
     Puzzle result = puzzleSolver.solve(input);
-    Assert.assertFalse(result.hasAnyUnsolvedValueCells());
+    Assert.assertNull(result.findFirstUnsolvedValueCellOrNull());
     Assert.assertFalse(result.hasErrors());
 
     Puzzle expected = parser.parse(TestData.SOLUTION_3_X_4);
@@ -32,7 +34,7 @@ public class PuzzleSolverTest {
     Puzzle input = parser.parse(TestData.PUZZLE_5_X_5);
 
     Puzzle result = puzzleSolver.solve(input);
-    Assert.assertFalse(result.hasAnyUnsolvedValueCells());
+    Assert.assertNull(result.findFirstUnsolvedValueCellOrNull());
     Assert.assertFalse(result.hasErrors());
 
     Puzzle expected = parser.parse(TestData.SOLUTION_5_X_5);

@@ -3,17 +3,21 @@ package com.vkostin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public class PuzzleBuilder {
-  public static PuzzleBuilder aPuzzle() {
-    return new PuzzleBuilder();
+  public static PuzzleBuilder aPuzzle(Function<Cell[][], IPuzzle> createPuzzle) {
+    return new PuzzleBuilder(createPuzzle);
   }
 
   private List<List<Cell>> rows = new ArrayList<>();
 
-  private PuzzleBuilder(){}
+  private final Function<Cell[][], IPuzzle> createPuzzle;
+  private PuzzleBuilder(Function<Cell[][], IPuzzle> createPuzzle){
+    this.createPuzzle = createPuzzle;
+  }
 
-  public Puzzle build() {
+  public IPuzzle build() {
     final int maxWidth = maxWidth();
     Cell[][] cells = new Cell[rows.size()][maxWidth];
 
@@ -23,7 +27,7 @@ public class PuzzleBuilder {
       }
     }
 
-    return new Puzzle(cells);
+    return createPuzzle.apply(cells);
   }
 
   private int maxWidth() {

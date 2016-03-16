@@ -3,6 +3,7 @@ package com.vkostin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class PuzzleParser {
 
@@ -12,11 +13,16 @@ public class PuzzleParser {
 
   private final static String UNSOLVED_VALUE = "_";
 
-  public Puzzle parse(String task) {
+  private final Function<Cell[][], IPuzzle> createPuzzle;
+  public PuzzleParser(Function<Cell[][], IPuzzle> createPuzzle) {
+    this.createPuzzle = createPuzzle;
+  }
+
+  public IPuzzle parse(String task) {
 
     String[] lines = task.split(NEW_LINE_REGEX);
 
-    PuzzleBuilder builder = PuzzleBuilder.aPuzzle();
+    PuzzleBuilder builder = PuzzleBuilder.aPuzzle(createPuzzle);
     for (String line : lines) {
       builder.addRow(parseLine(line));
     }

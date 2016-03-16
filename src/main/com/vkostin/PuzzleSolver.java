@@ -2,7 +2,7 @@ package com.vkostin;
 
 public class PuzzleSolver {
 
-  public Puzzle solve(Puzzle puzzle) {
+  public IPuzzle solve(IPuzzle puzzle) {
     if(puzzle.hasErrors()) {
       return null;
     }
@@ -15,7 +15,7 @@ public class PuzzleSolver {
     // assumptions
     for (int valueToBeTried = ValueCell.MIN_ALLOWED_VALUE; valueToBeTried <= ValueCell.MAX_ALLOWED_VALUE; valueToBeTried++) {
       unsolvedValueCell.setValue(valueToBeTried);
-      Puzzle result = solve(puzzle);
+      IPuzzle result = solve(puzzle);
       if(null != result) { return result; }
     }
 

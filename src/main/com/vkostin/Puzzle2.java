@@ -3,6 +3,7 @@ package com.vkostin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Puzzle2 implements IPuzzle {
 
@@ -12,6 +13,19 @@ public class Puzzle2 implements IPuzzle {
     for (Cell[] row : cells) {
       this.cells.add(Arrays.asList(row));
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Puzzle2)) return false;
+    Puzzle2 puzzle2 = (Puzzle2) o;
+    return Objects.equals(cells, puzzle2.cells);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(cells);
   }
 
   @Override
@@ -73,10 +87,22 @@ public class Puzzle2 implements IPuzzle {
   }
 
   private List<ValueCell> getValueCellsOnTheRight(TaskCell taskCell) {
+    List<ValueCell> valueCells = new ArrayList<>();
     for (List<Cell> row : cells) {
-      int ndx = indexOfCellInRow(taskCell, row);
-      if (-1 == ndx) continue;
+      int cellColumnIndex = indexOfCellInRow(taskCell, row);
+      if (-1 == cellColumnIndex) continue;
+
+      for (Cell cell : row.subList(cellColumnIndex+1, row.size())) {
+        if (cell instanceof ValueCell) {
+          valueCells.add((ValueCell) cell);
+        } else {
+          break;
+        }
+      }
+      break;
     }
+
+    return valueCells;
   }
 
   private int indexOfCellInRow(Cell cell, List<Cell> row) {
@@ -87,6 +113,18 @@ public class Puzzle2 implements IPuzzle {
   }
 
   private List<ValueCell> getValueCellsBelow(TaskCell taskCell) {
+    List<ValueCell> valueCells = new ArrayList<>();
+    int cellColumnIndex = -1;
+    for (List<Cell> row : cells) {
+      if(-1 == cellColumnIndex) {
+        cellColumnIndex = indexOfCellInRow(taskCell, row);
+      } else if (row.get(cellColumnIndex) instanceof ValueCell) {
+        valueCells.add((ValueCell) row.get(cellColumnIndex));
+      } else {
+        break;
+      }
+    }
+    return valueCells;
   }
 
 }

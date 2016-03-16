@@ -20,6 +20,8 @@ public class PuzzleSolverTest {
     Puzzle input = parser.parse(TestData.PUZZLE_3_X_4);
 
     Puzzle result = puzzleSolver.solve(input);
+    Assert.assertFalse(result.hasAnyUnsolvedValueCells());
+    Assert.assertFalse(result.hasErrors());
 
     Puzzle expected = parser.parse(TestData.SOLUTION_3_X_4);
     Assert.assertEquals(expected, result);
@@ -30,6 +32,8 @@ public class PuzzleSolverTest {
     Puzzle input = parser.parse(TestData.PUZZLE_5_X_5);
 
     Puzzle result = puzzleSolver.solve(input);
+    Assert.assertFalse(result.hasAnyUnsolvedValueCells());
+    Assert.assertFalse(result.hasErrors());
 
     Puzzle expected = parser.parse(TestData.SOLUTION_5_X_5);
     Assert.assertEquals(expected, result);

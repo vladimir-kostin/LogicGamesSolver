@@ -1,21 +1,14 @@
 package com.vkostin;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Puzzle {
+public class Puzzle implements Cloneable {
   final private Cell[][] cells;
 
   public Puzzle(Cell[][] cells) {
     this.cells = cells;
-  }
-
-  public Cell[][] getCells() {
-    return cells;
-  }
-
-  public List<Cell> getRow(int index) {
-    return Arrays.asList(cells[index]);
   }
 
   @Override
@@ -28,7 +21,7 @@ public class Puzzle {
 
   @Override
   public int hashCode() {
-    return Arrays.hashCode(cells);
+    return Arrays.deepHashCode(cells);
   }
 
   @Override
@@ -36,5 +29,109 @@ public class Puzzle {
     return "Puzzle{" +
             "cells=" + Arrays.deepToString(cells) +
             '}';
+  }
+
+  public ValueCell findFirstUnsolvedValueCellOrNull() {
+    for (int j = 0; j < cells.length; j++) {
+      for (int k = 0; k < cells[j].length; k++) {
+        if (cells[j][k] instanceof ValueCell) {
+          if (((ValueCell)cells[j][k]).isUnsolved()) { return (ValueCell)cells[j][k]; }
+        }
+      }
+    }
+    return null;
+  }
+
+  public boolean hasAnyUnsolvedValueCells() {
+    for (int j = 0; j < cells.length; j++) {
+      for (int k = 0; k < cells[j].length; k++) {
+        if (cells[j][k] instanceof ValueCell) {
+          if (((ValueCell)cells[j][k]).isUnsolved()) { return true; }
+        }
+      }
+    }
+    return false;
+  }
+
+  public boolean hasErrors() {
+    for (int j = 0; j < cells.length; j++) {
+      for (int k = 0; k < cells[j].length; k++) {
+        if (doesCellHasAnyErrors(j, k)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private boolean doesCellHasAnyErrors(int cellRowIndex, int cellColumnIndex) {
+    Cell cell = cells[cellRowIndex][cellColumnIndex];
+    if(cell instanceof ValueCell) { return false; }
+    if(cell instanceof TaskCell) {
+      return hasErrorsBelow((TaskCell) cell, cellRowIndex, cellColumnIndex)
+              || hasErrorsOnTheRight((TaskCell) cell, cellRowIndex, cellColumnIndex);
+    }
+
+    return true;
+  }
+
+  private boolean hasErrorsBelow(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
+    if (0 == taskCell.getSumOfValuesBelow()) { return false; }
+    return containsErrors(valueCellsBelowCell(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesBelow());
+  }
+
+  private boolean hasErrorsOnTheRight(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
+    if (0 == taskCell.getSumOfValueOnTheRight()) { return false; }
+    return containsErrors(valueCellsOnTheRightFromCell(cellRowIndex, cellColumnIndex), taskCell.getSumOfValueOnTheRight());
+  }
+
+  private static boolean containsErrors(List<ValueCell> valueCells, int expectedSumOfValues) {
+    int actualSumOfValues = valueCells.stream()
+            .filter(ValueCell::hasProperValue)
+            .mapToInt(ValueCell::getValue)
+            .sum();
+
+    if(expectedSumOfValues < actualSumOfValues) { return true; }
+
+    boolean containsUnresolvedValueCells = valueCells.stream()
+            .anyMatch(ValueCell::isUnsolved);
+
+    if(!containsUnresolvedValueCells && expectedSumOfValues != actualSumOfValues) { return  true; }
+
+    long properValuesCount = valueCells.stream()
+            .filter(ValueCell::hasProperValue)
+            .count();
+
+    long distinctProperValuesCount = valueCells.stream()
+            .filter(ValueCell::hasProperValue)
+            .mapToInt(ValueCell::getValue)
+            .distinct()
+            .count();
+
+    return (properValuesCount != distinctProperValuesCount);
+  }
+
+  private List<ValueCell> valueCellsBelowCell(int cellRowIndex, int cellColumnIndex) {
+    List<ValueCell> valueCells = new ArrayList<>();
+    for (int j = cellRowIndex + 1; j < cells.length; j++) {
+      if(cells[j][cellColumnIndex] instanceof ValueCell) {
+        valueCells.add((ValueCell) cells[j][cellColumnIndex]);
+      } else {
+        break;
+      }
+    }
+    return valueCells;
+  }
+
+  private List<ValueCell> valueCellsOnTheRightFromCell(int cellRowIndex, int cellColumnIndex) {
+    List<ValueCell> valueCells = new ArrayList<>();
+    for (int j = cellColumnIndex + 1; j < cells[cellRowIndex].length; j++) {
+      if (cells[cellRowIndex][j] instanceof ValueCell) {
+        valueCells.add((ValueCell) cells[cellRowIndex][j]);
+      } else {
+        break;
+      }
+    }
+    return valueCells;
   }
 }

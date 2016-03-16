@@ -50,11 +50,11 @@ public class Puzzle2 implements IPuzzle {
 
   private boolean doesTaskCellHaveAnyErrors(TaskCell taskCell) {
     if(0 < taskCell.getSumOfValuesBelow()) {
-      List<ValueCell> valueCellsBelow = getValueCellsBelow(taskCell);
+      List<ValueCell> valueCellsBelow = valueCellsBelowCell(taskCell);
       if(containsError(valueCellsBelow, taskCell.getSumOfValuesBelow())) { return true; }
     }
     if(0 < taskCell.getSumOfValueOnTheRight()) {
-      List<ValueCell> valueCellsOnTheRight = getValueCellsOnTheRight(taskCell);
+      List<ValueCell> valueCellsOnTheRight = valueCellsOnTheRightFromCell(taskCell);
       if(containsError(valueCellsOnTheRight, taskCell.getSumOfValueOnTheRight())) { return true; }
     }
     return false;
@@ -86,7 +86,7 @@ public class Puzzle2 implements IPuzzle {
     return (properValuesCount != distinctProperValuesCount);
   }
 
-  private List<ValueCell> getValueCellsOnTheRight(TaskCell taskCell) {
+  private List<ValueCell> valueCellsOnTheRightFromCell(Cell taskCell) {
     List<ValueCell> valueCells = new ArrayList<>();
     for (List<Cell> row : cells) {
       int cellColumnIndex = indexOfCellInRow(taskCell, row);
@@ -112,7 +112,7 @@ public class Puzzle2 implements IPuzzle {
     return -1;
   }
 
-  private List<ValueCell> getValueCellsBelow(TaskCell taskCell) {
+  private List<ValueCell> valueCellsBelowCell(Cell taskCell) {
     List<ValueCell> valueCells = new ArrayList<>();
     int cellColumnIndex = -1;
     for (List<Cell> row : cells) {

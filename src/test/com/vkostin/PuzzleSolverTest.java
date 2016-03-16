@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public class PuzzleSolverTest {
 
-  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle2(cells);
+  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle3(cells);
   private PuzzleParser parser = new PuzzleParser(createPuzzle);
   private PuzzleSolver puzzleSolver;
 

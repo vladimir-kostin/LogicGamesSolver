@@ -106,8 +106,8 @@ public class Puzzle2 implements IPuzzle {
   }
 
   private int indexOfCellInRow(Cell cell, List<Cell> row) {
-    for (Cell c : row) {
-      if (c == cell) { return row.indexOf(c); }
+    for (int columnIndex = 0; columnIndex < row.size(); columnIndex++) {
+      if(row.get(columnIndex) == cell) return columnIndex;
     }
     return -1;
   }

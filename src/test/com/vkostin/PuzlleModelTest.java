@@ -13,46 +13,28 @@ public class PuzlleModelTest {
 
   private PuzzleSolver solver = new PuzzleSolver();
 
+  private void testSolvingWithParser(PuzzleParser parser) {
+    TestData.ALL_PUZZLES_WITH_SOLUTIONS.entrySet().stream()
+            .forEach(e ->
+                    Assert.assertEquals(
+                            parser.parse(e.getValue()),
+                            solver.solve(parser.parse(e.getKey()))
+                    ));
+  }
+
   @Test
   public void puzzle1() throws Exception {
-
-    PuzzleParser parser = new PuzzleParser(createPuzzle1);
-
-    for (int j = 0; j < 500; j++) {
-      Assert.assertEquals(parser.parse(TestData.SOLUTION_3_X_4)
-              , solver.solve(parser.parse(TestData.PUZZLE_3_X_4)));
-
-      Assert.assertEquals(parser.parse(TestData.SOLUTION_5_X_5)
-              , solver.solve(parser.parse(TestData.PUZZLE_5_X_5)));
-    }
+    testSolvingWithParser(new PuzzleParser(createPuzzle1));
   }
 
   @Test
   public void puzzle2() throws Exception {
-
-    PuzzleParser parser = new PuzzleParser(createPuzzle2);
-
-    for (int j = 0; j < 500; j++) {
-      Assert.assertEquals(parser.parse(TestData.SOLUTION_3_X_4)
-              , solver.solve(parser.parse(TestData.PUZZLE_3_X_4)));
-
-      Assert.assertEquals(parser.parse(TestData.SOLUTION_5_X_5)
-              , solver.solve(parser.parse(TestData.PUZZLE_5_X_5)));
-    }
+    testSolvingWithParser(new PuzzleParser(createPuzzle2));
   }
 
   @Test
   public void puzzle3() throws Exception {
-
-    PuzzleParser parser = new PuzzleParser(createPuzzle3);
-
-      for (int j = 0; j < 500; j++) {
-        Assert.assertEquals(parser.parse(TestData.SOLUTION_3_X_4)
-                , solver.solve(parser.parse(TestData.PUZZLE_3_X_4)));
-
-        Assert.assertEquals(parser.parse(TestData.SOLUTION_5_X_5)
-                , solver.solve(parser.parse(TestData.PUZZLE_5_X_5)));
-      }
+    testSolvingWithParser(new PuzzleParser(createPuzzle3));
   }
 
 }

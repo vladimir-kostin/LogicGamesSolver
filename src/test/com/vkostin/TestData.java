@@ -1,5 +1,9 @@
 package com.vkostin;
 
+import com.google.common.collect.ImmutableMap;
+
+import java.util.Map;
+
 class TestData {
   final static String PUZZLE_3_X_4 = String.join("\n"
           ,"\\  3\\ 4\\ 6\\"
@@ -48,9 +52,9 @@ class TestData {
   );
 
   final static String PUZZLE_7_X_7 = String.join("\n"
-          , "\\  5\\ 13\\   \\   \\  16\\ 8\\"
+          , "\\   5\\ 13\\   \\   \\  16\\ 8\\"
           , "\\5  _   _   15\\ 11\\16 _   _"
-          , "28\\ _   _    _    _     _   _"
+          , "\\28 _   _    _    _     _   _"
           , "\\    \\  \\4 _    _      \\  \\"
           , "\\   4\\ 3\\3 _    _     9\\ 4\\"
           , "\\24 _   _    _    _     _   _"
@@ -58,9 +62,9 @@ class TestData {
   );
 
   final static String SOLUTION_7_X_7 = String.join("\n"
-          , "\\  5\\ 13\\   \\   \\  16\\ 8\\"
+          , "\\   5\\ 13\\   \\   \\  16\\ 8\\"
           , "\\5  1   4   15\\ 11\\16 9   7"
-          , "28\\ 4   9    5    2     7   1"
+          , "\\28 4   9    5    2     7   1"
           , "\\    \\  \\4 1    3      \\  \\"
           , "\\   4\\ 3\\3 2    1     9\\ 4\\"
           , "\\24 1   2    7    5     6   3"
@@ -166,5 +170,16 @@ class TestData {
           , "\\17 9     8    \\    \\30 1     3    7     9     2    8"
           , "\\9  8     1    \\    \\15 6     9     \\    \\17 8    9"
   );
+
+  final static Map<String, String> ALL_PUZZLES_WITH_SOLUTIONS = ImmutableMap.<String, String>builder()
+          .put(TestData.PUZZLE_3_X_4, TestData.SOLUTION_3_X_4)
+          .put(TestData.PUZZLE_5_X_5, TestData.SOLUTION_5_X_5)
+          .put(TestData.PUZZLE_6_X_6, TestData.SOLUTION_6_X_6)
+          .put(TestData.PUZZLE_7_X_7, TestData.SOLUTION_7_X_7)
+          .put(TestData.PUZZLE_8_X_8, TestData.SOLUTION_8_X_8)
+          .put(TestData.PUZZLE_9_X_9, TestData.SOLUTION_9_X_9)
+          .put(TestData.PUZZLE_10_X_10, TestData.SOLUTION_10_X_10)
+          .put(TestData.PUZZLE_11_X_11, TestData.SOLUTION_11_X_11)
+          .build();
 
 }

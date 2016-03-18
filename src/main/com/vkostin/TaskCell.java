@@ -4,16 +4,16 @@ import java.util.Objects;
 
 public class TaskCell implements Cell {
   final private int sumOfValuesBelow;
-  final private int sumOfValueOnTheRight;
+  final private int sumOfValuesOnTheRight;
 
-  public TaskCell(int sumOfValuesBelow, int sumOfValueOnTheRight) {
+  public TaskCell(int sumOfValuesBelow, int sumOfValuesOnTheRight) {
     this.sumOfValuesBelow = sumOfValuesBelow;
-    this.sumOfValueOnTheRight = sumOfValueOnTheRight;
+    this.sumOfValuesOnTheRight = sumOfValuesOnTheRight;
   }
 
   public int getSumOfValuesBelow() { return sumOfValuesBelow; }
-  public int getSumOfValueOnTheRight() {
-    return sumOfValueOnTheRight;
+  public int getSumOfValuesOnTheRight() {
+    return sumOfValuesOnTheRight;
   }
 
   @Override
@@ -22,19 +22,19 @@ public class TaskCell implements Cell {
     if (o == null || getClass() != o.getClass()) return false;
     TaskCell taskCell = (TaskCell) o;
     return sumOfValuesBelow == taskCell.sumOfValuesBelow &&
-            sumOfValueOnTheRight == taskCell.sumOfValueOnTheRight;
+            sumOfValuesOnTheRight == taskCell.sumOfValuesOnTheRight;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sumOfValuesBelow, sumOfValueOnTheRight);
+    return Objects.hash(sumOfValuesBelow, sumOfValuesOnTheRight);
   }
 
   @Override
   public String toString() {
     return "TaskCell{" +
             "sumOfValuesBelow=" + sumOfValuesBelow +
-            ", sumOfValueOnTheRight=" + sumOfValueOnTheRight +
+            ", sumOfValuesOnTheRight=" + sumOfValuesOnTheRight +
             '}';
   }
 

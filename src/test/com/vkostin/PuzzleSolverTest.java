@@ -8,21 +8,22 @@ import java.util.function.Function;
 
 public class PuzzleSolverTest {
 
-  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle3(cells);
+  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle5(cells);
   private PuzzleParser parser = new PuzzleParser(createPuzzle);
   private PuzzleSolver puzzleSolver;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     puzzleSolver = new PuzzleSolver();
   }
 
   private void shouldSolve(String puzlle, String solution) {
     IPuzzle input = parser.parse(puzlle);
 
-    IPuzzle result = puzzleSolver.solve(input);
-    Assert.assertNull(result.findFirstUnsolvedValueCellOrNull());
-    Assert.assertFalse(result.hasErrors());
+    IPuzzle result = PuzzleSolver.s_solve(input);
+            //puzzleSolver.solve(input);
+//    Assert.assertNull(result.findFirstUnsolvedValueCellOrNull());
+//    Assert.assertFalse(result.hasErrors());
 
     IPuzzle expected = parser.parse(solution);
     Assert.assertEquals(expected, result);

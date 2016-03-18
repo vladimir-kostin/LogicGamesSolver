@@ -32,6 +32,13 @@ public class Puzzle3 implements IPuzzle {
   }
 
   @Override
+  public int getRowCount() { return cells.size(); }
+  @Override
+  public int getRowLength() { return cells.get(0).size(); }
+  @Override
+  public Cell getCellAt(int rowIndex, int columnIndex) { return cells.get(rowIndex).get(columnIndex); }
+
+  @Override
   public ValueCell findFirstUnsolvedValueCellOrNull() {
     return cells.stream()
             .flatMap(List::stream)
@@ -59,7 +66,6 @@ public class Puzzle3 implements IPuzzle {
       return hasErrorsBelow((TaskCell) cell, cellRowIndex, cellColumnIndex)
               || hasErrorsOnTheRight((TaskCell) cell, cellRowIndex, cellColumnIndex);
     }
-
     return true;
   }
 
@@ -69,8 +75,8 @@ public class Puzzle3 implements IPuzzle {
   }
 
   private boolean hasErrorsOnTheRight(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
-    if (0 == taskCell.getSumOfValueOnTheRight()) return false;
-    return containsErrors(valueCellsOnTheRightFromCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValueOnTheRight());
+    if (0 == taskCell.getSumOfValuesOnTheRight()) return false;
+    return containsErrors(valueCellsOnTheRightFromCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesOnTheRight());
   }
 
   private static boolean containsErrors(List<ValueCell> valueCells, int expectedSumOfValues) {

@@ -28,13 +28,6 @@ public class Puzzle implements IPuzzle {
   }
 
   @Override
-  public String toString() {
-    return "Puzzle{" +
-            "cells=" + Arrays.deepToString(cells) +
-            '}';
-  }
-
-  @Override
   public ValueCell findFirstUnsolvedValueCellOrNull() {
     for (Cell[] row : cells) {
       for (Cell cell : row) {
@@ -47,6 +40,13 @@ public class Puzzle implements IPuzzle {
 
     return null;
   }
+
+  @Override
+  public int getRowCount() { return cells.length; }
+  @Override
+  public int getRowLength() { return 0; }
+  @Override
+  public Cell getCellAt(int rowIndex, int columnIndex) { return cells[rowIndex][columnIndex]; }
 
   @Override
   public boolean hasErrors() {
@@ -77,8 +77,8 @@ public class Puzzle implements IPuzzle {
   }
 
   private boolean hasErrorsOnTheRight(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
-    if (0 == taskCell.getSumOfValueOnTheRight()) { return false; }
-    return containsErrors(valueCellsOnTheRightFromCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValueOnTheRight());
+    if (0 == taskCell.getSumOfValuesOnTheRight()) { return false; }
+    return containsErrors(valueCellsOnTheRightFromCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesOnTheRight());
   }
 
   private static boolean containsErrors(List<ValueCell> valueCells, int expectedSumOfValues) {

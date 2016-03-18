@@ -62,12 +62,12 @@ public class Puzzle3 implements IPuzzle {
 
   private boolean hasErrorsBelow(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
     if (0 == taskCell.getSumOfValuesBelow()) return false;
-    return containsErrors(valueCellsBelowCell(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesBelow());
+    return containsErrors(valueCellsBelowCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesBelow());
   }
 
   private boolean hasErrorsOnTheRight(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
     if (0 == taskCell.getSumOfValueOnTheRight()) return false;
-    return containsErrors(valueCellsOnTheRightFromCell(cellRowIndex, cellColumnIndex), taskCell.getSumOfValueOnTheRight());
+    return containsErrors(valueCellsOnTheRightFromCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValueOnTheRight());
   }
 
   private static boolean containsErrors(List<ValueCell> valueCells, int expectedSumOfValues) {
@@ -96,7 +96,8 @@ public class Puzzle3 implements IPuzzle {
     return (properValuesCount != distinctProperValuesCount);
   }
 
-  private List<ValueCell> valueCellsBelowCell(int cellRowIndex, int cellColumnIndex) {
+  @Override
+  public List<ValueCell> valueCellsBelowCellAt(int cellRowIndex, int cellColumnIndex) {
     List<ValueCell> valueCells = new ArrayList<>();
     for (int rowIndex = cellRowIndex + 1; rowIndex < cells.size(); rowIndex++) {
       if (cells.get(rowIndex).get(cellColumnIndex) instanceof ValueCell) {
@@ -108,9 +109,9 @@ public class Puzzle3 implements IPuzzle {
     return valueCells;
   }
 
-  private List<ValueCell> valueCellsOnTheRightFromCell(int cellRowIndex, int cellColumnIndex) {
+  @Override
+  public List<ValueCell> valueCellsOnTheRightFromCellAt(int cellRowIndex, int cellColumnIndex) {
     List<ValueCell> valueCells = new ArrayList<>();
-
     for (int columnIndex = cellColumnIndex + 1; columnIndex < cells.get(cellRowIndex).size(); columnIndex++) {
       if (cells.get(cellRowIndex).get(columnIndex) instanceof ValueCell) {
         valueCells.add((ValueCell) cells.get(cellRowIndex).get(columnIndex));

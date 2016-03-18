@@ -8,7 +8,6 @@ import java.util.function.Function;
 public class PuzlleModelTest {
 
   private Function<Cell[][], IPuzzle> createPuzzle1 = cells -> new Puzzle(cells);
-  private Function<Cell[][], IPuzzle> createPuzzle2 = cells -> new Puzzle2(cells);
   private Function<Cell[][], IPuzzle> createPuzzle3 = cells -> new Puzzle3(cells);
 
   private PuzzleSolver solver = new PuzzleSolver();
@@ -25,11 +24,6 @@ public class PuzlleModelTest {
   @Test
   public void puzzle1() throws Exception {
     testSolvingWithParser(new PuzzleParser(createPuzzle1));
-  }
-
-  @Test
-  public void puzzle2() throws Exception {
-    testSolvingWithParser(new PuzzleParser(createPuzzle2));
   }
 
   @Test

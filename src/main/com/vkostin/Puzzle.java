@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * stores cells in 2D array
+ */
 public class Puzzle implements IPuzzle {
   final private Cell[][] cells;
 

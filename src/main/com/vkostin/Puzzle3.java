@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * stores cell in List<List<Cell>>
+ */
 public class Puzzle3 implements IPuzzle {
 
   private List<List<Cell>> cells = new ArrayList<>();

@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public class PuzzleSolverTest {
 
-  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle5(cells);
+  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle(cells);
   private PuzzleParser parser = new PuzzleParser(createPuzzle);
   private PuzzleSolver puzzleSolver;
 
@@ -17,13 +17,10 @@ public class PuzzleSolverTest {
     puzzleSolver = new PuzzleSolver();
   }
 
-  private void shouldSolve(String puzlle, String solution) {
-    IPuzzle input = parser.parse(puzlle);
+  private void shouldSolve(String puzzle, String solution) {
+    IPuzzle input = parser.parse(puzzle);
 
-    IPuzzle result = //PuzzleSolver.s_solve(input);
-            puzzleSolver.solve(input);
-//    Assert.assertNull(result.findFirstUnsolvedValueCellOrNull());
-//    Assert.assertFalse(result.hasErrors());
+    IPuzzle result = puzzleSolver.solve(input);
 
     IPuzzle expected = parser.parse(solution);
     Assert.assertEquals(expected, result);

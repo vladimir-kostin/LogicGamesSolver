@@ -9,8 +9,6 @@ public class PuzlleModelTest {
 
   private Function<Cell[][], IPuzzle> createPuzzle1 = cells -> new Puzzle(cells);
   private Function<Cell[][], IPuzzle> createPuzzle3 = cells -> new Puzzle3(cells);
-  private Function<Cell[][], IPuzzle> createPuzzle4 = cells -> new Puzzle4(cells);
-  private Function<Cell[][], IPuzzle> createPuzzle5 = cells -> new Puzzle5(cells);
 
   private PuzzleSolver solver = new PuzzleSolver();
 
@@ -22,8 +20,6 @@ public class PuzlleModelTest {
                             "solving: " + e.getKey(),
                             parser.parse(e.getValue()),
                             solver.solve(parser.parse(e.getKey()))
-//                            PuzzleSolver.s_solve(parser.parse(e.getKey()))
-//                            solver.solve(parser.parse(e.getKey()))
                     ));
   }
 
@@ -37,13 +33,4 @@ public class PuzlleModelTest {
     testSolvingWithParser(createPuzzle3);
   }
 
-  @Test
-  public void puzzle4() throws Exception {
-    testSolvingWithParser(createPuzzle4);
-  }
-
-  @Test
-  public void puzzle5() throws Exception {
-    testSolvingWithParser(createPuzzle5);
-  }
 }

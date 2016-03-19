@@ -1,17 +1,23 @@
 package com.vkostin;
 
-import java.util.List;
-
 public interface IPuzzle {
   int getRowCount();
   int getRowLength();
   Cell getCellAt(int rowIndex, int columnIndex);
 
-  ValueCell findFirstUnsolvedValueCellOrNull();
+  default boolean isEqualToPuzzle(IPuzzle other) {
+    if (getRowCount() != other.getRowCount()) return false;
+    if (getRowLength() != other.getRowLength()) return false;
 
-  // do NOT like this to be on puzzle
-  boolean hasErrors();
+    for (int rowIndex = 0; rowIndex < getRowCount(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getRowLength(); columnIndex++) {
+        if (!getCellAt(rowIndex, columnIndex).equals(
+                other.getCellAt(rowIndex, columnIndex))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
-  List<ValueCell> valueCellsBelowCellAt(int cellRowIndex, int cellColumnIndex);
-  List<ValueCell> valueCellsOnTheRightFromCellAt(int cellRowIndex, int cellColumnIndex);
 }

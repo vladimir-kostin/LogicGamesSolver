@@ -1,5 +1,7 @@
 package com.vkostin;
 
+import com.google.common.base.Objects;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,33 +17,6 @@ public class Puzzle implements IPuzzle {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Puzzle)) return false;
-    Puzzle puzzle = (Puzzle) o;
-    return Arrays.deepEquals(cells, puzzle.cells);
-  }
-
-  @Override
-  public int hashCode() {
-    return Arrays.deepHashCode(cells);
-  }
-
-  @Override
-  public ValueCell findFirstUnsolvedValueCellOrNull() {
-    for (Cell[] row : cells) {
-      for (Cell cell : row) {
-        if (cell instanceof ValueCell) {
-          ValueCell valueCell = (ValueCell) cell;
-          if (valueCell.isUnsolved()) { return valueCell; }
-        }
-      }
-    }
-
-    return null;
-  }
-
-  @Override
   public int getRowCount() { return cells.length; }
   @Override
   public int getRowLength() { return cells[0].length; }
@@ -49,88 +24,14 @@ public class Puzzle implements IPuzzle {
   public Cell getCellAt(int rowIndex, int columnIndex) { return cells[rowIndex][columnIndex]; }
 
   @Override
-  public boolean hasErrors() {
-    for (int j = 0; j < cells.length; j++) {
-      for (int k = 0; k < cells[j].length; k++) {
-        if (doesCellHaveAnyErrors(j, k)) {
-          return true;
-        }
-      }
-    }
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o instanceof Puzzle) { return Arrays.deepEquals(cells, ((Puzzle) o).cells); }
+    if (o instanceof IPuzzle) { return isEqualToPuzzle((IPuzzle) o); }
     return false;
   }
 
-  private boolean doesCellHaveAnyErrors(int cellRowIndex, int cellColumnIndex) {
-    Cell cell = cells[cellRowIndex][cellColumnIndex];
-    if(cell instanceof ValueCell) { return false; }
-    if(cell instanceof TaskCell) {
-      return hasErrorsBelow((TaskCell) cell, cellRowIndex, cellColumnIndex)
-              || hasErrorsOnTheRight((TaskCell) cell, cellRowIndex, cellColumnIndex);
-    }
-
-    return true;
-  }
-
-  private boolean hasErrorsBelow(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
-    if (0 == taskCell.getSumOfValuesBelow()) { return false; }
-    return containsErrors(valueCellsBelowCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesBelow());
-  }
-
-  private boolean hasErrorsOnTheRight(TaskCell taskCell, int cellRowIndex, int cellColumnIndex) {
-    if (0 == taskCell.getSumOfValuesOnTheRight()) { return false; }
-    return containsErrors(valueCellsOnTheRightFromCellAt(cellRowIndex, cellColumnIndex), taskCell.getSumOfValuesOnTheRight());
-  }
-
-  private static boolean containsErrors(List<ValueCell> valueCells, int expectedSumOfValues) {
-    int actualSumOfValues = valueCells.stream()
-            .filter(ValueCell::hasProperValue)
-            .mapToInt(ValueCell::getValue)
-            .sum();
-
-    if(expectedSumOfValues < actualSumOfValues) { return true; }
-
-    boolean containsUnresolvedValueCells = valueCells.stream()
-            .anyMatch(ValueCell::isUnsolved);
-
-    if(!containsUnresolvedValueCells && expectedSumOfValues != actualSumOfValues) { return  true; }
-
-    long properValuesCount = valueCells.stream()
-            .filter(ValueCell::hasProperValue)
-            .count();
-
-    long distinctProperValuesCount = valueCells.stream()
-            .filter(ValueCell::hasProperValue)
-            .mapToInt(ValueCell::getValue)
-            .distinct()
-            .count();
-
-    return (properValuesCount != distinctProperValuesCount);
-  }
-
   @Override
-  public List<ValueCell> valueCellsBelowCellAt(int cellRowIndex, int cellColumnIndex) {
-    List<ValueCell> valueCells = new ArrayList<>();
-    for (int j = cellRowIndex + 1; j < cells.length; j++) {
-      if(cells[j][cellColumnIndex] instanceof ValueCell) {
-        valueCells.add((ValueCell) cells[j][cellColumnIndex]);
-      } else {
-        break;
-      }
-    }
-    return valueCells;
-  }
-
-  @Override
-  public List<ValueCell> valueCellsOnTheRightFromCellAt(int cellRowIndex, int cellColumnIndex) {
-    List<ValueCell> valueCells = new ArrayList<>();
-    for (int j = cellColumnIndex + 1; j < cells[cellRowIndex].length; j++) {
-      if (cells[cellRowIndex][j] instanceof ValueCell) {
-        valueCells.add((ValueCell) cells[cellRowIndex][j]);
-      } else {
-        break;
-      }
-    }
-    return valueCells;
-  }
+  public int hashCode() { return Arrays.deepHashCode(cells); }
 
 }

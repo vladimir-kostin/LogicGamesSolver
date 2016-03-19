@@ -20,8 +20,8 @@ public class PuzzleSolverTest {
   private void shouldSolve(String puzlle, String solution) {
     IPuzzle input = parser.parse(puzlle);
 
-    IPuzzle result = PuzzleSolver.s_solve(input);
-            //puzzleSolver.solve(input);
+    IPuzzle result = //PuzzleSolver.s_solve(input);
+            puzzleSolver.solve(input);
 //    Assert.assertNull(result.findFirstUnsolvedValueCellOrNull());
 //    Assert.assertFalse(result.hasErrors());
 

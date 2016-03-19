@@ -21,7 +21,8 @@ public class PuzlleModelTest {
                     Assert.assertEquals(
                             "solving: " + e.getKey(),
                             parser.parse(e.getValue()),
-                            PuzzleSolver.s_solve(parser.parse(e.getKey()))
+                            solver.solve(parser.parse(e.getKey()))
+//                            PuzzleSolver.s_solve(parser.parse(e.getKey()))
 //                            solver.solve(parser.parse(e.getKey()))
                     ));
   }

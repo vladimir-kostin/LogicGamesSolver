@@ -19,23 +19,12 @@ public class TaskCell implements Cell {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof TaskCell)) return false;
     TaskCell taskCell = (TaskCell) o;
     return sumOfValuesBelow == taskCell.sumOfValuesBelow &&
             sumOfValuesOnTheRight == taskCell.sumOfValuesOnTheRight;
   }
 
   @Override
-  public int hashCode() {
-    return Objects.hash(sumOfValuesBelow, sumOfValuesOnTheRight);
-  }
-
-  @Override
-  public String toString() {
-    return "TaskCell{" +
-            "sumOfValuesBelow=" + sumOfValuesBelow +
-            ", sumOfValuesOnTheRight=" + sumOfValuesOnTheRight +
-            '}';
-  }
-
+  public int hashCode() { return Objects.hash(sumOfValuesBelow, sumOfValuesOnTheRight); }
 }

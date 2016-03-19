@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-public class PuzzleSolversTest {
+public class PuzzleSolversPerformanceTest {
 
   private Function<Cell[][], IPuzzle> createPuzzle1 = cells -> new Puzzle(cells);
   private Function<Cell[][], IPuzzle> createPuzzle3 = cells -> new Puzzle3(cells);
 
-  private PuzzleSolver simpleSolver = new PuzzleSolver();
+  private SimplePuzzleSolver simpleSolver = new SimplePuzzleSolver();
   private BetterPuzzleSolver betterSolver = new BetterPuzzleSolver();
 
   private void testSolverWithModel(IPuzzleSolver solver, Function<Cell[][], IPuzzle> createPuzzle) {

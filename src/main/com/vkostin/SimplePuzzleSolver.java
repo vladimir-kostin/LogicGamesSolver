@@ -1,9 +1,6 @@
 package com.vkostin;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PuzzleSolver implements IPuzzleSolver {
+public class SimplePuzzleSolver implements IPuzzleSolver {
 
   @Override
   public IPuzzle solve(IPuzzle puzzle) {

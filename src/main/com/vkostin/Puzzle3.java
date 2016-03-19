@@ -19,6 +19,13 @@ public class Puzzle3 implements IPuzzle {
   }
 
   @Override
+  public int getRowCount() { return cells.size(); }
+  @Override
+  public int getRowLength() { return cells.get(0).size(); }
+  @Override
+  public Cell getCellAt(int rowIndex, int columnIndex) { return cells.get(rowIndex).get(columnIndex); }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o instanceof Puzzle3) { return Objects.equals(cells, ((Puzzle3)(o)).cells); }
@@ -28,12 +35,5 @@ public class Puzzle3 implements IPuzzle {
 
   @Override
   public int hashCode() { return Objects.hash(cells); }
-
-  @Override
-  public int getRowCount() { return cells.size(); }
-  @Override
-  public int getRowLength() { return cells.get(0).size(); }
-  @Override
-  public Cell getCellAt(int rowIndex, int columnIndex) { return cells.get(rowIndex).get(columnIndex); }
 
 }

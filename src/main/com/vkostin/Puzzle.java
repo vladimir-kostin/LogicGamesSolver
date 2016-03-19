@@ -44,7 +44,7 @@ public class Puzzle implements IPuzzle {
   @Override
   public int getRowCount() { return cells.length; }
   @Override
-  public int getRowLength() { return 0; }
+  public int getRowLength() { return cells[0].length; }
   @Override
   public Cell getCellAt(int rowIndex, int columnIndex) { return cells[rowIndex][columnIndex]; }
 

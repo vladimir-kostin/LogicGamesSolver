@@ -1,4 +1,6 @@
-package com.vkostin;
+package com.vkostin.kakuro;
+
+import com.vkostin.*;
 
 public class SimplePuzzleSolver implements IPuzzleSolver {
 

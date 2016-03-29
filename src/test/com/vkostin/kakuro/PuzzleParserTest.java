@@ -1,5 +1,8 @@
-package com.vkostin;
+package com.vkostin.kakuro;
 
+import com.vkostin.*;
+import com.vkostin.kakuro.PuzzleParser;
+import com.vkostin.kakuro.TestData;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

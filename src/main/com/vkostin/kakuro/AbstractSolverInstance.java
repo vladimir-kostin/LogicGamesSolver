@@ -1,9 +1,13 @@
-package com.vkostin;
+package com.vkostin.kakuro;
+
+import com.vkostin.Cell;
+import com.vkostin.IPuzzle;
+import com.vkostin.ValueCell;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractSolverInstance {
+abstract class AbstractSolverInstance {
   protected final IPuzzle puzzle;
   protected AbstractSolverInstance(IPuzzle puzzle) {
     this.puzzle = puzzle;

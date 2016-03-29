@@ -1,26 +1,28 @@
-package com.vkostin;
+package com.vkostin.kakuro;
 
+import com.vkostin.*;
+import com.vkostin.kakuro.BetterPuzzleSolver;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.function.Function;
 
-public class SimplePuzzleSolverTest {
+public class BetterPuzzleSolverTest {
 
   private Function<Cell[][], IPuzzle> createPuzzle = cells -> new Puzzle(cells);
   private PuzzleParser parser = new PuzzleParser(createPuzzle);
-  private SimplePuzzleSolver simplePuzzleSolver;
+  private BetterPuzzleSolver betterPuzzleSolver;
 
   @Before
   public void setUp() {
-    simplePuzzleSolver = new SimplePuzzleSolver();
+    betterPuzzleSolver = new BetterPuzzleSolver();
   }
 
   private void shouldSolve(String puzzle, String solution) {
     IPuzzle input = parser.parse(puzzle);
 
-    IPuzzle result = simplePuzzleSolver.solve(input);
+    IPuzzle result = betterPuzzleSolver.solve(input);
 
     IPuzzle expected = parser.parse(solution);
     Assert.assertEquals(expected, result);

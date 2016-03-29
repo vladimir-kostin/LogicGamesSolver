@@ -1,4 +1,4 @@
-package com.vkostin;
+package com.vkostin.kakuro;
 
 import com.google.common.collect.ImmutableMap;
 

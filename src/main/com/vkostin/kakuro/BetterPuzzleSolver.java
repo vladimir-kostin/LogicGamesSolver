@@ -59,7 +59,7 @@ public class BetterPuzzleSolver implements IPuzzleSolver {
     @Override
     protected ValueCell findUnsolvedValueCellOfNull() {
       return valueCells.stream()
-              .filter(ValueCell::isUnsolved)
+              .filter(Rules::isUnsolved)
               .findAny()
               .orElse(null);
     }

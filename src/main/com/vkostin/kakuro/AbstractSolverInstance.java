@@ -19,13 +19,13 @@ abstract class AbstractSolverInstance {
     ValueCell unsolvedValueCell = findUnsolvedValueCellOfNull();
     if (null == unsolvedValueCell) return puzzle;
 
-    for (int valueToTry = ValueCell.MIN_ALLOWED_VALUE; valueToTry <= ValueCell.MAX_ALLOWED_VALUE; valueToTry++) {
+    for (int valueToTry = Rules.MIN_ALLOWED_VALUE; valueToTry <= Rules.MAX_ALLOWED_VALUE; valueToTry++) {
       unsolvedValueCell.setValue(valueToTry);
       IPuzzle result = solve();
       if (null != result) return result;
     }
 
-    unsolvedValueCell.clearValue();
+    Rules.clearValue(unsolvedValueCell);
     return null;
   }
 
@@ -34,23 +34,23 @@ abstract class AbstractSolverInstance {
 
   protected boolean doValueCellsMeetExpectations(List<ValueCell> valueCells, int expectedSumOfValues) {
     int actualSumOfValues = valueCells.stream()
-            .filter(ValueCell::hasProperValue)
+            .filter(Rules::hasProperValue)
             .mapToInt(ValueCell::getValue)
             .sum();
 
     if(expectedSumOfValues < actualSumOfValues) { return false; }
 
     boolean containsUnresolvedValueCells = valueCells.stream()
-            .anyMatch(ValueCell::isUnsolved);
+            .anyMatch(Rules::isUnsolved);
 
     if(!containsUnresolvedValueCells && expectedSumOfValues != actualSumOfValues) { return  false; }
 
     long properValuesCount = valueCells.stream()
-            .filter(ValueCell::hasProperValue)
+            .filter(Rules::hasProperValue)
             .count();
 
     long distinctProperValuesCount = valueCells.stream()
-            .filter(ValueCell::hasProperValue)
+            .filter(Rules::hasProperValue)
             .mapToInt(ValueCell::getValue)
             .distinct()
             .count();

@@ -1,8 +1,6 @@
 package com.vkostin.kakuro;
 
 import com.vkostin.*;
-import com.vkostin.kakuro.BetterPuzzleSolver;
-import com.vkostin.kakuro.SimplePuzzleSolver;
 import org.junit.Assert;
 import org.junit.Test;
 

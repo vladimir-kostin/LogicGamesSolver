@@ -1,8 +1,6 @@
 package com.vkostin.kakuro;
 
 import com.vkostin.*;
-import com.vkostin.kakuro.PuzzleParser;
-import com.vkostin.kakuro.TestData;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +36,7 @@ public class PuzzleParserTest {
   }
 
   private ValueCell vC() {
-    return new ValueCell();
+    return new ValueCell(Rules.UNSOLVED_VALUE);
   }
   private ValueCell vC(int value) { return new ValueCell(value); }
 

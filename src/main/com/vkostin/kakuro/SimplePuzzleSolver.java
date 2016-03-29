@@ -38,7 +38,7 @@ public class SimplePuzzleSolver implements IPuzzleSolver {
           Cell aCell = puzzle.getCellAt(rowIndex, columnIndex);
           if (aCell instanceof ValueCell) {
             ValueCell valueCell = (ValueCell) aCell;
-            if (valueCell.isUnsolved()) { return valueCell; }
+            if(Rules.isUnsolved(valueCell)) { return valueCell; }
           }
         }
       }

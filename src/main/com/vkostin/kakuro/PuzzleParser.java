@@ -60,7 +60,7 @@ public class PuzzleParser {
   }
 
   private ValueCell parseValueCell(String input) {
-    if (UNSOLVED_VALUE.equals(input)) { return new ValueCell(); }
+    if (UNSOLVED_VALUE.equals(input)) { return new ValueCell(Rules.UNSOLVED_VALUE); }
 
     return Optional.of(input)
             .map(Integer::parseInt)

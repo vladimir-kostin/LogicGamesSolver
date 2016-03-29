@@ -64,7 +64,7 @@ public class PuzzleParser {
 
     return Optional.of(input)
             .map(Integer::parseInt)
-            .map(ValueCell::newValueCell)
+            .map(ValueCell::new)
             .orElseThrow(RuntimeException::new);
   }
 

@@ -30,6 +30,8 @@ public class PuzzleBuilder {
     return createPuzzle.apply(cells);
   }
 
+  public void clear() { rows.clear(); }
+
   private int maxWidth() {
     return rows.stream()
             .mapToInt(List::size)

@@ -4,7 +4,7 @@ import com.vkostin.Cell;
 
 import java.util.Objects;
 
-public class TaskCell implements Cell {
+class TaskCell implements Cell {
   final private int sumOfValuesBelow;
   final private int sumOfValuesOnTheRight;
 

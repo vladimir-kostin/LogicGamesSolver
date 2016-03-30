@@ -1,8 +1,10 @@
 package com.vkostin.tennerGrid;
 
+import com.vkostin.Cell;
+
 import java.util.Objects;
 
-public class TaskCell {
+class TaskCell implements Cell {
   final private int sumOfValuesAbove;
 
   public TaskCell(int sumOfValuesAbove) {

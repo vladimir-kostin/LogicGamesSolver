@@ -7,7 +7,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BetterPuzzleSolver implements IPuzzleSolver {
+class BetterPuzzleSolver implements IPuzzleSolver {
 
   @Override
   public IPuzzle solve(IPuzzle puzzle) {

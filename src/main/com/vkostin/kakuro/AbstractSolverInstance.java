@@ -32,6 +32,7 @@ abstract class AbstractSolverInstance {
   protected abstract boolean isCurrentAssumptionWrong();
   protected abstract ValueCell findUnsolvedValueCellOfNull();
 
+  // TODO "failed to meet expectations"
   protected boolean doValueCellsMeetExpectations(List<ValueCell> valueCells, int expectedSumOfValues) {
     int actualSumOfValues = valueCells.stream()
             .filter(Rules::hasProperValue)

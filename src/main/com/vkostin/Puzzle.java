@@ -1,10 +1,6 @@
 package com.vkostin;
 
-import com.google.common.base.Objects;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * stores cells in 2D array

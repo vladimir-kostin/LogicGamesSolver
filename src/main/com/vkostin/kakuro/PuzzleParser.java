@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class PuzzleParser {
+class PuzzleParser {
 
   private final static String NEW_LINE_REGEX = "[\\r\\n]+";
   private final static String WHITE_SPACE_REGEX = "[\\s]+";
@@ -20,9 +20,9 @@ public class PuzzleParser {
     this.createPuzzle = createPuzzle;
   }
 
-  public IPuzzle parse(String task) {
+  public IPuzzle parse(String text) {
 
-    String[] lines = task.split(NEW_LINE_REGEX);
+    String[] lines = text.split(NEW_LINE_REGEX);
 
     PuzzleBuilder builder = PuzzleBuilder.aPuzzle(createPuzzle);
     for (String line : lines) {

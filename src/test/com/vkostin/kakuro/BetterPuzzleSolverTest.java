@@ -28,19 +28,15 @@ public class BetterPuzzleSolverTest {
   }
 
   @Test
-  public void shouldSolve3x4() {
-    shouldSolve(TestData.PUZZLE_3_X_4, TestData.SOLUTION_3_X_4);
-  }
+  public void shouldSolve____() { shouldSolve(TestData.PUZZLE____, TestData.SOLUTION____); }
 
   @Test
-  public void shouldSolve5x5() {
-    shouldSolve(TestData.PUZZLE_5_X_5, TestData.SOLUTION_5_X_5);
-  }
+  public void shouldSolve___1() { shouldSolve(TestData.PUZZLE___1, TestData.SOLUTION___1); }
 
   @Test
-  public void shouldSolve6x6() { shouldSolve(TestData.PUZZLE_6_X_6, TestData.SOLUTION_6_X_6); }
+  public void shouldSolve___8() { shouldSolve(TestData.PUZZLE___8, TestData.SOLUTION___8); }
 
   @Test
-  public void shouldSolve7x7() { shouldSolve(TestData.PUZZLE_7_X_7, TestData.SOLUTION_7_X_7); }
+  public void shouldSolve__20() { shouldSolve(TestData.PUZZLE__20, TestData.SOLUTION__20); }
 
 }

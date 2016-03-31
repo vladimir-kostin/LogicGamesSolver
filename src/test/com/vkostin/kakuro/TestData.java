@@ -5,19 +5,19 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 
 class TestData {
-  final static String PUZZLE_3_X_4 = String.join("\n"
+  final static String PUZZLE____ = String.join("\n"
           ,"\\  3\\ 4\\ 6\\"
           ,"\\6 _   _   _"
           ,"\\7 _   _   _"
           );
 
-  final  static  String SOLUTION_3_X_4 = String.join("\r"
+  final  static  String SOLUTION____ = String.join("\r"
           ,"\\  3\\ 4\\ 6\\"
           ,"\\6 1   3   2"
           ,"\\7 2   1   4"
   );
 
-  final static String PUZZLE_5_X_5 = String.join("\r\n"
+  final static String PUZZLE___1 = String.join("\r\n"
           , "\\  4\\  9\\  \\   \\"
           , "\\4 _    _    21\\ \\"
           , "\\7 _    _    _    16\\"
@@ -25,7 +25,7 @@ class TestData {
           , "\\  \\   \\16 _    _"
   );
 
-  final static String SOLUTION_5_X_5 = String.join("\n\r"
+  final static String SOLUTION___1 = String.join("\n\r"
           , "\\  4\\  9\\  \\   \\"
           , "\\4 3    1    21\\ \\"
           , "\\7 1    2    4    16\\"
@@ -33,7 +33,7 @@ class TestData {
           , "\\  \\   \\16 9    7"
   );
 
-  final static String PUZZLE_6_X_6 = String.join("\n"
+  final static String PUZZLE___8 = String.join("\n"
           , "\\    \\  21\\  10\\     \\  \\"
           , "\\   8\\8  _     _     16\\ 4\\"
           , "\\22 _     _     _      _   _"
@@ -42,7 +42,7 @@ class TestData {
           , "\\    \\    \\4  _      _    \\"
   );
 
-  final static String SOLUTION_6_X_6 = String.join("\n"
+  final static String SOLUTION___8 = String.join("\n"
           , "\\    \\  21\\  10\\     \\  \\"
           , "\\   8\\8  5     3     16\\ 4\\"
           , "\\22 2     9     7      3   1"
@@ -51,7 +51,7 @@ class TestData {
           , "\\    \\    \\4  3      1    \\"
   );
 
-  final static String PUZZLE_7_X_7 = String.join("\n"
+  final static String PUZZLE__20 = String.join("\n"
           , "\\   5\\ 13\\   \\   \\  16\\ 8\\"
           , "\\5  _   _   15\\ 11\\16 _   _"
           , "\\28 _   _    _    _     _   _"
@@ -61,7 +61,7 @@ class TestData {
           , "\\4  _   _     \\   \\4  _   _"
   );
 
-  final static String SOLUTION_7_X_7 = String.join("\n"
+  final static String SOLUTION__20 = String.join("\n"
           , "\\   5\\ 13\\   \\   \\  16\\ 8\\"
           , "\\5  1   4   15\\ 11\\16 9   7"
           , "\\28 4   9    5    2     7   1"
@@ -71,7 +71,7 @@ class TestData {
           , "\\4  3   1     \\   \\4  3   1"
   );
 
-  final static String PUZZLE_8_X_8 = String.join("\n"
+  final static String PUZZLE__42 = String.join("\n"
           , "\\    \\  41\\ 6\\    \\    \\  33\\ 7\\"
           , "\\    \\14 _   _    11\\  16\\11 _   _"
           , "\\  14\\26 _   _     _     _     _   _"
@@ -82,7 +82,7 @@ class TestData {
           , "\\7  _     _    \\    \\12 _     _    \\"
   );
 
-  final static String SOLUTION_8_X_8 = String.join("\n"
+  final static String SOLUTION__42 = String.join("\n"
           , "\\    \\  41\\ 6\\    \\    \\  33\\ 7\\"
           , "\\    \\14 9   5    11\\  16\\11 6   5"
           , "\\  14\\26 4   1     7     9     3   2"
@@ -93,7 +93,7 @@ class TestData {
           , "\\7  2     5    \\    \\12 7     5    \\"
   );
 
-  final static String PUZZLE_9_X_9 = String.join("\n"
+  final static String PUZZLE__64 = String.join("\n"
           , "\\   7\\  36\\    \\   4\\  3\\  26\\    \\ \\"
           , "\\14 _     _    15\\11 _    _     _      \\ \\"
           , "\\27 _     _     _     _    _     _    36\\ \\"
@@ -105,7 +105,7 @@ class TestData {
           , "\\    \\    \\21 _     _    _      \\11 _ _"
   );
 
-  final static String SOLUTION_9_X_9 = String.join("\n"
+  final static String SOLUTION__64 = String.join("\n"
           , "\\   7\\  36\\    \\   4\\  3\\   26\\    \\ \\"
           , "\\14 5     9    15\\11 1    2      8      \\ \\"
           , "\\27 2     4     8     3    1      9    36\\ \\"
@@ -117,7 +117,7 @@ class TestData {
           , "\\    \\    \\21 5     9     7      \\11 4 7"
   );
 
-  final static String PUZZLE_10_X_10 = String.join("\n"
+  final static String PUZZLE__86 = String.join("\n"
           , "\\   4\\  8\\    \\    \\   3\\ 22\\   \\    \\   \\"
           , "\\3  _    _    10\\   6\\10 _    _     \\    \\   \\"
           , "\\24 _    _     _     _     _    _    4\\    \\   \\"
@@ -130,7 +130,7 @@ class TestData {
           , "\\    \\   \\   \\5   _     _     \\   \\12 _    _"
   );
 
-  final static String SOLUTION_10_X_10 = String.join("\n"
+  final static String SOLUTION__86 = String.join("\n"
           , "\\   4\\  8\\    \\    \\   3\\ 22\\   \\    \\   \\"
           , "\\3  1    2    10\\   6\\10 1    9     \\    \\   \\"
           , "\\24 3    6     1     5     2    7    4\\    \\   \\"
@@ -143,7 +143,7 @@ class TestData {
           , "\\    \\   \\   \\5   1     4     \\   \\12 8    4"
   );
 
-  final static String PUZZLE_11_X_11 = String.join("\n"
+  final static String PUZZLE_108 = String.join("\n"
           , "\\  16\\  20\\  \\    \\    \\   5\\ 22\\    \\   8\\ 14\\"
           , "\\14 _     _  15\\    \\    \\8  _    _     7\\10 _    _"
           , "\\18 _     _   _    13\\  22\\23 _    _     _     _    _"
@@ -157,7 +157,7 @@ class TestData {
           , "\\9  _     _    \\    \\15 _     _     \\    \\17 _    _"
   );
 
-  final static String SOLUTION_11_X_11 = String.join("\n"
+  final static String SOLUTION_108 = String.join("\n"
           , "\\  16\\  20\\  \\    \\    \\   5\\ 22\\    \\   8\\ 14\\"
           , "\\14 9     5  15\\    \\    \\8  1    7     7\\10 1    9"
           , "\\18 7     2   9    13\\  22\\23 4    6     1     7    5"
@@ -172,14 +172,14 @@ class TestData {
   );
 
   final static Map<String, String> ALL_PUZZLES_WITH_SOLUTIONS = ImmutableMap.<String, String>builder()
-          .put(TestData.PUZZLE_3_X_4, TestData.SOLUTION_3_X_4)
-          .put(TestData.PUZZLE_5_X_5, TestData.SOLUTION_5_X_5)
-          .put(TestData.PUZZLE_6_X_6, TestData.SOLUTION_6_X_6)
-          .put(TestData.PUZZLE_7_X_7, TestData.SOLUTION_7_X_7)
-          .put(TestData.PUZZLE_8_X_8, TestData.SOLUTION_8_X_8)
-          .put(TestData.PUZZLE_9_X_9, TestData.SOLUTION_9_X_9)
-          .put(TestData.PUZZLE_10_X_10, TestData.SOLUTION_10_X_10)
-          .put(TestData.PUZZLE_11_X_11, TestData.SOLUTION_11_X_11)
+          .put(TestData.PUZZLE____, TestData.SOLUTION____)
+          .put(TestData.PUZZLE___1, TestData.SOLUTION___1)
+          .put(TestData.PUZZLE___8, TestData.SOLUTION___8)
+          .put(TestData.PUZZLE__20, TestData.SOLUTION__20)
+          .put(TestData.PUZZLE__42, TestData.SOLUTION__42)
+          .put(TestData.PUZZLE__64, TestData.SOLUTION__64)
+          .put(TestData.PUZZLE__86, TestData.SOLUTION__86)
+          .put(TestData.PUZZLE_108, TestData.SOLUTION_108)
           .build();
 
 }

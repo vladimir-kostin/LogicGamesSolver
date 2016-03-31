@@ -13,7 +13,7 @@ public class PuzzleParserTest {
   PuzzleParser puzzleParser;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     puzzleParser = new PuzzleParser(createPuzzle);
   }
 
@@ -24,13 +24,55 @@ public class PuzzleParserTest {
 
   private TaskCell tC(int sumAbove) { return new TaskCell(sumAbove); }
 
-  @Test
-  public void shouldParsePuzzle1() {
-    IPuzzle result = puzzleParser.parse(TestData.PUZZLE_1);
+  private PuzzleBuilder aPuzzle() { return PuzzleBuilder.aPuzzle(createPuzzle); }
 
-    IPuzzle expected = PuzzleBuilder.aPuzzle(createPuzzle)
-            .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC())
+  @Test
+  public void shouldParsePuzzle___() {
+    IPuzzle result = puzzleParser.parse(TestData.PUZZLE___);
+
+    IPuzzle expected = aPuzzle()
+            .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC( ))
             .addRow(tC(0), tC(1), tC(2), tC(3), tC(4), tC(5), tC(6), tC(7), tC(8), tC(9))
+            .build();
+
+    Assert.assertEquals(expected, result);
+  }
+
+  @Test
+  public void shouldParseSolution___() throws Exception {
+    IPuzzle result = puzzleParser.parse(TestData.SOLUTION___);
+
+    IPuzzle expected = aPuzzle()
+            .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC(9))
+            .addRow(tC(0), tC(1), tC(2), tC(3), tC(4), tC(5), tC(6), tC(7), tC(8), tC(9))
+            .build();
+
+    Assert.assertEquals(expected, result);
+  }
+
+  @Test
+  public void shouldParsePuzzle__1() {
+    IPuzzle result = puzzleParser.parse(TestData.PUZZLE__1);
+
+    IPuzzle expected = aPuzzle()
+            .addRow(vC(  ), vC(  ), vC(  ), vC( 3), vC( 7), vC( 0), vC( 4), vC( 5), vC( 1), vC( 2))
+            .addRow(vC( 3), vC( 1), vC(  ), vC( 2), vC(  ), vC( 8), vC( 9), vC( 7), vC( 4), vC( 5))
+            .addRow(vC( 6), vC( 7), vC(  ), vC(  ), vC( 9), vC( 2), vC( 1), vC( 3), vC(  ), vC(  ))
+            .addRow(tC(17), tC(17), tC(10), tC(10), tC(22), tC(10), tC(14), tC(15), tC(13), tC( 7))
+            .build();
+
+    Assert.assertEquals(expected, result);
+  }
+
+  @Test
+  public void shouldParseSolution__1() {
+    IPuzzle result = puzzleParser.parse(TestData.SOLUTION__1);
+
+    IPuzzle expected = aPuzzle()
+            .addRow(vC( 8), vC( 9), vC( 6), vC( 3), vC( 7), vC( 0), vC( 4), vC( 5), vC( 1), vC( 2))
+            .addRow(vC( 3), vC( 1), vC( 0), vC( 2), vC( 6), vC( 8), vC( 9), vC( 7), vC( 4), vC( 5))
+            .addRow(vC( 6), vC( 7), vC( 4), vC( 5), vC( 9), vC( 2), vC( 1), vC( 3), vC( 8), vC( 0))
+            .addRow(tC(17), tC(17), tC(10), tC(10), tC(22), tC(10), tC(14), tC(15), tC(13), tC( 7))
             .build();
 
     Assert.assertEquals(expected, result);

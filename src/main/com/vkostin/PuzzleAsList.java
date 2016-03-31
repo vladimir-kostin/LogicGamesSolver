@@ -8,11 +8,11 @@ import java.util.Objects;
 /**
  * stores cell in List<List<Cell>>
  */
-public class Puzzle3 implements IPuzzle {
+public class PuzzleAsList implements IPuzzle {
 
   private List<List<Cell>> cells = new ArrayList<>();
 
-  public Puzzle3(Cell[][] cells) {
+  public PuzzleAsList(Cell[][] cells) {
     for (Cell[] row : cells) {
       this.cells.add(Arrays.asList(row));
     }
@@ -28,7 +28,7 @@ public class Puzzle3 implements IPuzzle {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o instanceof Puzzle3) { return Objects.equals(cells, ((Puzzle3)(o)).cells); }
+    if (o instanceof PuzzleAsList) { return Objects.equals(cells, ((PuzzleAsList)(o)).cells); }
     if (o instanceof IPuzzle) { return isEqualToPuzzle((IPuzzle) o); }
     return false;
   }

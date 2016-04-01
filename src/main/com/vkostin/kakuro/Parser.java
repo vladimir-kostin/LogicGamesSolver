@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-class PuzzleParser {
+class Parser {
 
   private final static String NEW_LINE_REGEX = "[\\r\\n]+";
   private final static String WHITE_SPACE_REGEX = "[\\s]+";
@@ -16,7 +16,7 @@ class PuzzleParser {
   private final static String UNSOLVED_VALUE = "_";
 
   private final Function<Cell[][], IPuzzle> createPuzzle;
-  public PuzzleParser(Function<Cell[][], IPuzzle> createPuzzle) {
+  public Parser(Function<Cell[][], IPuzzle> createPuzzle) {
     this.createPuzzle = createPuzzle;
   }
 

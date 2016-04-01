@@ -1,6 +1,6 @@
 package com.vkostin.tennerGrid;
 
-import com.vkostin.AbstractPuzzleParser;
+import com.vkostin.AbstractParser;
 import com.vkostin.Cell;
 import com.vkostin.IPuzzle;
 import com.vkostin.ValueCell;
@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class PuzzleParser extends AbstractPuzzleParser {
+class Parser extends AbstractParser {
 
-  public PuzzleParser(Function<Cell[][], IPuzzle> createPuzzle) { super(createPuzzle); }
+  public Parser(Function<Cell[][], IPuzzle> createPuzzle) { super(createPuzzle); }
 
   @Override
   public IPuzzle parse(String multiLineText) {

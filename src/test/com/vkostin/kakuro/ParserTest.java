@@ -7,14 +7,14 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-public class PuzzleParserTest {
+public class ParserTest {
 
   Function<Cell[][], IPuzzle> createPuzzle = cells -> new PuzzleAsList(cells);
-  PuzzleParser puzzleParser;
+  Parser parser;
 
   @Before
   public void setUp() {
-    puzzleParser = new PuzzleParser(createPuzzle);
+    parser = new Parser(createPuzzle);
   }
 
   private TaskCell tC() { return tC(0, 0); }
@@ -31,7 +31,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParsePuzzle____() {
-    IPuzzle result = puzzleParser.parse(TestData.PUZZLE____);
+    IPuzzle result = parser.parse(TestData.PUZZLE____);
 
     IPuzzle expected = aPuzzle()
             .addRow(tC(),    tC(3,0), tC(4,0), tC(6,0))
@@ -44,7 +44,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParsePuzzle___1() {
-    IPuzzle result = puzzleParser.parse(TestData.PUZZLE___1);
+    IPuzzle result = parser.parse(TestData.PUZZLE___1);
 
     IPuzzle expected = aPuzzle()
             .addRow(tC(),    tC(4,0),   tC(9,0),  tC(),     tC())
@@ -59,7 +59,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParseSolution____() throws Exception {
-    IPuzzle result = puzzleParser.parse(TestData.SOLUTION____);
+    IPuzzle result = parser.parse(TestData.SOLUTION____);
 
     IPuzzle expected = aPuzzle()
             .addRow(tC(),    tC(3,0), tC(4,0), tC(6,0))
@@ -72,7 +72,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParseSolution___1() throws Exception {
-    IPuzzle result = puzzleParser.parse(TestData.SOLUTION___1);
+    IPuzzle result = parser.parse(TestData.SOLUTION___1);
 
     IPuzzle expected = aPuzzle()
             .addRow(tC(),    tC(4,0),   tC(9,0),  tC(),     tC())

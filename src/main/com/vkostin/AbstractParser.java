@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public abstract class AbstractPuzzleParser {
+public abstract class AbstractParser implements Parser {
 
   private final static String NEW_LINE_REGEX = "[\\r\\n]+";
   private final static String WHITE_SPACE_REGEX = "[\\s]+";
@@ -14,11 +14,9 @@ public abstract class AbstractPuzzleParser {
 
   protected final PuzzleBuilder builder;
 
-  public AbstractPuzzleParser(Function<Cell[][], IPuzzle> createPuzzle) {
+  public AbstractParser(Function<Cell[][], IPuzzle> createPuzzle) {
     builder = PuzzleBuilder.aPuzzle(createPuzzle);
   }
-
-  public abstract IPuzzle parse(String multiLineText);
 
   protected List<String> nonEmptyTextLines(String multiLineText) {
     return Arrays.asList(multiLineText.split(NEW_LINE_REGEX)).stream()

@@ -7,14 +7,14 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-public class PuzzleParserTest {
+public class ParserTest {
 
   Function<Cell[][], IPuzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
-  PuzzleParser puzzleParser;
+  Parser parser;
 
   @Before
   public void setUp() {
-    puzzleParser = new PuzzleParser(createPuzzle);
+    parser = new Parser(createPuzzle);
   }
 
   private ValueCell vC() {
@@ -28,7 +28,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParsePuzzle___() {
-    IPuzzle result = puzzleParser.parse(TestData.PUZZLE___);
+    IPuzzle result = parser.parse(TestData.PUZZLE___);
 
     IPuzzle expected = aPuzzle()
             .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC( ))
@@ -40,7 +40,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParseSolution___() throws Exception {
-    IPuzzle result = puzzleParser.parse(TestData.SOLUTION___);
+    IPuzzle result = parser.parse(TestData.SOLUTION___);
 
     IPuzzle expected = aPuzzle()
             .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC(9))
@@ -52,7 +52,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParsePuzzle__1() {
-    IPuzzle result = puzzleParser.parse(TestData.PUZZLE__1);
+    IPuzzle result = parser.parse(TestData.PUZZLE__1);
 
     IPuzzle expected = aPuzzle()
             .addRow(vC(  ), vC(  ), vC(  ), vC( 3), vC( 7), vC( 0), vC( 4), vC( 5), vC( 1), vC( 2))
@@ -66,7 +66,7 @@ public class PuzzleParserTest {
 
   @Test
   public void shouldParseSolution__1() {
-    IPuzzle result = puzzleParser.parse(TestData.SOLUTION__1);
+    IPuzzle result = parser.parse(TestData.SOLUTION__1);
 
     IPuzzle expected = aPuzzle()
             .addRow(vC( 8), vC( 9), vC( 6), vC( 3), vC( 7), vC( 0), vC( 4), vC( 5), vC( 1), vC( 2))

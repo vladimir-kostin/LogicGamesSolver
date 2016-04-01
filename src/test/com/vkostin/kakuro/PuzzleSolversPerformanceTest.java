@@ -15,7 +15,7 @@ public class PuzzleSolversPerformanceTest {
   private BetterPuzzleSolver betterSolver = new BetterPuzzleSolver();
 
   private void testSolverWithModel(IPuzzleSolver solver, Function<Cell[][], IPuzzle> createPuzzle) {
-    PuzzleParser parser = new PuzzleParser(createPuzzle);
+    Parser parser = new Parser(createPuzzle);
     TestData.ALL_PUZZLES_WITH_SOLUTIONS.entrySet().stream()
             .forEach(e ->
                     Assert.assertEquals(

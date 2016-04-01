@@ -10,7 +10,7 @@ import java.util.function.Function;
 public class SimplePuzzleSolverTest {
 
   private Function<Cell[][], IPuzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
-  private PuzzleParser parser = new PuzzleParser(createPuzzle);
+  private Parser parser = new Parser(createPuzzle);
   private SimplePuzzleSolver simplePuzzleSolver;
 
   @Before

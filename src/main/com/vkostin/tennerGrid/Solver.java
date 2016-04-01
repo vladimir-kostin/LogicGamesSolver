@@ -1,12 +1,11 @@
 package com.vkostin.tennerGrid;
 
-import com.vkostin.Cell;
 import com.vkostin.Puzzle;
 import com.vkostin.ValueCell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 public class Solver implements com.vkostin.Solver {
 
@@ -40,7 +39,7 @@ public class Solver implements com.vkostin.Solver {
       }
 
       for (int rowIndex = 0; rowIndex < _puzzle.getRowCount(); rowIndex++) {
-        if(doesRowContainNonUniqueProperValues(rowIndex)) return true;
+        if(!areAllProperValueUniqueInRow(rowIndex)) return true;
       }
 
       return false;
@@ -49,13 +48,13 @@ public class Solver implements com.vkostin.Solver {
     private boolean doesColumnContainErrors(int columnIndex) {
       List<ValueCell> valueCells = new ArrayList<>();
       for (int rowIndex = 0; rowIndex < _puzzle.getRowCount(); rowIndex++) {
-        valueCells.add(getValueCellOrNull(rowIndex, columnIndex));
+        valueCell(rowIndex, columnIndex)
+                .ifPresent(valueCells::add);
       }
 
       int expectedSumOfValues = expectedSumOfValuesInColumn(columnIndex);
 
       int actualSumOfValues = valueCells.stream()
-              .filter(Objects::nonNull)
               .filter(Rules::hasProperValue)
               .mapToInt(ValueCell::getValue)
               .sum();
@@ -65,47 +64,41 @@ public class Solver implements com.vkostin.Solver {
       boolean containsUnresolvedCells = valueCells.stream()
               .anyMatch(Rules::hasUnsolvedValue);
 
-      return containsUnresolvedCells || expectedSumOfValues != actualSumOfValues;
+      return !containsUnresolvedCells && expectedSumOfValues != actualSumOfValues;
     }
 
-    private boolean doesRowContainNonUniqueProperValues(int rowIndex) {
-      List<ValueCell> valueCells = new ArrayList<>();
+    private boolean areAllProperValueUniqueInRow(int rowIndex) {
+      List<ValueCell> valueCellsWithProperValues = new ArrayList<>();
       for (int columnIndex = 0; columnIndex < _puzzle.getRowLength(); columnIndex++) {
-        valueCells.add(getValueCellOrNull(rowIndex, columnIndex));
+        valueCell(rowIndex, columnIndex)
+                .filter(Rules::hasProperValue)
+                .ifPresent(valueCellsWithProperValues::add);
       }
 
-      long countOfProperValueCells = valueCells.stream()
-              .filter(Objects::nonNull)
-              .filter(Rules::hasProperValue)
-              .count();
-
-      long countOfDistinctValues = valueCells.stream()
-              .filter(Objects::nonNull)
-              .filter(Rules::hasProperValue)
+      long countOfDistinctValues = valueCellsWithProperValues.stream()
               .mapToInt(ValueCell::getValue)
               .distinct()
               .count();
 
-      return countOfProperValueCells == countOfDistinctValues;
+      return valueCellsWithProperValues.size() == countOfDistinctValues;
     }
 
-    private ValueCell getValueCellOrNull(int rowIndex, int columnIndex) {
-      Cell aCell = _puzzle.getCellAt(rowIndex, columnIndex);
-      return (aCell instanceof ValueCell) ? (ValueCell) aCell : null;
+    private Optional<ValueCell> valueCell(int rowIndex, int columnIndex) {
+      return Optional.of(_puzzle.getCellAt(rowIndex, columnIndex))
+              .map(cell -> cell.as(ValueCell.class));
     }
 
     private int expectedSumOfValuesInColumn(int columnIndex) {
-      return ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount() - 2, columnIndex)).getSumOfValuesAbove();
+      return ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount() - 1, columnIndex)).getSumOfValuesAbove();
     }
 
+    // TODO may be it would be possible to return Optional ?
     private ValueCell findUnsolvedValueCellOrNull() {
       for (int rowIndex = 0; rowIndex < _puzzle.getRowCount(); rowIndex++) {
         for (int columnIndex = 0; columnIndex < _puzzle.getRowLength(); columnIndex++) {
-          Cell aCell = _puzzle.getCellAt(rowIndex, columnIndex);
-          if (aCell instanceof ValueCell) {
-            ValueCell valueCell = (ValueCell) aCell;
-            if (Rules.hasUnsolvedValue(valueCell)) return valueCell;
-          }
+          Optional<ValueCell> unsolvedValueCell = valueCell(rowIndex, columnIndex)
+                  .filter(Rules::hasUnsolvedValue);
+          if (unsolvedValueCell.isPresent()) return unsolvedValueCell.get();
         }
       }
       return null;

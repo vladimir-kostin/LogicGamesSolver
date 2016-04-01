@@ -11,6 +11,8 @@ class TaskCell implements Cell {
     this.sumOfValuesAbove = sumOfValuesAbove;
   }
 
+  public int getSumOfValuesAbove() { return sumOfValuesAbove; }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

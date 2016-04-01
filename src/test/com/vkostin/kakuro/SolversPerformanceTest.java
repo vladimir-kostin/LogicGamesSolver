@@ -3,10 +3,12 @@ package com.vkostin.kakuro;
 import com.vkostin.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.function.Function;
 
-public class PuzzleSolversPerformanceTest {
+@Category(PerformanceTest.class)
+public class SolversPerformanceTest {
 
   private Function<Cell[][], Puzzle> createPuzzle1 = cells -> new PuzzleAsArray(cells);
   private Function<Cell[][], Puzzle> createPuzzle3 = cells -> new PuzzleAsList(cells);

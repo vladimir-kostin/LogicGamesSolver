@@ -1,4 +1,15 @@
 ------------
+[2016-04-01]
+------------
+..Summary
+Counting up to 10
+
+..Description
+1. Your goal is to enter every digit, from 0 to 9, in each row of the Grid.
+2. The number on the bottom row gives you the sum from that column.
+3. Digits can repeat on the same column, however digits in contiguous tiles must be different, even diagonally. Obviously digits can't repeat on the same row.
+
+------------
 [2016-03-29]
 ------------
 Q: how to provide to solver a tenner-grid puzzle (via text file) ?

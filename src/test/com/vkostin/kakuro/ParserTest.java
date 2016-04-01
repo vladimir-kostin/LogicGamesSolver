@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 public class ParserTest {
 
-  Function<Cell[][], IPuzzle> createPuzzle = cells -> new PuzzleAsList(cells);
+  Function<Cell[][], Puzzle> createPuzzle = cells -> new PuzzleAsList(cells);
   Parser parser;
 
   @Before
@@ -31,9 +31,9 @@ public class ParserTest {
 
   @Test
   public void shouldParsePuzzle____() {
-    IPuzzle result = parser.parse(TestData.PUZZLE____);
+    Puzzle result = parser.parse(TestData.PUZZLE____);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(tC(),    tC(3,0), tC(4,0), tC(6,0))
             .addRow(tC(0,6), vC(),    vC(),    vC())
             .addRow(tC(0,7), vC(),    vC(),    vC())
@@ -44,9 +44,9 @@ public class ParserTest {
 
   @Test
   public void shouldParsePuzzle___1() {
-    IPuzzle result = parser.parse(TestData.PUZZLE___1);
+    Puzzle result = parser.parse(TestData.PUZZLE___1);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(tC(),    tC(4,0),   tC(9,0),  tC(),     tC())
             .addRow(tC(0,4), vC(),      vC(),     tC(21,0), tC())
             .addRow(tC(0,7), vC(),      vC(),     vC(),     tC(16,0))
@@ -59,9 +59,9 @@ public class ParserTest {
 
   @Test
   public void shouldParseSolution____() throws Exception {
-    IPuzzle result = parser.parse(TestData.SOLUTION____);
+    Puzzle result = parser.parse(TestData.SOLUTION____);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(tC(),    tC(3,0), tC(4,0), tC(6,0))
             .addRow(tC(0,6), vC(1),   vC(3),   vC(2))
             .addRow(tC(0,7), vC(2),   vC(1),   vC(4))
@@ -72,9 +72,9 @@ public class ParserTest {
 
   @Test
   public void shouldParseSolution___1() throws Exception {
-    IPuzzle result = parser.parse(TestData.SOLUTION___1);
+    Puzzle result = parser.parse(TestData.SOLUTION___1);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(tC(),    tC(4,0),   tC(9,0),  tC(),     tC())
             .addRow(tC(0,4), vC(3),     vC(1),     tC(21,0), tC())
             .addRow(tC(0,7), vC(1),     vC(2),     vC(4),     tC(16,0))

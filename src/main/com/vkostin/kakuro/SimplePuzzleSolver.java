@@ -2,15 +2,15 @@ package com.vkostin.kakuro;
 
 import com.vkostin.*;
 
-class SimplePuzzleSolver implements IPuzzleSolver {
+class SimplePuzzleSolver implements Solver {
 
   @Override
-  public IPuzzle solve(IPuzzle puzzle) {
+  public Puzzle solve(Puzzle puzzle) {
     return new SolverInstance(puzzle).solve();
   }
 
   public static class SolverInstance extends AbstractSolverInstance {
-    public SolverInstance(IPuzzle puzzle) { super(puzzle); }
+    public SolverInstance(Puzzle puzzle) { super(puzzle); }
 
     @Override
     protected boolean isCurrentAssumptionWrong() {

@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.function.Function;
 
 public class PuzzleBuilder {
-  public static PuzzleBuilder aPuzzle(Function<Cell[][], IPuzzle> createPuzzle) {
+  public static PuzzleBuilder aPuzzle(Function<Cell[][], Puzzle> createPuzzle) {
     return new PuzzleBuilder(createPuzzle);
   }
 
   private List<List<Cell>> rows = new ArrayList<>();
 
-  private final Function<Cell[][], IPuzzle> createPuzzle;
-  private PuzzleBuilder(Function<Cell[][], IPuzzle> createPuzzle){
+  private final Function<Cell[][], Puzzle> createPuzzle;
+  private PuzzleBuilder(Function<Cell[][], Puzzle> createPuzzle){
     this.createPuzzle = createPuzzle;
   }
 
-  public IPuzzle build() {
+  public Puzzle build() {
     final int maxWidth = maxWidth();
     Cell[][] cells = new Cell[rows.size()][maxWidth];
 

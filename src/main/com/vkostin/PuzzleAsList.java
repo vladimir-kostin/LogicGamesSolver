@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * stores cell in List<List<Cell>>
  */
-public class PuzzleAsList implements IPuzzle {
+public class PuzzleAsList implements Puzzle {
 
   private List<List<Cell>> cells = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class PuzzleAsList implements IPuzzle {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o instanceof PuzzleAsList) { return Objects.equals(cells, ((PuzzleAsList)(o)).cells); }
-    if (o instanceof IPuzzle) { return isEqualToPuzzle((IPuzzle) o); }
+    if (o instanceof Puzzle) { return isEqualToPuzzle((Puzzle) o); }
     return false;
   }
 

@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 public class SimplePuzzleSolverTest {
 
-  private Function<Cell[][], IPuzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
+  private Function<Cell[][], Puzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
   private Parser parser = new Parser(createPuzzle);
   private SimplePuzzleSolver simplePuzzleSolver;
 
@@ -19,11 +19,11 @@ public class SimplePuzzleSolverTest {
   }
 
   private void shouldSolve(String puzzle, String solution) {
-    IPuzzle input = parser.parse(puzzle);
+    Puzzle input = parser.parse(puzzle);
 
-    IPuzzle result = simplePuzzleSolver.solve(input);
+    Puzzle result = simplePuzzleSolver.solve(input);
 
-    IPuzzle expected = parser.parse(solution);
+    Puzzle expected = parser.parse(solution);
     Assert.assertEquals(expected, result);
   }
 

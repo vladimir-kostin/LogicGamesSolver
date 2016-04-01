@@ -15,12 +15,12 @@ class Parser {
 
   private final static String UNSOLVED_VALUE = "_";
 
-  private final Function<Cell[][], IPuzzle> createPuzzle;
-  public Parser(Function<Cell[][], IPuzzle> createPuzzle) {
+  private final Function<Cell[][], Puzzle> createPuzzle;
+  public Parser(Function<Cell[][], Puzzle> createPuzzle) {
     this.createPuzzle = createPuzzle;
   }
 
-  public IPuzzle parse(String text) {
+  public Puzzle parse(String text) {
 
     String[] lines = text.split(NEW_LINE_REGEX);
 

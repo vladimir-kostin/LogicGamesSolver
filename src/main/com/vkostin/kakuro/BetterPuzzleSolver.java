@@ -7,10 +7,10 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
-class BetterPuzzleSolver implements IPuzzleSolver {
+class BetterPuzzleSolver implements Solver {
 
   @Override
-  public IPuzzle solve(IPuzzle puzzle) {
+  public Puzzle solve(Puzzle puzzle) {
     return new SolverInstance(puzzle).solve();
   }
 
@@ -21,7 +21,7 @@ class BetterPuzzleSolver implements IPuzzleSolver {
     private final Map<TaskCell, List<ValueCell>> valuesBelow = new IdentityHashMap<>();
     private final Map<TaskCell, List<ValueCell>> valuesOnTheRight = new IdentityHashMap<>();
 
-    public SolverInstance(IPuzzle puzzle) {
+    public SolverInstance(Puzzle puzzle) {
       super(puzzle);
 
       for (int rowIndex = 0; rowIndex < puzzle.getRowCount(); rowIndex++) {

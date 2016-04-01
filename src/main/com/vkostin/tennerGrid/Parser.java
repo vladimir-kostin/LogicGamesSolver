@@ -2,7 +2,7 @@ package com.vkostin.tennerGrid;
 
 import com.vkostin.AbstractParser;
 import com.vkostin.Cell;
-import com.vkostin.IPuzzle;
+import com.vkostin.Puzzle;
 import com.vkostin.ValueCell;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 class Parser extends AbstractParser {
 
-  public Parser(Function<Cell[][], IPuzzle> createPuzzle) { super(createPuzzle); }
+  public Parser(Function<Cell[][], Puzzle> createPuzzle) { super(createPuzzle); }
 
   @Override
-  public IPuzzle parse(String multiLineText) {
+  public Puzzle parse(String multiLineText) {
     builder.clear();
     List<String> lines = nonEmptyTextLines(multiLineText);
     int lastRowIndex = lines.size() - 1;

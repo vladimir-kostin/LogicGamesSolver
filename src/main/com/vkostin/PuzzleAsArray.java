@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * stores cells in 2D array
  */
-public class PuzzleAsArray implements IPuzzle {
+public class PuzzleAsArray implements Puzzle {
   final private Cell[][] cells;
 
   public PuzzleAsArray(Cell[][] cells) {
@@ -23,7 +23,7 @@ public class PuzzleAsArray implements IPuzzle {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o instanceof PuzzleAsArray) { return Arrays.deepEquals(cells, ((PuzzleAsArray) o).cells); }
-    if (o instanceof IPuzzle) { return isEqualToPuzzle((IPuzzle) o); }
+    if (o instanceof Puzzle) { return isEqualToPuzzle((Puzzle) o); }
     return false;
   }
 

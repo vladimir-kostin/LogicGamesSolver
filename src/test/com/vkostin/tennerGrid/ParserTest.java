@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 public class ParserTest {
 
-  Function<Cell[][], IPuzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
+  Function<Cell[][], Puzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
   Parser parser;
 
   @Before
@@ -28,9 +28,9 @@ public class ParserTest {
 
   @Test
   public void shouldParsePuzzle___() {
-    IPuzzle result = parser.parse(TestData.PUZZLE___);
+    Puzzle result = parser.parse(TestData.PUZZLE___);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC( ))
             .addRow(tC(0), tC(1), tC(2), tC(3), tC(4), tC(5), tC(6), tC(7), tC(8), tC(9))
             .build();
@@ -40,9 +40,9 @@ public class ParserTest {
 
   @Test
   public void shouldParseSolution___() throws Exception {
-    IPuzzle result = parser.parse(TestData.SOLUTION___);
+    Puzzle result = parser.parse(TestData.SOLUTION___);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(vC(0), vC(1), vC(2), vC(3), vC(4), vC(5), vC(6), vC(7), vC(8), vC(9))
             .addRow(tC(0), tC(1), tC(2), tC(3), tC(4), tC(5), tC(6), tC(7), tC(8), tC(9))
             .build();
@@ -52,9 +52,9 @@ public class ParserTest {
 
   @Test
   public void shouldParsePuzzle__1() {
-    IPuzzle result = parser.parse(TestData.PUZZLE__1);
+    Puzzle result = parser.parse(TestData.PUZZLE__1);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(vC(  ), vC(  ), vC(  ), vC( 3), vC( 7), vC( 0), vC( 4), vC( 5), vC( 1), vC( 2))
             .addRow(vC( 3), vC( 1), vC(  ), vC( 2), vC(  ), vC( 8), vC( 9), vC( 7), vC( 4), vC( 5))
             .addRow(vC( 6), vC( 7), vC(  ), vC(  ), vC( 9), vC( 2), vC( 1), vC( 3), vC(  ), vC(  ))
@@ -66,9 +66,9 @@ public class ParserTest {
 
   @Test
   public void shouldParseSolution__1() {
-    IPuzzle result = parser.parse(TestData.SOLUTION__1);
+    Puzzle result = parser.parse(TestData.SOLUTION__1);
 
-    IPuzzle expected = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(vC( 8), vC( 9), vC( 6), vC( 3), vC( 7), vC( 0), vC( 4), vC( 5), vC( 1), vC( 2))
             .addRow(vC( 3), vC( 1), vC( 0), vC( 2), vC( 6), vC( 8), vC( 9), vC( 7), vC( 4), vC( 5))
             .addRow(vC( 6), vC( 7), vC( 4), vC( 5), vC( 9), vC( 2), vC( 1), vC( 3), vC( 8), vC( 0))

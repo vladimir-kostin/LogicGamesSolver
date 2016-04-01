@@ -1,12 +1,11 @@
 package com.vkostin.tennerGrid;
 
-import com.vkostin.IPuzzle;
-import com.vkostin.IPuzzleSolver;
+import com.vkostin.Puzzle;
 
-public class Solver implements IPuzzleSolver {
+public class Solver implements com.vkostin.Solver {
 
   @Override
-  public IPuzzle solve(IPuzzle puzzle) {
+  public Puzzle solve(Puzzle puzzle) {
     return null;
   }
 

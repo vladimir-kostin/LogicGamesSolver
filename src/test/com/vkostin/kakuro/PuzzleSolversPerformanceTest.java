@@ -8,13 +8,13 @@ import java.util.function.Function;
 
 public class PuzzleSolversPerformanceTest {
 
-  private Function<Cell[][], IPuzzle> createPuzzle1 = cells -> new PuzzleAsArray(cells);
-  private Function<Cell[][], IPuzzle> createPuzzle3 = cells -> new PuzzleAsList(cells);
+  private Function<Cell[][], Puzzle> createPuzzle1 = cells -> new PuzzleAsArray(cells);
+  private Function<Cell[][], Puzzle> createPuzzle3 = cells -> new PuzzleAsList(cells);
 
   private SimplePuzzleSolver simpleSolver = new SimplePuzzleSolver();
   private BetterPuzzleSolver betterSolver = new BetterPuzzleSolver();
 
-  private void testSolverWithModel(IPuzzleSolver solver, Function<Cell[][], IPuzzle> createPuzzle) {
+  private void testSolverWithModel(Solver solver, Function<Cell[][], Puzzle> createPuzzle) {
     Parser parser = new Parser(createPuzzle);
     TestData.ALL_PUZZLES_WITH_SOLUTIONS.entrySet().stream()
             .forEach(e ->

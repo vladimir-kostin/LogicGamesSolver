@@ -1,19 +1,19 @@
 package com.vkostin.kakuro;
 
 import com.vkostin.Cell;
-import com.vkostin.IPuzzle;
+import com.vkostin.Puzzle;
 import com.vkostin.ValueCell;
 
 import java.util.ArrayList;
 import java.util.List;
 
 abstract class AbstractSolverInstance {
-  protected final IPuzzle puzzle;
-  protected AbstractSolverInstance(IPuzzle puzzle) {
+  protected final Puzzle puzzle;
+  protected AbstractSolverInstance(Puzzle puzzle) {
     this.puzzle = puzzle;
   }
 
-  public IPuzzle solve() {
+  public Puzzle solve() {
     if (isCurrentAssumptionWrong()) return null;
 
     ValueCell unsolvedValueCell = findUnsolvedValueCellOfNull();
@@ -21,7 +21,7 @@ abstract class AbstractSolverInstance {
 
     for (int valueToTry = Rules.MIN_ALLOWED_VALUE; valueToTry <= Rules.MAX_ALLOWED_VALUE; valueToTry++) {
       unsolvedValueCell.setValue(valueToTry);
-      IPuzzle result = solve();
+      Puzzle result = solve();
       if (null != result) return result;
     }
 

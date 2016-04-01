@@ -1,11 +1,11 @@
 package com.vkostin;
 
-public interface IPuzzle {
+public interface Puzzle {
   int getRowCount();
   int getRowLength();
   Cell getCellAt(int rowIndex, int columnIndex);
 
-  default boolean isEqualToPuzzle(IPuzzle other) {
+  default boolean isEqualToPuzzle(Puzzle other) {
     if (getRowCount() != other.getRowCount()) return false;
     if (getRowLength() != other.getRowLength()) return false;
 

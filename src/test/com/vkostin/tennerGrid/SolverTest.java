@@ -18,4 +18,13 @@ public class SolverTest extends com.vkostin.SolverTest {
   @Test
   public void shouldSolve__1() { shouldSolve(TestData.PUZZLE__1, TestData.SOLUTION__1); }
 
+  @Test
+  public void shouldSolve__8() { shouldSolve(TestData.PUZZLE__8, TestData.SOLUTION__8); }
+
+  @Test
+  public void shouldSolve_14() { shouldSolve(TestData.PUZZLE_14, TestData.SOLUTION_14); }
+
+  @Test
+  public void shouldSolve_19() { shouldSolve(TestData.PUZZLE_19, TestData.SOLUTION_19); }
+
 }

@@ -35,11 +35,28 @@ public class Solver implements com.vkostin.Solver {
 
     private boolean isCurrentAssumptionWrong() {
       for (int columnIndex = 0; columnIndex < _puzzle.getRowLength(); columnIndex++) {
-        if(doesColumnContainErrors(columnIndex)) return true;
+        if (doesColumnContainErrors(columnIndex)) return true;
       }
 
       for (int rowIndex = 0; rowIndex < _puzzle.getRowCount(); rowIndex++) {
-        if(!areAllProperValueUniqueInRow(rowIndex)) return true;
+        if (!areAllProperValueUniqueInRow(rowIndex)) return true;
+      }
+
+      for (int rowIndex = 0; rowIndex < _puzzle.getRowCount(); rowIndex++) {
+        for (int columnIndex = 0; columnIndex < _puzzle.getRowLength(); columnIndex++) {
+          Optional<ValueCell> valueCell = valueCell(rowIndex, columnIndex);
+          if (!valueCell.isPresent()) continue;
+
+          if (valueCell.filter(Rules::hasUnsolvedValue)
+                  .isPresent()) continue;
+
+          final int atRow = rowIndex;
+          final int atCol = columnIndex;
+          if (!valueCell.map(ValueCell::getValue)
+                  .filter(value -> allThreeValueCellsAboveHaveDifferentValues(value, atRow, atCol))
+                  .filter(value -> allThreeValueCellsBelowHaveDifferentValues(value, atRow, atCol))
+                  .isPresent()) return true;
+        }
       }
 
       return false;
@@ -90,6 +107,14 @@ public class Solver implements com.vkostin.Solver {
 
     private int expectedSumOfValuesInColumn(int columnIndex) {
       return ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount() - 1, columnIndex)).getSumOfValuesAbove();
+    }
+
+    private boolean allThreeValueCellsAboveHaveDifferentValues(int valueToCheck, int rowIndex, int columnIndex) {
+return true;
+    }
+
+    private boolean allThreeValueCellsBelowHaveDifferentValues(int valueToCheck, int rowIndex, int columnIndex) {
+return true;
     }
 
     // TODO may be it would be possible to return Optional ?

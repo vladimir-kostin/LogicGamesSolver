@@ -53,8 +53,8 @@ public class Solver implements com.vkostin.Solver {
           final int atRow = rowIndex;
           final int atCol = columnIndex;
           if (!valueCell.map(ValueCell::getValue)
-                  .filter(value -> allThreeValueCellsAboveHaveDifferentValues(value, atRow, atCol))
-                  .filter(value -> allThreeValueCellsBelowHaveDifferentValues(value, atRow, atCol))
+                  .filter(value -> threeConsequtiveValueCellsInRowDoNotHaveValuesEqualTo(value, atRow-1, atCol-1))
+                  .filter(value -> threeConsequtiveValueCellsInRowDoNotHaveValuesEqualTo(value, atRow+1, atCol-1))
                   .isPresent()) return true;
         }
       }
@@ -109,12 +109,18 @@ public class Solver implements com.vkostin.Solver {
       return ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount() - 1, columnIndex)).getSumOfValuesAbove();
     }
 
-    private boolean allThreeValueCellsAboveHaveDifferentValues(int valueToCheck, int rowIndex, int columnIndex) {
-return true;
-    }
+    private boolean threeConsequtiveValueCellsInRowDoNotHaveValuesEqualTo(final int valueToCheck, int rowIndex, int lowestColumnIndex) {
+      if (0 > rowIndex) return true;
+      if (_puzzle.getRowCount() - 1 <= rowIndex) return true;
 
-    private boolean allThreeValueCellsBelowHaveDifferentValues(int valueToCheck, int rowIndex, int columnIndex) {
-return true;
+      for (int columnIndex = Math.max(lowestColumnIndex, 0); columnIndex <= Math.min(lowestColumnIndex+2, _puzzle.getRowLength()-1); columnIndex++) {
+        if(valueCell(rowIndex, columnIndex)
+                .filter(Rules::hasProperValue)
+                .map(ValueCell::getValue)
+                .filter(value -> valueToCheck == value)
+                .isPresent()) return false;
+      }
+      return true;
     }
 
     // TODO may be it would be possible to return Optional ?

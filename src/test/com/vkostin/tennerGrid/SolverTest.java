@@ -22,9 +22,15 @@ public class SolverTest extends com.vkostin.SolverTest {
   public void shouldSolve__8() { shouldSolve(TestData.PUZZLE__8, TestData.SOLUTION__8); }
 
   @Test
+  public void shouldSolve_10() { shouldSolve(TestData.PUZZLE_10, TestData.SOLUTION_10); }
+
+  @Test
   public void shouldSolve_14() { shouldSolve(TestData.PUZZLE_14, TestData.SOLUTION_14); }
 
   @Test
   public void shouldSolve_19() { shouldSolve(TestData.PUZZLE_19, TestData.SOLUTION_19); }
+
+  @Test
+  public void shouldSolve_20() { shouldSolve(TestData.PUZZLE_20, TestData.SOLUTION_20); }
 
 }

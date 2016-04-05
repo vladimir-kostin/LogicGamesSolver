@@ -32,33 +32,6 @@ abstract class AbstractSolverInstance {
   protected abstract boolean isCurrentAssumptionWrong();
   protected abstract ValueCell findUnsolvedValueCellOfNull();
 
-  // TODO "failed to meet expectations"
-  protected boolean doValueCellsMeetExpectations(List<ValueCell> valueCells, int expectedSumOfValues) {
-    int actualSumOfValues = valueCells.stream()
-            .filter(Rules::hasProperValue)
-            .mapToInt(ValueCell::getValue)
-            .sum();
-
-    if(expectedSumOfValues < actualSumOfValues) { return false; }
-
-    boolean containsUnresolvedValueCells = valueCells.stream()
-            .anyMatch(Rules::isUnsolved);
-
-    if(!containsUnresolvedValueCells && expectedSumOfValues != actualSumOfValues) { return  false; }
-
-    long properValuesCount = valueCells.stream()
-            .filter(Rules::hasProperValue)
-            .count();
-
-    long distinctProperValuesCount = valueCells.stream()
-            .filter(Rules::hasProperValue)
-            .mapToInt(ValueCell::getValue)
-            .distinct()
-            .count();
-
-    return properValuesCount == distinctProperValuesCount;
-  }
-
   protected List<ValueCell> getValueCellsBelowThan(int cellRowIndex, int cellColumnIndex) {
     List<ValueCell> valueCells = new ArrayList<>();
     for (int rowIndex = cellRowIndex+1; rowIndex < puzzle.getRowCount(); rowIndex++) {

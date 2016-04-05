@@ -20,10 +20,10 @@ class SimplePuzzleSolver implements Solver {
           if (aCell instanceof TaskCell) {
             TaskCell taskCell = (TaskCell) aCell;
             if (0 < taskCell.getSumOfValuesBelow()) {
-              if(!doValueCellsMeetExpectations(getValueCellsBelowThan(rowIndex, columnIndex), taskCell.getSumOfValuesBelow())) { return true; }
+              if(ValueCell.doValueCellsFailToMeetExpectation(taskCell.getSumOfValuesBelow(), getValueCellsBelowThan(rowIndex, columnIndex), Rules::hasProperValue, false)) return true;
             }
             if (0 < taskCell.getSumOfValuesOnTheRight()) {
-              if(!doValueCellsMeetExpectations(getValueCellsOnTheRightFrom(rowIndex, columnIndex), taskCell.getSumOfValuesOnTheRight())) { return true; }
+              if (ValueCell.doValueCellsFailToMeetExpectation(taskCell.getSumOfValuesOnTheRight(), getValueCellsOnTheRightFrom(rowIndex, columnIndex), Rules::hasProperValue, false)) return true;
             }
           }
         }

@@ -65,18 +65,7 @@ public class AbstractSolverInstance {
     }
 
     int expectedSumOfValues = expectedSumOfValuesInColumn(columnIndex);
-
-    int actualSumOfValues = valueCells.stream()
-            .filter(Rules::hasProperValue)
-            .mapToInt(ValueCell::getValue)
-            .sum();
-
-    if (expectedSumOfValues < actualSumOfValues) return true;
-
-    boolean containsUnresolvedCells = valueCells.stream()
-            .anyMatch(Rules::hasUnsolvedValue);
-
-    return !containsUnresolvedCells && expectedSumOfValues != actualSumOfValues;
+    return ValueCell.doValueCellsFailToMeetExpectation(expectedSumOfValues, valueCells, Rules::hasProperValue, true);
   }
 
   protected boolean areAllProperValueUniqueInRow(int rowIndex) {

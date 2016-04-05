@@ -48,10 +48,10 @@ class BetterPuzzleSolver implements Solver {
 
     private boolean isAssumptionWrongForTaskCell(TaskCell taskCell) {
       if (0 < taskCell.getSumOfValuesBelow()) {
-        if (!doValueCellsMeetExpectations(valuesBelow.get(taskCell), taskCell.getSumOfValuesBelow())) return true;
+        if (ValueCell.doValueCellsFailToMeetExpectation(taskCell.getSumOfValuesBelow(), valuesBelow.get(taskCell), Rules::hasProperValue, false)) return true;
       }
       if (0 < taskCell.getSumOfValuesOnTheRight()) {
-        if (!doValueCellsMeetExpectations(valuesOnTheRight.get(taskCell), taskCell.getSumOfValuesOnTheRight())) return true;
+        if (ValueCell.doValueCellsFailToMeetExpectation(taskCell.getSumOfValuesOnTheRight(), valuesOnTheRight.get(taskCell), Rules::hasProperValue, false)) return true;
       }
       return false;
     }

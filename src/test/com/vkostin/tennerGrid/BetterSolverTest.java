@@ -10,7 +10,7 @@ public class BetterSolverTest extends SolverTest {
   @Before
   public void setUp() {
     parser = new Parser(PuzzleAsArray::new);
-    solver = new SimpleSolver();
+    solver = new BetterSolver();
   }
 
   @Test

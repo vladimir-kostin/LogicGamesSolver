@@ -1,37 +1,42 @@
 package com.vkostin;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class ValueCell implements Cell {
 
   public static boolean doValueCellsFailToMeetExpectation(
           int expectedValueSum
           , Collection<ValueCell> valueCells
-          , Predicate<ValueCell> hasProperValue) {
+          , Predicate<ValueCell> hasProperValue
+          , boolean duplicateProperValuesAreAllowed) {
 
-    List<ValueCell> properValueCells = valueCells.stream()
+    int actualSumOfProperValues = valueCells.stream()
             .filter(hasProperValue)
-            .collect(Collectors.toList());
-
-    int acturalSumOfProperValues = properValueCells.stream()
             .mapToInt(ValueCell::getValue)
             .sum();
 
-    if (expectedValueSum < acturalSumOfProperValues) return true;
+    if (expectedValueSum < actualSumOfProperValues) return true;
 
-    if (valueCells.size() == properValueCells.size()
-            && expectedValueSum != acturalSumOfProperValues) return true;
+    boolean containsUnresolvedCells = valueCells.stream()
+            .anyMatch(hasProperValue.negate());
 
-    long distinctProperValueCount = properValueCells.stream()
+    if (!containsUnresolvedCells && expectedValueSum != actualSumOfProperValues) return true;
+    if(duplicateProperValuesAreAllowed) return false;
+
+    long properValueCount = valueCells.stream()
+            .filter(hasProperValue)
+            .mapToInt(ValueCell::getValue)
+            .count();
+
+    long distinctProperValueCount = valueCells.stream()
+            .filter(hasProperValue)
             .mapToInt(ValueCell::getValue)
             .distinct()
             .count();
 
-    return properValueCells.size() != distinctProperValueCount;
+    return properValueCount != distinctProperValueCount;
   }
 
   private int value;

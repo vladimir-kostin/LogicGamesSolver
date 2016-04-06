@@ -10,11 +10,12 @@ import java.util.function.Function;
 @Category(PerformanceTest.class)
 public class SolversPerformanceTest {
 
-  private Function<Cell[][], Puzzle> createPuzzle1 = cells -> new PuzzleAsArray(cells);
-  private Function<Cell[][], Puzzle> createPuzzle3 = cells -> new PuzzleAsList(cells);
+  private Function<Cell[][], Puzzle> createPuzzleAsArray = cells -> new PuzzleAsArray(cells);
+  private Function<Cell[][], Puzzle> createPuzzleAsList = cells -> new PuzzleAsList(cells);
 
   private SimplePuzzleSolver simpleSolver = new SimplePuzzleSolver();
   private BetterPuzzleSolver betterSolver = new BetterPuzzleSolver();
+  private AnotherSolver anotherSolver = new AnotherSolver();
 
   private void testSolverWithModel(Solver solver, Function<Cell[][], Puzzle> createPuzzle) {
     Parser parser = new Parser(createPuzzle);
@@ -28,23 +29,33 @@ public class SolversPerformanceTest {
   }
 
   @Test
-  public void testSimpleSolver_wModel1() {
-    testSolverWithModel(simpleSolver, createPuzzle1);
+  public void testSimpleSolver_wModelAsArray() {
+    testSolverWithModel(simpleSolver, createPuzzleAsArray);
   }
 
   @Test
-  public void testSimpleSolver_wModel3() {
-    testSolverWithModel(simpleSolver, createPuzzle3);
+  public void testSimpleSolver_wModelAsList() {
+    testSolverWithModel(simpleSolver, createPuzzleAsList);
   }
 
   @Test
-  public void testBetterSolver_wModel1() {
-    testSolverWithModel(betterSolver, createPuzzle1);
+  public void testBetterSolver_wModelAsArray() {
+    testSolverWithModel(betterSolver, createPuzzleAsArray);
   }
 
   @Test
-  public void testBetterSolver_wModel3() {
-    testSolverWithModel(betterSolver, createPuzzle3);
+  public void testBetterSolver_wModelAsList() {
+    testSolverWithModel(betterSolver, createPuzzleAsList);
+  }
+
+  @Test
+  public void testAnotherSolver_wModelAsArray() {
+    testSolverWithModel(anotherSolver, createPuzzleAsArray);
+  }
+
+  @Test
+  public void testAnotherSolver_wModelAsList() {
+    testSolverWithModel(anotherSolver, createPuzzleAsList);
   }
 
 }

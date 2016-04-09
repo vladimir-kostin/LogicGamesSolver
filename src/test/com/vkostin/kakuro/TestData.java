@@ -1,9 +1,5 @@
 package com.vkostin.kakuro;
 
-import com.google.common.collect.ImmutableMap;
-
-import java.util.Map;
-
 class TestData {
   final static String PUZZLE____ = String.join("\n"
           ,"\\  3\\ 4\\ 6\\"
@@ -170,16 +166,5 @@ class TestData {
           , "\\17 9     8    \\    \\30 1     3    7     9     2    8"
           , "\\9  8     1    \\    \\15 6     9     \\    \\17 8    9"
   );
-
-  final static Map<String, String> ALL_PUZZLES_WITH_SOLUTIONS = ImmutableMap.<String, String>builder()
-          .put(TestData.PUZZLE____, TestData.SOLUTION____)
-          .put(TestData.PUZZLE___1, TestData.SOLUTION___1)
-          .put(TestData.PUZZLE___8, TestData.SOLUTION___8)
-          .put(TestData.PUZZLE__20, TestData.SOLUTION__20)
-          .put(TestData.PUZZLE__42, TestData.SOLUTION__42)
-          .put(TestData.PUZZLE__64, TestData.SOLUTION__64)
-          .put(TestData.PUZZLE__86, TestData.SOLUTION__86)
-          .put(TestData.PUZZLE_108, TestData.SOLUTION_108)
-          .build();
 
 }

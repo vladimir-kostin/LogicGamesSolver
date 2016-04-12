@@ -6,9 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AnotherSolverTest extends SolverTest {
+
   @Before
-  public void setUp() throws Exception {
-    parser = new com.vkostin.kakuro.Parser(PuzzleAsArray::new);
+  public void setUp() {
+    parser = new Parser(PuzzleAsArray::new);
     solver = new AnotherSolver();
   }
 

@@ -1,5 +1,10 @@
 package com.vkostin.tennerGrid;
 
+import com.vkostin.TestParameter;
+
+import java.util.Arrays;
+import java.util.List;
+
 class TestData {
   final static String PUZZLE___ = String.join("\r\n"
           , "0 1 2 3 4 5 6 7 8 _"
@@ -115,6 +120,23 @@ class TestData {
           , " 6  4  7  1  3  2  5  8  9  0"
           , " 2  1  0  4  9  8  7  3  5  6"
           , "18 26 23 30 33 22 39 25 31 23"
+  );
+
+  public final static List<TestParameter> QUICKLY_SOLVEABLE_TEST_DATA = Arrays.asList(
+          new TestParameter(0, PUZZLE___, SOLUTION___)
+          , new TestParameter( 1, PUZZLE__1, SOLUTION__1)
+          , new TestParameter( 8, PUZZLE__8, SOLUTION__8)
+          , new TestParameter( 10, PUZZLE_10, SOLUTION_10)
+  );
+
+  public final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
+          new TestParameter(0, PUZZLE___, SOLUTION___)
+          , new TestParameter( 1, PUZZLE__1, SOLUTION__1)
+          , new TestParameter( 8, PUZZLE__8, SOLUTION__8)
+          , new TestParameter( 10, PUZZLE_10, SOLUTION_10)
+          , new TestParameter( 14, PUZZLE_14, SOLUTION_14)
+          , new TestParameter( 19, PUZZLE_19, SOLUTION_19)
+          , new TestParameter( 20, PUZZLE_20, SOLUTION_20)
   );
 
 }

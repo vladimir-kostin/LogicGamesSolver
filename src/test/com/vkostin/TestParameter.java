@@ -1,11 +1,11 @@
 package com.vkostin;
 
-public class PerformanceTestParameter {
+public class TestParameter {
   private final int _number;
   private final String _puzzle;
   private final String _solution;
 
-  public PerformanceTestParameter(int number, String puzzle, String solution) {
+  public TestParameter(int number, String puzzle, String solution) {
     this._number = number;
     this._puzzle = puzzle;
     this._solution = solution;

@@ -1,5 +1,10 @@
 package com.vkostin.kakuro;
 
+import com.vkostin.TestParameter;
+
+import java.util.Arrays;
+import java.util.List;
+
 class TestData {
   final static String PUZZLE____ = String.join("\n"
           ,"\\  3\\ 4\\ 6\\"
@@ -165,6 +170,24 @@ class TestData {
           , "\\  17\\5  4   1      \\   7\\  12\\9 5     4    10\\ 17\\"
           , "\\17 9     8    \\    \\30 1     3    7     9     2    8"
           , "\\9  8     1    \\    \\15 6     9     \\    \\17 8    9"
+  );
+
+  public final static List<TestParameter> QUICKLY_SOLVEABLE_TEST_DATA = Arrays.asList(
+          new TestParameter(0, PUZZLE____, SOLUTION____)
+          , new TestParameter( 1, PUZZLE___1, SOLUTION___1)
+          , new TestParameter( 8, PUZZLE___8, SOLUTION___8)
+          , new TestParameter( 20, PUZZLE__20, SOLUTION__20)
+  );
+
+  public final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
+          new TestParameter(0, PUZZLE____, SOLUTION____)
+          , new TestParameter(  1, PUZZLE___1, SOLUTION___1)
+          , new TestParameter(  8, PUZZLE___8, SOLUTION___8)
+          , new TestParameter( 20, PUZZLE__20, SOLUTION__20)
+          , new TestParameter( 42, PUZZLE__42, SOLUTION__42)
+          , new TestParameter( 64, PUZZLE__64, SOLUTION__64)
+          , new TestParameter( 86, PUZZLE__86, SOLUTION__86)
+          , new TestParameter(108, PUZZLE_108, SOLUTION_108)
   );
 
 }

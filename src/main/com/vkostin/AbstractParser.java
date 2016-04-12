@@ -14,7 +14,7 @@ public abstract class AbstractParser implements Parser {
 
   protected final PuzzleBuilder builder;
 
-  public AbstractParser(Function<Cell[][], Puzzle> createPuzzle) {
+  protected AbstractParser(Function<Cell[][], Puzzle> createPuzzle) {
     builder = PuzzleBuilder.aPuzzle(createPuzzle);
   }
 

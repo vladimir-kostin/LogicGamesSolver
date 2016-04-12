@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-class Parser implements com.vkostin.Parser {
+public class Parser implements com.vkostin.Parser {
 
   private final static String NEW_LINE_REGEX = "[\\r\\n]+";
   private final static String WHITE_SPACE_REGEX = "[\\s]+";

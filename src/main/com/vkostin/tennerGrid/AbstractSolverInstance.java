@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AbstractSolverInstance {
+abstract class AbstractSolverInstance {
   protected final Puzzle _puzzle;
 
-  public AbstractSolverInstance(Puzzle puzzle) { _puzzle = puzzle; }
+  protected AbstractSolverInstance(Puzzle puzzle) { _puzzle = puzzle; }
 
   public Puzzle solve() {
     if(isCurrentAssumptionWrong()) return null;

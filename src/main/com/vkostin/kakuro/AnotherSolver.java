@@ -32,6 +32,7 @@ public class AnotherSolver implements Solver {
       }
     }
 
+    // TODO deal with comments
     public Puzzle solve() {
 //      if (isCurrentAssumptionWrong()) return null;
 
@@ -75,6 +76,7 @@ public class AnotherSolver implements Solver {
               .orElse(null);
     }
 
+    // TODO deal with comments
     @Override
     protected ValueCell findUnsolvedValueCellOfNull() {
       return null;

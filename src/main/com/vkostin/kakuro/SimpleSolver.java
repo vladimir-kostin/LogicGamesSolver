@@ -2,7 +2,7 @@ package com.vkostin.kakuro;
 
 import com.vkostin.*;
 
-class SimpleSolver implements Solver {
+public class SimpleSolver implements Solver {
 
   @Override
   public Puzzle solve(Puzzle puzzle) {

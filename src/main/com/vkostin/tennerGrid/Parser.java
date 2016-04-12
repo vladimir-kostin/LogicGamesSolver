@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class Parser extends AbstractParser {
+public class Parser extends AbstractParser {
 
   public Parser(Function<Cell[][], Puzzle> createPuzzle) { super(createPuzzle); }
 

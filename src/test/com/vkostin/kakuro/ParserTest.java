@@ -9,8 +9,8 @@ import java.util.function.Function;
 
 public class ParserTest {
 
-  Function<Cell[][], Puzzle> createPuzzle = cells -> new PuzzleAsList(cells);
-  Parser parser;
+  private Function<Cell[][], Puzzle> createPuzzle = PuzzleAsList::new;
+  private Parser parser;
 
   @Before
   public void setUp() {

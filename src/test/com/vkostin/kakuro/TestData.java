@@ -172,14 +172,14 @@ class TestData {
           , "\\9  8     1    \\    \\15 6     9     \\    \\17 8    9"
   );
 
-  public final static List<TestParameter> QUICKLY_SOLVEABLE_TEST_DATA = Arrays.asList(
+  final static List<TestParameter> QUICKLY_SOLVABLE_TEST_DATA = Arrays.asList(
           new TestParameter(0, PUZZLE____, SOLUTION____)
           , new TestParameter( 1, PUZZLE___1, SOLUTION___1)
           , new TestParameter( 8, PUZZLE___8, SOLUTION___8)
           , new TestParameter( 20, PUZZLE__20, SOLUTION__20)
   );
 
-  public final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
+  final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
           new TestParameter(0, PUZZLE____, SOLUTION____)
           , new TestParameter(  1, PUZZLE___1, SOLUTION___1)
           , new TestParameter(  8, PUZZLE___8, SOLUTION___8)

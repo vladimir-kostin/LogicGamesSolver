@@ -122,14 +122,14 @@ class TestData {
           , "18 26 23 30 33 22 39 25 31 23"
   );
 
-  public final static List<TestParameter> QUICKLY_SOLVEABLE_TEST_DATA = Arrays.asList(
+  final static List<TestParameter> QUICKLY_SOLVABLE_TEST_DATA = Arrays.asList(
           new TestParameter(0, PUZZLE___, SOLUTION___)
           , new TestParameter( 1, PUZZLE__1, SOLUTION__1)
           , new TestParameter( 8, PUZZLE__8, SOLUTION__8)
           , new TestParameter( 10, PUZZLE_10, SOLUTION_10)
   );
 
-  public final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
+  final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
           new TestParameter(0, PUZZLE___, SOLUTION___)
           , new TestParameter( 1, PUZZLE__1, SOLUTION__1)
           , new TestParameter( 8, PUZZLE__8, SOLUTION__8)

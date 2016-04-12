@@ -7,21 +7,21 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-public class BetterPuzzleSolverTest {
+public class BetterSolverTest {
 
   private Function<Cell[][], Puzzle> createPuzzle = cells -> new PuzzleAsArray(cells);
   private Parser parser = new Parser(createPuzzle);
-  private BetterPuzzleSolver betterPuzzleSolver;
+  private BetterSolver betterSolver;
 
   @Before
   public void setUp() {
-    betterPuzzleSolver = new BetterPuzzleSolver();
+    betterSolver = new BetterSolver();
   }
 
   private void shouldSolve(String puzzle, String solution) {
     Puzzle input = parser.parse(puzzle);
 
-    Puzzle result = betterPuzzleSolver.solve(input);
+    Puzzle result = betterSolver.solve(input);
 
     Puzzle expected = parser.parse(solution);
     Assert.assertEquals(expected, result);

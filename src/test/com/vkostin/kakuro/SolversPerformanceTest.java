@@ -15,8 +15,8 @@ public class SolversPerformanceTest {
   private Function<Cell[][], Puzzle> createPuzzleAsArray = cells -> new PuzzleAsArray(cells);
   private Function<Cell[][], Puzzle> createPuzzleAsList = cells -> new PuzzleAsList(cells);
 
-  private SimplePuzzleSolver simpleSolver = new SimplePuzzleSolver();
-  private BetterPuzzleSolver betterSolver = new BetterPuzzleSolver();
+  private SimpleSolver simpleSolver = new SimpleSolver();
+  private BetterSolver betterSolver = new BetterSolver();
   private AnotherSolver anotherSolver = new AnotherSolver();
 
   private List<PerformanceTestParameter> testData = Arrays.asList(

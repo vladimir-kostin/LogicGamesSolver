@@ -1,62 +1,46 @@
 package com.vkostin.kakuro;
 
-import com.vkostin.*;
+import com.vkostin.AbstractParser;
+import com.vkostin.Cell;
+import com.vkostin.Puzzle;
+import com.vkostin.ValueCell;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class Parser implements com.vkostin.Parser {
+public class Parser extends AbstractParser {
 
-  private final static String NEW_LINE_REGEX = "[\\r\\n]+";
-  private final static String WHITE_SPACE_REGEX = "[\\s]+";
   private final static String BACKSLASH_REGEX = "\\\\";
 
-  private final static String UNSOLVED_VALUE = "_";
+  public Parser(Function<Cell[][], Puzzle> createPuzzle) { super(createPuzzle); }
 
-  private final Function<Cell[][], Puzzle> createPuzzle;
-  public Parser(Function<Cell[][], Puzzle> createPuzzle) {
-    this.createPuzzle = createPuzzle;
-  }
+  public Puzzle parse(String multiLineText) {
+    builder.clear();
 
-  public Puzzle parse(String text) {
+    nonEmptyTextLines(multiLineText).stream()
+            .map(this::parseLine)
+            .forEach(builder::addRow);
 
-    String[] lines = text.split(NEW_LINE_REGEX);
-
-    PuzzleBuilder builder = PuzzleBuilder.aPuzzle(createPuzzle);
-    for (String line : lines) {
-      builder.addRow(parseLine(line));
-    }
     return builder.build();
   }
 
-  private List<Cell> parseLine(String line) {
-    String[] cells = line.split(WHITE_SPACE_REGEX);
+  private List<Cell> parseLine(String oneLineText) {
+    return cellStringRepresentations(oneLineText).stream()
+            .map(this::parseCell)
+            .collect(Collectors.toList());
+  }
 
-    List<Cell> cellsInLine = new ArrayList<>();
-    for (String cell : cells) {
+  private Cell parseCell(String cellRepresentation) {
+    String[] splits = cellRepresentation.split(BACKSLASH_REGEX, 3);
 
-      String[] sums = cell.split(BACKSLASH_REGEX, 3);
+    switch (splits.length) {
+      case 1: return parseValueCell(cellRepresentation);
+      case 2: return mapStringsToTaskCell(splits[0], splits[1]);
 
-      switch (sums.length) {
-        case 1: {
-          Optional.of(sums[0])
-                  .map(this::parseValueCell)
-                  .ifPresent(cellsInLine::add);
-        } break;
-
-        case 2: {
-          cellsInLine.add(mapStringsToTaskCell(sums[0], sums[1]));
-        } break;
-
-        default: {
-          throw new RuntimeException();
-        }
-      }
+      default: throw new RuntimeException();
     }
-
-    return cellsInLine;
   }
 
   private ValueCell parseValueCell(String input) {

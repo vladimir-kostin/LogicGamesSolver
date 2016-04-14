@@ -1,5 +1,5 @@
 package com.vkostin;
 
 public interface Parser {
-   Puzzle parse(String multiLineText);
+  Puzzle parse(String multiLineText);
 }

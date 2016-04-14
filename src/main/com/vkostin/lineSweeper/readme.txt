@@ -42,3 +42,11 @@ ascii-symbols is bad idea --> since display will depend on proper font
 200 ╚
 201 ╔
 205 ═
+
+There are six available values for path cells:
+left-to-right = '-'
+up-to-down    = '|'
+up-to-left    = 'J'
+up-to-right   = 'L'
+down-to-right = 'F'
+down-to-left  = 'T' (worst choice)

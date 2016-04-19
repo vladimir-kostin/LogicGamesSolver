@@ -1,8 +1,10 @@
 package com.vkostin.lineSweeper;
 
+import com.vkostin.Cell;
+
 import java.util.Objects;
 
-class PathCell {
+class PathCell implements Cell {
   private PathWay _path;
 
   public PathWay getPath() { return _path; }

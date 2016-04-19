@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-import static org.junit.Assert.*;
-
 public class ParserTest {
   private Function<Cell[][], Puzzle> createPuzzle = PuzzleAsList::new;
   private Parser parser;
@@ -30,7 +28,7 @@ public class ParserTest {
   public void shouldParsePuzzle___() {
     Puzzle result = parser.parse(TestData.PUZZLE___);
 
-    Puzzle expectd = aPuzzle()
+    Puzzle expected = aPuzzle()
             .addRow(tc(2), pc( ), pc( ), pc( ), tc(2))
             .addRow(pc( ), pc( ), pc( ), pc( ), pc( ))
             .addRow(pc( ), pc( ), pc( ), pc( ), pc( ))
@@ -38,7 +36,7 @@ public class ParserTest {
             .addRow(tc(2), pc( ), pc( ), pc( ), tc(2))
             .build();
 
-    Assert.assertEquals(expectd, result);
+    Assert.assertEquals(expected, result);
   }
 
 }

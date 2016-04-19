@@ -17,24 +17,24 @@ Q: how to provide to solver a line-sweeper puzzle (via text file) ?
 'x' : will indicate a number in cell (line will NOT go over this cell)
 
 simple example:
-2 _ _ 2
+3 _ _ 3
 _ _ _ _
 _ _ _ _
-2 _ _ 2
+3 _ _ 3
 
-2 _ _ _ 2
+3 _ _ _ 3
 _ _ _ _ _
 _ _ _ _ _
 _ _ _ _ _
-2 _ _ _ 2
+3 _ _ _ 3
 
 Q: how to provide an answer to this puzzle (via text file) ?
 ascii-symbols is bad idea --> since display will depend on proper font
-2╔═╗2
+3╔═╗3
 ╔╝_╚╗
 ║___║
 ╚╗_╔╝
-2╚═╝2
+3╚═╝3
 
 186 ║
 187 ╗

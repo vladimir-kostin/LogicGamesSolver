@@ -2,14 +2,22 @@ package com.vkostin.lineSweeper;
 
 class TestData {
   final static String PUZZLE___ = String.join("\n"
-          , "2 _ _ _ 2"
+          , "3 _ _ _ 3"
           , "_ _ _ _ _"
           , "_ _ _ _ _"
           , "_ _ _ _ _"
-          , "2 _ _ _ 2"
+          , "3 _ _ _ 3"
   );
 
-  final static String PUZZLE__1 = String.join("\r"
+  final static String SOLUTION___ = String.join("\r"
+          , "3 F - T 3"
+          , "F J _ L T"
+          , "| _ _ _ |"
+          , "L T _ F J"
+          , "3 L - J 3"
+  );
+
+  final static String PUZZLE__1 = String.join("\r\n"
           , "_ 3 _ _ 3 _"
           , "_ _ _ _ _ _"
           , "_ _ _ _ _ _"
@@ -18,7 +26,10 @@ class TestData {
           , "_ _ _ _ _ _"
   );
 
-  final static String PUZZLE__3 = String.join("\n\r"
+  final static String SOLUTION__1 = String.join("\n\r"
+  );
+
+  final static String PUZZLE__3 = String.join("\n"
           , "_ 3 _ 3 _ 4 _ _"
           , "_ _ _ _ _ _ _ _"
           , "_ 8 _ _ _ 6 _ _"
@@ -29,7 +40,7 @@ class TestData {
           , "_ _ _ _ _ _ _ 3"
   );
 
-  final static String PUZZLE_23 = String.join("\r\n"
+  final static String PUZZLE_23 = String.join("\n"
           , "_ _ _ _ _ _ _ _"
           , "_ _ 7 _ _ 6 _ 4"
           , "_ _ _ _ _ _ _ _"

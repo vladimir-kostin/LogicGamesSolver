@@ -7,6 +7,9 @@ import java.util.Objects;
 class PathCell implements Cell {
   private PathWay _path;
 
+  public PathCell() { this(null); }
+  public PathCell(PathWay path) { this._path = path; }
+
   public PathWay getPath() { return _path; }
   public void setPath(PathWay path) { this._path = path; }
   public void clearPath() { this._path = null; }

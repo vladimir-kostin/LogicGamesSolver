@@ -61,4 +61,36 @@ Puzzle result = parser.parse(TestData.SOLUTION___);
     Assert.assertEquals(expected, result);
   }
 
+  @Test
+  public void shouldPartPuzzle__1() {
+    Puzzle result = parser.parse(TestData.PUZZLE__1);
+
+    Puzzle expected = aPuzzle()
+            .addRow(pc( ), tc(3), pc( ), pc( ), tc(3), pc( ))
+            .addRow(pc( ), pc( ), pc( ), pc( ), pc( ), pc( ))
+            .addRow(pc( ), pc( ), pc( ), pc( ), pc( ), pc( ))
+            .addRow(tc(5), pc( ), tc(3), pc( ), pc( ), tc(5))
+            .addRow(pc( ), pc( ), pc( ), tc(5), pc( ), pc( ))
+            .addRow(pc( ), pc( ), pc( ), pc( ), pc( ), pc( ))
+            .build();
+
+    Assert.assertEquals(expected, result);
+  }
+
+  @Test
+  public void shouldParseSolution__1() {
+    Puzzle result = parser.parse(TestData.SOLUTION__1);
+
+    Puzzle expected = aPuzzle()
+            .addRow(pc( ), tc(3), pc( ), pc( ), tc(3), pc( ))
+            .addRow(pcf(), pc_(), pc_(), pc_(), pc_(), pct())
+            .addRow(pcl(), pct(), pc( ), pc( ), pcf(), pcj())
+            .addRow(tc(5), pci(), tc(3), pc( ), pci(), tc(5))
+            .addRow(pcf(), pcj(), pc( ), tc(5), pcl(), pct())
+            .addRow(pcl(), pc_(), pc_(), pc_(), pc_(), pcj())
+            .build();
+
+    Assert.assertEquals(expected, result);
+  }
+
 }

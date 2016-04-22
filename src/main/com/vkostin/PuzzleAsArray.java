@@ -30,4 +30,11 @@ public class PuzzleAsArray implements Puzzle {
   @Override
   public int hashCode() { return Arrays.deepHashCode(cells); }
 
+  @Override
+  public String toString() {
+    return "PuzzleAsArray{" +
+            "cells=" + Arrays.deepToString(cells) +
+            '}';
+  }
+
 }

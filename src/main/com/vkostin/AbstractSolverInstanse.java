@@ -41,6 +41,7 @@ public abstract class AbstractSolverInstanse {
 
   public Puzzle solve() {
     CellWithCoordinates<Cell> unsolvedCell = findUnsolvedCell();
+    // TODO : actually if no-unsolved cell is found there still might be a more complex error, so it might make sense to perform full check here
     if (null == unsolvedCell) return _puzzle;
 
     for (Object anAssumption : assumptionsToBeMade()) {

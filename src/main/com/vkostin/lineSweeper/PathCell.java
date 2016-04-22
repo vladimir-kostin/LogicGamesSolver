@@ -27,4 +27,9 @@ class PathCell implements Cell {
     return Objects.hash(_path);
   }
 
+  @Override
+  public String toString() {
+    return (null == _path) ? "_" : "" + _path;
+  }
+
 }

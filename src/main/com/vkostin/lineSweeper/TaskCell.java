@@ -26,4 +26,9 @@ class TaskCell implements Cell {
     return Objects.hash(_numberOfPathCellsAround);
   }
 
+  @Override
+  public String toString() {
+    return "" + _numberOfPathCellsAround;
+  }
+
 }

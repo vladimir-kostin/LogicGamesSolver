@@ -1,5 +1,10 @@
 package com.vkostin.lineSweeper;
 
+import com.vkostin.TestParameter;
+
+import java.util.Arrays;
+import java.util.List;
+
 class TestData {
   final static String PUZZLE___ = String.join("\n"
           , "3 _ _ _ 3"
@@ -103,6 +108,14 @@ class TestData {
           , "4 7 F - J F J F J |"
           , "F - J 8 F J F J 8 |"
           , "L - - - J 5 L - - J"
+  );
+
+  final static List<TestParameter> ALL_TEST_DATA = Arrays.asList(
+          new TestParameter(0, PUZZLE___, SOLUTION___)
+          , new TestParameter( 1, PUZZLE__1, SOLUTION__1)
+          , new TestParameter( 3, PUZZLE__3, SOLUTION__3)
+          , new TestParameter(23, PUZZLE_23, SOLUTION_23)
+          , new TestParameter(38, PUZZLE_38, SOLUTION_38)
   );
 
 }

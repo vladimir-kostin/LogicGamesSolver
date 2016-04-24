@@ -57,6 +57,13 @@ public abstract class AbstractSolverInstanse {
     return null;
   }
 
+  protected CellWithCoordinates cellWithCoordinatesOrNullAt(int rowIndex, int columnIndex) {
+    if (0 > rowIndex || _puzzle.getRowCount() <= rowIndex
+            || 0 > columnIndex || _puzzle.getRowLength() <= columnIndex) return null;
+
+    return new CellWithCoordinates(_puzzle.getCellAt(rowIndex, columnIndex), rowIndex, columnIndex);
+  }
+
   protected abstract CellWithCoordinates<Cell> findUnsolvedCell();
   protected abstract List<?> assumptionsToBeMade();
   protected abstract boolean isAnyRuleBroken(CellWithCoordinates<Cell> cell);

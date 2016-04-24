@@ -5,9 +5,8 @@ import com.vkostin.Cell;
 import com.vkostin.CellWithCoordinates;
 import com.vkostin.Puzzle;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Solver implements com.vkostin.Solver {
 
@@ -90,10 +89,42 @@ public class Solver implements com.vkostin.Solver {
         if (null != onTheRight && null != onTheRight.getPath() && onTheRight.getPath().connectsToCellOnTheLeft()) return true;
       }
 
+      cellsAround(cell).stream()
+              .filter(Objects::nonNull)
+              .filter(c -> null != c.cell().as(TaskCell.class))
+              .forEach(this::taskCellHasCorrespondingAmountOfPathCellsAround);
       // TODO : additionally all task-cells around must be checked for proper amount of non-empty path-cells
       // TODO : there must be only one single loop
 
       return false;
+    }
+
+    private List<CellWithCoordinates<Cell>> cellsAround(CellWithCoordinates<Cell> cell) {
+      List<CellWithCoordinates<Cell>> cellsAround = new ArrayList<>();
+
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex() - 1));
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex()));
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex() + 1));
+
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex(), cell.columnIndex() - 1));
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex(), cell.columnIndex() + 1));
+
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() - 1));
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex()));
+      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() + 1));
+
+      return cellsAround;
+    }
+
+    private boolean taskCellHasCorrespondingAmountOfPathCellsAround(CellWithCoordinates<Cell> taskCell) {
+      cellsAround(taskCell).stream()
+              .filter(Objects::nonNull)
+              .map(CellWithCoordinates::cell)
+              .map(c -> c.as(PathCell.class))
+              .filter(Objects::nonNull)
+              .map(PathCell::getPath);
+
+      #ERROR
     }
 
     @Override

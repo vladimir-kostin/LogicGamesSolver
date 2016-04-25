@@ -57,20 +57,7 @@ enum PathWay {
   public abstract boolean connectsToCellOnTheLeft();
   public abstract boolean connectsToCellOnTheRight();
 
-  private enum Direction {
-    DOWN {
-      @Override public Direction opposite() { return UP; }
-    },
-    LEFT {
-      @Override public Direction opposite() { return RIGHT; }
-    },
-    RIGHT {
-      @Override public Direction opposite() { return LEFT; }
-    },
-    UP {
-      @Override public Direction opposite() { return DOWN; }
-    };
+  static boolean isEmpty(PathWay pathWay) { return EMPTY.equals(pathWay); }
+  static boolean isNotEmpty(PathWay pathWay) { return !isEmpty(pathWay); }
 
-    public abstract Direction opposite();
-  }
 }

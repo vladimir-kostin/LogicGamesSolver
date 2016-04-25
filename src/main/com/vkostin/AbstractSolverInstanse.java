@@ -42,7 +42,7 @@ public abstract class AbstractSolverInstanse {
   public Puzzle solve() {
     CellWithCoordinates<Cell> unsolvedCell = findUnsolvedCell();
     // TODO : actually if no-unsolved cell is found there still might be a more complex error, so it might make sense to perform full check here
-    if (null == unsolvedCell) return _puzzle;
+    if (null == unsolvedCell) return finalizeSolvedPuzzle(_puzzle);
 
     for (Object anAssumption : assumptionsToBeMade()) {
       setValue(anAssumption, unsolvedCell);
@@ -62,6 +62,10 @@ public abstract class AbstractSolverInstanse {
             || 0 > columnIndex || _puzzle.getRowLength() <= columnIndex) return null;
 
     return new CellWithCoordinates(_puzzle.getCellAt(rowIndex, columnIndex), rowIndex, columnIndex);
+  }
+
+  protected Puzzle finalizeSolvedPuzzle(Puzzle puzzle) {
+    return puzzle;
   }
 
   protected abstract CellWithCoordinates<Cell> findUnsolvedCell();

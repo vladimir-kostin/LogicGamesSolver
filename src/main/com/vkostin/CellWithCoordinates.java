@@ -16,4 +16,9 @@ public class CellWithCoordinates<C extends Cell> {
   public int rowIndex() { return _rowIndex; }
   public int columnIndex() { return _columnIndex; }
 
+  @Override
+  public String toString() {
+    return "" + _cell + "[" + _rowIndex + "," + _columnIndex + ']';
+  }
+
 }

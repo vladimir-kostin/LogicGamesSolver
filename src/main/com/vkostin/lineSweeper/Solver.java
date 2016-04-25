@@ -5,7 +5,11 @@ import com.vkostin.Cell;
 import com.vkostin.CellWithCoordinates;
 import com.vkostin.Puzzle;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Solver implements com.vkostin.Solver {
@@ -20,6 +24,18 @@ public class Solver implements com.vkostin.Solver {
     public SolverInstance(Puzzle puzzle) {
       super(puzzle);
       _assumptions = Arrays.asList(PathWay.values());
+    }
+
+    @Override
+    protected Puzzle finalizeSolvedPuzzle(final Puzzle puzzle) {
+      _withCoords.cells().stream()
+              .map(CellWithCoordinates::cell)
+              .map(c -> c.as(PathCell.class))
+              .filter(Objects::nonNull)
+              .filter(pc -> PathWay.isEmpty(pc.getPath()))
+              .forEach(this::clearValue);
+
+      return super.finalizeSolvedPuzzle(puzzle);
     }
 
     @Override
@@ -89,42 +105,54 @@ public class Solver implements com.vkostin.Solver {
         if (null != onTheRight && null != onTheRight.getPath() && onTheRight.getPath().connectsToCellOnTheLeft()) return true;
       }
 
-      cellsAround(cell).stream()
-              .filter(Objects::nonNull)
+      if (cellsAround(cell)
               .filter(c -> null != c.cell().as(TaskCell.class))
-              .forEach(this::taskCellHasCorrespondingAmountOfPathCellsAround);
-      // TODO : additionally all task-cells around must be checked for proper amount of non-empty path-cells
+              .anyMatch(this::isRuleBrokenForTaskcellWithPathsAround)) return true;
+
       // TODO : there must be only one single loop
 
       return false;
     }
 
-    private List<CellWithCoordinates<Cell>> cellsAround(CellWithCoordinates<Cell> cell) {
-      List<CellWithCoordinates<Cell>> cellsAround = new ArrayList<>();
+    private Stream<CellWithCoordinates> cellsAround(CellWithCoordinates<Cell> cell) {
+      return Stream.of(
+              cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex() - 1),
+              cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex()),
+              cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex() + 1),
 
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex() - 1));
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex()));
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() - 1, cell.columnIndex() + 1));
+              cellWithCoordinatesOrNullAt(cell.rowIndex(), cell.columnIndex() - 1),
+              cellWithCoordinatesOrNullAt(cell.rowIndex(), cell.columnIndex() + 1),
 
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex(), cell.columnIndex() - 1));
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex(), cell.columnIndex() + 1));
-
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() - 1));
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex()));
-      cellsAround.add(cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() + 1));
-
-      return cellsAround;
+              cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() - 1),
+              cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex()),
+              cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() + 1)
+      ).filter(Objects::nonNull);
     }
 
-    private boolean taskCellHasCorrespondingAmountOfPathCellsAround(CellWithCoordinates<Cell> taskCell) {
-      cellsAround(taskCell).stream()
-              .filter(Objects::nonNull)
+    private boolean isRuleBrokenForTaskcellWithPathsAround(CellWithCoordinates<Cell> taskCell) {
+      final int expectedAmountOfPathCellsWithPaths = taskCell.cell().as(TaskCell.class).numberOfPathCellsAround();
+
+      List<PathCell> pathCellsAround = cellsAround(taskCell)
               .map(CellWithCoordinates::cell)
               .map(c -> c.as(PathCell.class))
               .filter(Objects::nonNull)
-              .map(PathCell::getPath);
+              .collect(Collectors.toList());
 
-      #ERROR
+      long amountOfPathCellWithNonNullPaths = pathCellsAround.stream()
+              .map(PathCell::getPath)
+              .filter(Objects::nonNull)
+              .count();
+
+
+      long amountOfPathCellsWithNonEmptyPaths = pathCellsAround.stream()
+              .map(PathCell::getPath)
+              .filter(Objects::nonNull)
+              .filter(PathWay::isNotEmpty)
+              .count();
+
+      if (expectedAmountOfPathCellsWithPaths < amountOfPathCellsWithNonEmptyPaths) return true;
+      return expectedAmountOfPathCellsWithPaths != amountOfPathCellsWithNonEmptyPaths
+              && pathCellsAround.size() == amountOfPathCellWithNonNullPaths;
     }
 
     @Override
@@ -134,8 +162,10 @@ public class Solver implements com.vkostin.Solver {
 
     @Override
     protected void clearValue(CellWithCoordinates<Cell> cell) {
-      cell.cell().as(PathCell.class).clearPath();
+      clearValue(cell.cell().as(PathCell.class));
     }
+
+    private void clearValue(PathCell pathCell) { pathCell.clearPath(); }
 
   }
 

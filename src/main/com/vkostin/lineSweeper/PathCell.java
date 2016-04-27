@@ -3,6 +3,7 @@ package com.vkostin.lineSweeper;
 import com.vkostin.Cell;
 
 import java.util.Objects;
+import java.util.Optional;
 
 class PathCell implements Cell {
   private PathWay _path;
@@ -13,6 +14,12 @@ class PathCell implements Cell {
   public PathWay getPath() { return _path; }
   public void setPath(PathWay path) { this._path = path; }
   public void clearPath() { this._path = null; }
+
+  public boolean hasNonEmptyPath() {
+    return Optional.ofNullable(_path)
+            .map(PathWay::isNotEmpty)
+            .orElse(false);
+  }
 
   @Override
   public boolean equals(Object o) {

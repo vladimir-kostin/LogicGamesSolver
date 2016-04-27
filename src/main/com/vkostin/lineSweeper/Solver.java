@@ -107,9 +107,11 @@ public class Solver implements com.vkostin.Solver {
 
       if (cellsAround(cell)
               .filter(c -> null != c.cell().as(TaskCell.class))
-              .anyMatch(this::isRuleBrokenForTaskcellWithPathsAround)) return true;
+              .anyMatch(this::isRuleBrokenForTaskCellWithPathsAround)) return true;
 
       // TODO : there must be only one single loop
+      List<CellWithCoordinates> path = buildPathStartingFrom(cell);
+      if(isThereNonEmptyPathCellsNotIncludedInPatn(path)) return true;
 
       return false;
     }
@@ -129,7 +131,7 @@ public class Solver implements com.vkostin.Solver {
       ).filter(Objects::nonNull);
     }
 
-    private boolean isRuleBrokenForTaskcellWithPathsAround(CellWithCoordinates<Cell> taskCell) {
+    private boolean isRuleBrokenForTaskCellWithPathsAround(CellWithCoordinates<Cell> taskCell) {
       final int expectedAmountOfPathCellsWithPaths = taskCell.cell().as(TaskCell.class).numberOfPathCellsAround();
 
       List<PathCell> pathCellsAround = cellsAround(taskCell)
@@ -153,6 +155,18 @@ public class Solver implements com.vkostin.Solver {
       if (expectedAmountOfPathCellsWithPaths < amountOfPathCellsWithNonEmptyPaths) return true;
       return expectedAmountOfPathCellsWithPaths != amountOfPathCellsWithNonEmptyPaths
               && pathCellsAround.size() == amountOfPathCellWithNonNullPaths;
+    }
+
+    private List<CellWithCoordinates> buildPathStartingFrom(CellWithCoordinates<Cell> cell) {
+      //TODO add path building logic here
+      return null;
+    }
+
+    private boolean isThereNonEmptyPathCellsNotIncludedInPatn(List<CellWithCoordinates> path) {
+      return _withCoords.cells().stream()
+              .filter(c -> null != c.cell().as(PathCell.class))
+              .filter(c -> c.cell().as(PathCell.class).hasNonEmptyPath())
+              .anyMatch(c -> !path.contains(c));
     }
 
     @Override

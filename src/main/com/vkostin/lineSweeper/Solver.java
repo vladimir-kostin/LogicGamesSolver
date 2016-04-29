@@ -111,7 +111,8 @@ public class Solver implements com.vkostin.Solver {
 
       // TODO : there must be only one single loop
       List<CellWithCoordinates> path = buildPathStartingFrom(cell);
-      if(isThereNonEmptyPathCellsNotIncludedInPatn(path)) return true;
+
+      if(isThereNonEmptyPathCellsNotIncludedInPathLoop(path)) return true;
 
       return false;
     }
@@ -158,15 +159,23 @@ public class Solver implements com.vkostin.Solver {
     }
 
     private List<CellWithCoordinates> buildPathStartingFrom(CellWithCoordinates<Cell> cell) {
+      if(!Optional.ofNullable(cell)
+              .map(CellWithCoordinates::cell)
+              .map(c -> c.as(PathCell.class))
+              .map(PathCell::getPath)
+              .map(PathWay::isNotEmpty)
+              .orElse(false)) return null;
       //TODO add path building logic here
       return null;
     }
 
-    private boolean isThereNonEmptyPathCellsNotIncludedInPatn(List<CellWithCoordinates> path) {
+    private boolean isThereNonEmptyPathCellsNotIncludedInPathLoop(List<CellWithCoordinates> pathLoop) {
+      if (null == pathLoop) return false;
+
       return _withCoords.cells().stream()
               .filter(c -> null != c.cell().as(PathCell.class))
               .filter(c -> c.cell().as(PathCell.class).hasNonEmptyPath())
-              .anyMatch(c -> !path.contains(c));
+              .anyMatch(c -> !pathLoop.contains(c));
     }
 
     @Override

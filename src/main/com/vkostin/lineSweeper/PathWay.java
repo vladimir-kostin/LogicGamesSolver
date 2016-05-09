@@ -1,5 +1,6 @@
 package com.vkostin.lineSweeper;
 
+@Deprecated
 enum PathWay {
 
   DOWN_LEFT {

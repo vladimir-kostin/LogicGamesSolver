@@ -5,6 +5,7 @@ import com.vkostin.Cell;
 import java.util.Objects;
 import java.util.Optional;
 
+@Deprecated
 class PathCell implements Cell {
   private PathWay _path;
 

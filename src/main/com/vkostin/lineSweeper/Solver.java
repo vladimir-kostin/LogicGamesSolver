@@ -1,9 +1,6 @@
 package com.vkostin.lineSweeper;
 
-import com.vkostin.AbstractSolverInstanse;
-import com.vkostin.Cell;
-import com.vkostin.CellWithCoordinates;
-import com.vkostin.Puzzle;
+import com.vkostin.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,10 +17,12 @@ public class Solver implements com.vkostin.Solver {
   public static class SolverInstance extends AbstractSolverInstanse {
 
     private final List<PathWay> _assumptions;
+    private final FluentPuzzle _fluentPuzzle;
 
     public SolverInstance(Puzzle puzzle) {
       super(puzzle);
       _assumptions = Arrays.asList(PathWay.values());
+      _fluentPuzzle = new FluentPuzzle(puzzle);
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Deprecated
 public class Parser extends AbstractParser {
 
   private final static Map<String, PathWay> mappings = new HashMap() {{

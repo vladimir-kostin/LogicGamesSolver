@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static com.vkostin.lineSweeper.Direction.*;
 
-public enum PathWay {
+enum PathWay {
   DOWN_LEFT(DOWN, LEFT) {
     @Override public String toString() { return "T"; }
   },
@@ -29,7 +29,7 @@ public enum PathWay {
 
   private final Direction dir1;
   private final Direction dir2;
-  private PathWay(Direction dir1, Direction dir2) {
+  PathWay(Direction dir1, Direction dir2) {
     this.dir1 = dir1;
     this.dir2 = dir2;
   }

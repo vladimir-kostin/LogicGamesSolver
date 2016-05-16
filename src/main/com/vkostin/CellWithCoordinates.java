@@ -1,5 +1,10 @@
 package com.vkostin;
 
+/**
+ * want to replace with FluentCell
+ * @param <C>
+ */
+@Deprecated
 public class CellWithCoordinates<C extends Cell> {
 
   private final C _cell;

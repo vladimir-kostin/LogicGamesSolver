@@ -80,9 +80,6 @@ public class AnotherSolver implements Solver {
     @Override
     protected ValueCell findUnsolvedValueCellOfNull() {
       return null;
-//      return Optional.ofNullable(findUnsolvedValueCellWithCoordinatesOrNull())
-//              .map(ValueCellWithCoordinates::cell)
-//              .orElse(null);
     }
 
     private TaskCellWithCoordinates findTaskCellAbove(CellWithCoordinates<?> cell) {

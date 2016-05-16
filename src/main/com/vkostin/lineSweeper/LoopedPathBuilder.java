@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class LoopedPathBuilder {
+class LoopedPathBuilder {
 
   public List<FluentCell> buildLoopedPathStartingFrom(final FluentCell startCell) {
     if (!hasNonEmptyPath(startCell)) return null;
@@ -45,7 +45,7 @@ public class LoopedPathBuilder {
   private Direction getDirectionFromPathDifferentFrom(PathWay pathWay, Direction unwantedDirection) {
     return Stream.of(Direction.values())
             .filter(d -> d != unwantedDirection)
-            .filter(d -> pathWay.connectsToCellIn(d))
+            .filter(pathWay::connectsToCellIn)
             .findAny()
             .orElse(null);
   }

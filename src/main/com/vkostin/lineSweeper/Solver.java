@@ -2,10 +2,7 @@ package com.vkostin.lineSweeper;
 
 import com.vkostin.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -109,7 +106,7 @@ public class Solver implements com.vkostin.Solver {
               .anyMatch(this::isRuleBrokenForTaskCellWithPathsAround)) return true;
 
       // TODO : there must be only one single loop
-      List<FluentCell> path = buildPathStartingFrom(cell);
+      List<FluentCell> path = buildPathLoopStartingFrom(cell);
 
       if(isThereNonEmptyPathCellsNotIncludedInPathLoop(path)) return true;
 
@@ -157,36 +154,31 @@ public class Solver implements com.vkostin.Solver {
               && pathCellsAround.size() == amountOfPathCellWithNonNullPaths;
     }
 
-    private List<FluentCell> buildPathStartingFrom(CellWithCoordinates<Cell> cell) {
+    private List<FluentCell> buildPathLoopStartingFrom(CellWithCoordinates<Cell> cell) {
       boolean hasNonEmptyPath = Optional.of(cell)
               .map(CellWithCoordinates::cell)
               .map(c -> c.as(PathCell.class))
               .map(PathCell::hasNonEmptyPath)
-              .orElse(null);
+              .orElse(false);
       if (!hasNonEmptyPath) return null;
 
-      FluentCell startCell = new FluentCell(_fluentPuzzle, cell.cell(), new CellAddress(cell.rowIndex(), cell.columnIndex()));
-
+      FluentCell startCell = _fluentPuzzle.at(new CellAddress(cell.rowIndex(), cell.columnIndex()));
       Direction d = directionFromCellDirrefentFrom(startCell, null);
-      startCell.neighbourTo(d);
-      Direction
 
+      List<FluentCell> path = new ArrayList<>();
 
-      Stream.of(Direction.values())
-      Direction.values().str
+      for (FluentCell c = startCell; null != c; c = c.neighbourTo(d)) {
+        path.add(c);
+        c = c.neighbourTo(d);
+        d = directionFromCellDirrefentFrom(c, d.opposite());
+        if (startCell == c) return path;
+      }
 
-      if(!Optional.ofNullable(cell)
-              .map(CellWithCoordinates::cell)
-              .map(c -> c.as(PathCell.class))
-              .map(PathCell::getPath)
-              .map(PathWay::isNotEmpty)
-              .orElse(false)) return null;
-      //TODO add path building logic here
       return null;
     }
 
     private PathWay getPathWay(FluentCell cell) {
-      return Optional.of(cell)
+      return Optional.ofNullable(cell)
               .map(FluentCell::cell)
               .map(c -> c.as(PathCell.class))
               .map(PathCell::getPath)
@@ -207,9 +199,12 @@ public class Solver implements com.vkostin.Solver {
     private boolean isThereNonEmptyPathCellsNotIncludedInPathLoop(List<FluentCell> pathLoop) {
       if (null == pathLoop) return false;
 
-      return _withCoords.cells().stream()
-              .filter(c -> null != c.cell().as(PathCell.class))
-              .filter(c -> c.cell().as(PathCell.class).hasNonEmptyPath())
+      return _fluentPuzzle.cells().stream()
+              .filter(c -> Optional.of(c)
+                      .map(FluentCell::cell)
+                      .map(cell -> cell.as(PathCell.class))
+                      .map(PathCell::hasNonEmptyPath)
+                      .orElse(false))
               .anyMatch(c -> !pathLoop.contains(c));
     }
 

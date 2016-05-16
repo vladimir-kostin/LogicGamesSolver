@@ -2,6 +2,7 @@ package com.vkostin.lineSweeper;
 
 import com.vkostin.Puzzle;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class FluentPuzzle {
     }
   }
 
-  public FluentCell at(CellAddress address) {
-    return _cells.get(address);
-  }
+  public FluentCell at(CellAddress address) { return _cells.get(address); }
+
+  public Collection<FluentCell> cells() { return _cells.values(); }
 }

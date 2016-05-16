@@ -2,8 +2,6 @@ package com.vkostin.lineSweeper;
 
 import com.vkostin.Cell;
 
-import java.util.Optional;
-
 public class FluentCell {
   private final FluentPuzzle _puzzle;
   private final Cell _cell;
@@ -15,17 +13,9 @@ public class FluentCell {
     this._address = address;
   }
 
-  public FluentPuzzle puzzle() {
-    return _puzzle;
-  }
-
-  public Cell cell() {
-    return _cell;
-  }
-
-  public CellAddress address() {
-    return _address;
-  }
+  public FluentPuzzle puzzle() { return _puzzle; }
+  public Cell cell() { return _cell; }
+  public CellAddress address() { return _address; }
 
   public FluentCell neighbourTo(Direction direction) {
     return _puzzle.at(_address.neighbourAddressTo(direction));

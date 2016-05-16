@@ -1,5 +1,7 @@
 package com.vkostin.lineSweeper;
 
+import java.util.Objects;
+
 public class CellAddress {
   private final int _row;
   private final int _col;
@@ -23,4 +25,19 @@ public class CellAddress {
     }
     return new CellAddress(row, col);
   }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (!(o instanceof CellAddress)) return false;
+    CellAddress that = (CellAddress) o;
+    return _row == that._row &&
+            _col == that._col;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(_row, _col);
+  }
+
 }

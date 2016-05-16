@@ -15,11 +15,13 @@ public class Solver implements com.vkostin.Solver {
 
     private final List<PathWay> _assumptions;
     private final FluentPuzzle _fluentPuzzle;
+    private final LoopedPathBuilder _loopBuilder;
 
     public SolverInstance(Puzzle puzzle) {
       super(puzzle);
       _assumptions = Arrays.asList(PathWay.values());
       _fluentPuzzle = new FluentPuzzle(puzzle);
+      _loopBuilder = new LoopedPathBuilder();
     }
 
     @Override
@@ -105,9 +107,8 @@ public class Solver implements com.vkostin.Solver {
               .filter(c -> null != c.cell().as(TaskCell.class))
               .anyMatch(this::isRuleBrokenForTaskCellWithPathsAround)) return true;
 
-      // TODO : there must be only one single loop
-      List<FluentCell> path = buildPathLoopStartingFrom(cell);
-
+      FluentCell fluentCell = _fluentPuzzle.at(new CellAddress(cell.rowIndex(), cell.columnIndex()));
+      List<FluentCell> path = _loopBuilder.buildLoopedPathStartingFrom(fluentCell);
       if(isThereNonEmptyPathCellsNotIncludedInPathLoop(path)) return true;
 
       return false;
@@ -152,48 +153,6 @@ public class Solver implements com.vkostin.Solver {
       if (expectedAmountOfPathCellsWithPaths < amountOfPathCellsWithNonEmptyPaths) return true;
       return expectedAmountOfPathCellsWithPaths != amountOfPathCellsWithNonEmptyPaths
               && pathCellsAround.size() == amountOfPathCellWithNonNullPaths;
-    }
-
-    private List<FluentCell> buildPathLoopStartingFrom(CellWithCoordinates<Cell> cell) {
-      boolean hasNonEmptyPath = Optional.of(cell)
-              .map(CellWithCoordinates::cell)
-              .map(c -> c.as(PathCell.class))
-              .map(PathCell::hasNonEmptyPath)
-              .orElse(false);
-      if (!hasNonEmptyPath) return null;
-
-      FluentCell startCell = _fluentPuzzle.at(new CellAddress(cell.rowIndex(), cell.columnIndex()));
-      Direction d = directionFromCellDirrefentFrom(startCell, null);
-
-      List<FluentCell> path = new ArrayList<>();
-
-      for (FluentCell c = startCell; null != c; c = c.neighbourTo(d)) {
-        path.add(c);
-        c = c.neighbourTo(d);
-        d = directionFromCellDirrefentFrom(c, d.opposite());
-        if (startCell == c) return path;
-      }
-
-      return null;
-    }
-
-    private PathWay getPathWay(FluentCell cell) {
-      return Optional.ofNullable(cell)
-              .map(FluentCell::cell)
-              .map(c -> c.as(PathCell.class))
-              .map(PathCell::getPath)
-              .orElse(null);
-    }
-
-    private Direction directionFromCellDirrefentFrom(FluentCell cell, Direction unwantedDirection) {
-      PathWay pathWay = getPathWay(cell);
-      if (null == pathWay) return null;
-
-      return Stream.of(Direction.values())
-              .filter(d -> d != unwantedDirection)
-              .filter(d -> pathWay.connectsToCellIn(d))
-              .findAny()
-              .orElse(null);
     }
 
     private boolean isThereNonEmptyPathCellsNotIncludedInPathLoop(List<FluentCell> pathLoop) {

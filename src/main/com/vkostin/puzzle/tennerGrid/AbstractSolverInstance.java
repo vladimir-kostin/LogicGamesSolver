@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
+// TODO remove it
 abstract class AbstractSolverInstance {
   protected final Puzzle _puzzle;
 

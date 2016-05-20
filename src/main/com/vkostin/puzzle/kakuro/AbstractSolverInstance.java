@@ -7,6 +7,8 @@ import com.vkostin.common.ValueCell;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO remove it
+@Deprecated
 abstract class AbstractSolverInstance {
   protected final Puzzle puzzle;
   protected AbstractSolverInstance(Puzzle puzzle) {

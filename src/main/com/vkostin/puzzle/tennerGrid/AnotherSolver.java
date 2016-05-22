@@ -3,6 +3,7 @@ package com.vkostin.puzzle.tennerGrid;
 import com.vkostin.common.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -50,10 +51,11 @@ public class AnotherSolver implements Solver {
     }
 
     private boolean doesColumnContainError(int columnIndex) {
-      List<ValueCell> valueCells = IntStream.rangeClosed(0, _puzzle.getRowCount())
+      List<ValueCell> valueCells = IntStream.range(0, _puzzle.getRowCount()-1)
               .boxed()
               .map(rowIndex -> _puzzle.getCellAt(rowIndex, columnIndex))
               .map(c -> c.as(ValueCell.class))
+              .filter(Objects::nonNull)
               .collect(Collectors.toList());
 
       int expectedSumOfValues = _puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex).as(TaskCell.class).getSumOfValuesAbove();
@@ -86,8 +88,17 @@ public class AnotherSolver implements Solver {
     }
 
     private boolean threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(int valueToCheck, int rowIndex, int lowestColumnIndex) {
-    }
+      if (0 > rowIndex || _puzzle.getRowCount() - 1 <= rowIndex) return true;
 
+      return IntStream.rangeClosed(Math.max(lowestColumnIndex, 0), Math.min(lowestColumnIndex + 2, _puzzle.getRowLength()-1))
+              .boxed()
+              .map(colIndex -> _puzzle.getCellAt(rowIndex, colIndex))
+              .map(cell -> cell.as(ValueCell.class))
+              .filter(Objects::nonNull)
+              .filter(Rules::hasProperValue)
+              .map(ValueCell::getValue)
+              .noneMatch(value -> valueToCheck == value);
+    }
 
     @Override
     protected void setValue(Object value, CellWithCoordinates<Cell> cell) {

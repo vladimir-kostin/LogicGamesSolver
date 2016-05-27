@@ -2,8 +2,8 @@ package com.vkostin.puzzle.tennerGrid;
 
 import com.vkostin.common.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,7 +16,13 @@ public class AnotherSolver implements Solver {
   }
 
   static class SolverInstance extends AbstractSolverInstanse {
-    public SolverInstance(Puzzle puzzle) { super(puzzle); }
+    final private List<Integer> _assumptions;
+    public SolverInstance(Puzzle puzzle) {
+      super(puzzle);
+      _assumptions = IntStream.rangeClosed(Rules.MIN_ALLOWED_VALUE, Rules.MAX_ALLOWED_VALUE)
+              .boxed()
+              .collect(Collectors.toList());
+    }
 
     @Override
     protected CellWithCoordinates<Cell> findUnsolvedCell() {
@@ -35,11 +41,7 @@ public class AnotherSolver implements Solver {
     }
 
     @Override
-    protected List<?> assumptionsToBeMade() {
-      return IntStream.rangeClosed(Rules.MIN_ALLOWED_VALUE, Rules.MAX_ALLOWED_VALUE)
-              .boxed()
-              .collect(Collectors.toList());
-    }
+    protected List<?> assumptionsToBeMade() { return _assumptions; }
 
     @Override
     protected boolean isAnyRuleBroken(CellWithCoordinates<Cell> cell) {
@@ -51,25 +53,26 @@ public class AnotherSolver implements Solver {
     }
 
     private boolean doesColumnContainError(int columnIndex) {
-      List<ValueCell> valueCells = IntStream.range(0, _puzzle.getRowCount()-1)
-              .boxed()
-              .map(rowIndex -> _puzzle.getCellAt(rowIndex, columnIndex))
-              .map(c -> c.as(ValueCell.class))
-              .filter(Objects::nonNull)
-              .collect(Collectors.toList());
+      List<ValueCell> valueCells = new ArrayList<>();
+      for (int rowIndex = 0; rowIndex < _puzzle.getRowCount() - 1; rowIndex++) {
+        valueCells.add(valueCellAt(rowIndex, columnIndex));
+      }
 
       int expectedSumOfValues = _puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex).as(TaskCell.class).getSumOfValuesAbove();
       return ValueCell.doValueCellsFailToMeetExpectation(expectedSumOfValues, valueCells, Rules::hasProperValue, true);
     }
 
+    private ValueCell valueCellAt(int rowIndex, int colIndex) {
+      return _puzzle.getCellAt(rowIndex, colIndex).as(ValueCell.class);
+    }
+
     private boolean areAllProperValueUniqueInRow(int rowIndex) {
-      List<ValueCell> valueCellsWithProperValues =
-      IntStream.range(0, _puzzle.getRowLength())
-              .boxed()
-              .map(colIndex -> _puzzle.getCellAt(rowIndex, colIndex))
-              .map(c -> c.as(ValueCell.class))
-              .filter(Rules::hasProperValue)
-              .collect(Collectors.toList());
+      List<ValueCell> valueCellsWithProperValues = new ArrayList<>();
+      for (int colIndex = 0; colIndex < _puzzle.getRowLength(); colIndex++) {
+        Optional.of(valueCellAt(rowIndex, colIndex))
+                .filter(Rules::hasProperValue)
+                .ifPresent(valueCellsWithProperValues::add);
+      }
 
       long countOfDistinctValues = valueCellsWithProperValues.stream()
               .mapToInt(ValueCell::getValue)
@@ -90,14 +93,14 @@ public class AnotherSolver implements Solver {
     private boolean threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(int valueToCheck, int rowIndex, int lowestColumnIndex) {
       if (0 > rowIndex || _puzzle.getRowCount() - 1 <= rowIndex) return true;
 
-      return IntStream.rangeClosed(Math.max(lowestColumnIndex, 0), Math.min(lowestColumnIndex + 2, _puzzle.getRowLength()-1))
-              .boxed()
-              .map(colIndex -> _puzzle.getCellAt(rowIndex, colIndex))
-              .map(cell -> cell.as(ValueCell.class))
-              .filter(Objects::nonNull)
-              .filter(Rules::hasProperValue)
-              .map(ValueCell::getValue)
-              .noneMatch(value -> valueToCheck == value);
+      for (int colIndex = Math.max(lowestColumnIndex, 0); colIndex <= Math.min(lowestColumnIndex + 2, _puzzle.getRowLength() - 1); colIndex++) {
+        if (Optional.of(valueCellAt(rowIndex, colIndex))
+                .filter(Rules::hasProperValue)
+                .map(ValueCell::getValue)
+                .filter(value -> valueToCheck == value)
+                .isPresent()) return false;
+      }
+      return true;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class SolversPerformanceTest {
 
   @Test
   public void testSimpleSolver() {
-//    TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, simpleSolver);
+    TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, simpleSolver);
   }
 
   @Test

@@ -58,12 +58,14 @@ public class AnotherSolver implements Solver {
         valueCells.add(valueCellAt(rowIndex, columnIndex));
       }
 
-      int expectedSumOfValues = _puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex).as(TaskCell.class).getSumOfValuesAbove();
+//      int expectedSumOfValues = _puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex).as(TaskCell.class).getSumOfValuesAbove();
+      int expectedSumOfValues = ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex)).getSumOfValuesAbove();
       return ValueCell.doValueCellsFailToMeetExpectation(expectedSumOfValues, valueCells, Rules::hasProperValue, true);
     }
 
     private ValueCell valueCellAt(int rowIndex, int colIndex) {
-      return _puzzle.getCellAt(rowIndex, colIndex).as(ValueCell.class);
+//      return _puzzle.getCellAt(rowIndex, colIndex).as(ValueCell.class);
+      return (ValueCell)_puzzle.getCellAt(rowIndex, colIndex);
     }
 
     private boolean areAllProperValueUniqueInRow(int rowIndex) {
@@ -83,7 +85,8 @@ public class AnotherSolver implements Solver {
     }
 
     private boolean valuesInContiguousCellsAreDifferent(CellWithCoordinates<Cell> cell) {
-      int value = cell.cell().as(ValueCell.class).getValue();
+//      int value = cell.cell().as(ValueCell.class).getValue();
+      int value = ((ValueCell)cell.cell()).getValue();
       if (!threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(value, cell.rowIndex()-1, cell.columnIndex()-1)) return false;
       if (!threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(value, cell.rowIndex()+1, cell.columnIndex()-1)) return false;
 
@@ -105,12 +108,12 @@ public class AnotherSolver implements Solver {
 
     @Override
     protected void setValue(Object value, CellWithCoordinates<Cell> cell) {
-      cell.cell().as(ValueCell.class).setValue((Integer) value);
+      ((ValueCell)cell.cell()).setValue((Integer) value);
     }
 
     @Override
     protected void clearValue(CellWithCoordinates<Cell> cell) {
-      Rules.clearValue(cell.cell().as(ValueCell.class));
+      Rules.clearValue((ValueCell) cell.cell());
     }
 
   }

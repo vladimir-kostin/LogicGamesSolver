@@ -30,4 +30,21 @@ public class SolversPerformanceTest {
     TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, anotherSolver);
   }
 
+  @Test
+  public void testAnotherSolver10times() throws Exception {
+
+    for (int i = 0; i < 10; i++) {
+      testAnotherSolver();
+    }
+
+  }
+
+  @Test
+  public void testBetterSolver10times() throws Exception {
+    for (int i = 0; i < 10; i++) {
+      testBetterSolver();
+    }
+
+  }
+
 }

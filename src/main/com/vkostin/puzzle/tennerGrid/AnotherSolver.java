@@ -1,5 +1,7 @@
 package com.vkostin.puzzle.tennerGrid;
 
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Iterables;
 import com.vkostin.common.*;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class AnotherSolver implements Solver {
 
     @Override
     protected CellWithCoordinates<Cell> findUnsolvedCell() {
+//      return Iterables.find(_withCoords.cells(), this::isValueCellUnsolved, null);
+//      return FluentIterable.from(_withCoords.cells()).firstMatch(this::isValueCellUnsolved).orNull();
       return _withCoords.cells().stream()
               .filter(this::isValueCellUnsolved)
               .findFirst()

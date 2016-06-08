@@ -1,6 +1,6 @@
 package com.vkostin.puzzle.lineSweeper;
 
-import com.vkostin.common.AbstractSolverInstanse;
+import com.vkostin.common.AbstractCheckSingleChangeSolverInstanse;
 import com.vkostin.common.Cell;
 import com.vkostin.common.CellWithCoordinates;
 import com.vkostin.common.Puzzle;
@@ -14,7 +14,7 @@ public class Solver implements com.vkostin.common.Solver {
   @Override
   public Puzzle solve(Puzzle puzzle) { return new SolverInstance(puzzle).solve(); }
 
-  public static class SolverInstance extends AbstractSolverInstanse {
+  public static class SolverInstance extends AbstractCheckSingleChangeSolverInstanse {
 
     private final List<PathWay> _assumptions;
     private final FluentPuzzle _fluentPuzzle;

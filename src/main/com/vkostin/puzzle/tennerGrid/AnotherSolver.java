@@ -1,7 +1,5 @@
 package com.vkostin.puzzle.tennerGrid;
 
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
 import com.vkostin.common.*;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class AnotherSolver implements Solver {
     return new SolverInstance(puzzle).solve();
   }
 
-  static class SolverInstance extends AbstractSolverInstanse {
+  static class SolverInstance extends AbstractCheckSingleChangeSolverInstanse {
     final private List<Integer> _assumptions;
     public SolverInstance(Puzzle puzzle) {
       super(puzzle);

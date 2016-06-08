@@ -13,7 +13,7 @@ import java.util.List;
 // 4. if no errors --> goto 1 (recursively)
 // 5. if errors and another assumptions can be made to that cell --> goto 2
 // 6. if here that means that some of previous assumptions were incorrect --> get out of recursion
-public abstract class AbstractSolverInstanse {
+public abstract class AbstractCheckSingleChangeSolverInstanse {
 
   protected static class PuzzleWithCoordinates {
     private final List<CellWithCoordinates<Cell>> _cells;
@@ -33,7 +33,7 @@ public abstract class AbstractSolverInstanse {
 
   protected final Puzzle _puzzle;
   protected final PuzzleWithCoordinates _withCoords;
-  protected AbstractSolverInstanse(Puzzle puzzle) {
+  protected AbstractCheckSingleChangeSolverInstanse(Puzzle puzzle) {
     // TODO check for puzzle to NOT contain any error
     this._puzzle = puzzle;
     this._withCoords = new PuzzleWithCoordinates(puzzle);

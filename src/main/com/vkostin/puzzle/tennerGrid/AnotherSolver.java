@@ -26,8 +26,6 @@ public class AnotherSolver implements Solver {
 
     @Override
     protected CellWithCoordinates<Cell> findUnsolvedCell() {
-//      return Iterables.find(_withCoords.cells(), this::isValueCellUnsolved, null);
-//      return FluentIterable.from(_withCoords.cells()).firstMatch(this::isValueCellUnsolved).orNull();
       return _withCoords.cells().stream()
               .filter(this::isValueCellUnsolved)
               .findFirst()
@@ -60,13 +58,11 @@ public class AnotherSolver implements Solver {
         valueCells.add(valueCellAt(rowIndex, columnIndex));
       }
 
-//      int expectedSumOfValues = _puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex).as(TaskCell.class).getSumOfValuesAbove();
       int expectedSumOfValues = ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount()-1, columnIndex)).getSumOfValuesAbove();
       return ValueCell.doValueCellsFailToMeetExpectation(expectedSumOfValues, valueCells, Rules::hasProperValue, true);
     }
 
     private ValueCell valueCellAt(int rowIndex, int colIndex) {
-//      return _puzzle.getCellAt(rowIndex, colIndex).as(ValueCell.class);
       return (ValueCell)_puzzle.getCellAt(rowIndex, colIndex);
     }
 
@@ -87,7 +83,6 @@ public class AnotherSolver implements Solver {
     }
 
     private boolean valuesInContiguousCellsAreDifferent(CellWithCoordinates<Cell> cell) {
-//      int value = cell.cell().as(ValueCell.class).getValue();
       int value = ((ValueCell)cell.cell()).getValue();
       if (!threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(value, cell.rowIndex()-1, cell.columnIndex()-1)) return false;
       if (!threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(value, cell.rowIndex()+1, cell.columnIndex()-1)) return false;

@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AnotherSolver implements Solver {
+public class Solver implements com.vkostin.common.Solver {
 
   @Override
   public Puzzle solve(Puzzle puzzle) {

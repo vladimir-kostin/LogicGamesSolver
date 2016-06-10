@@ -1,5 +1,8 @@
 package com.vkostin.puzzle.lineSweeper;
 
+import com.vkostin.common.Direction;
+import com.vkostin.common.FluentCell;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

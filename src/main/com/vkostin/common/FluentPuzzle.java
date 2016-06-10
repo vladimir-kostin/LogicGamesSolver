@@ -1,6 +1,4 @@
-package com.vkostin.puzzle.lineSweeper;
-
-import com.vkostin.common.Puzzle;
+package com.vkostin.common;
 
 import java.util.Collection;
 import java.util.HashMap;

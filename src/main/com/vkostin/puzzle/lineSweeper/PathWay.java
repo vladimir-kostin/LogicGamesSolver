@@ -1,5 +1,7 @@
 package com.vkostin.puzzle.lineSweeper;
 
+import com.vkostin.common.Direction;
+
 import java.util.Objects;
 
 enum PathWay {

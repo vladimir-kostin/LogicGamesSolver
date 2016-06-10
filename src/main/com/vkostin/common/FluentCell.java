@@ -1,6 +1,4 @@
-package com.vkostin.puzzle.lineSweeper;
-
-import com.vkostin.common.Cell;
+package com.vkostin.common;
 
 public class FluentCell {
   private final FluentPuzzle _puzzle;

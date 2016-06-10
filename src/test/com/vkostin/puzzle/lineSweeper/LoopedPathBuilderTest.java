@@ -1,7 +1,6 @@
 package com.vkostin.puzzle.lineSweeper;
 
-import com.vkostin.common.Puzzle;
-import com.vkostin.common.PuzzleAsArray;
+import com.vkostin.common.*;
 import org.junit.Test;
 
 import java.util.List;

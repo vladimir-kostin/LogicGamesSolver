@@ -1,4 +1,4 @@
-package com.vkostin.puzzle.lineSweeper;
+package com.vkostin.common;
 
 import java.util.Objects;
 

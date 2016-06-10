@@ -1,9 +1,6 @@
 package com.vkostin.puzzle.lineSweeper;
 
-import com.vkostin.common.AbstractCheckSingleChangeSolverInstanse;
-import com.vkostin.common.Cell;
-import com.vkostin.common.CellWithCoordinates;
-import com.vkostin.common.Puzzle;
+import com.vkostin.common.*;
 
 import java.util.*;
 import java.util.stream.Collectors;

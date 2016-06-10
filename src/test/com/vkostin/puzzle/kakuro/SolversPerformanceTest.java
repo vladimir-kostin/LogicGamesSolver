@@ -11,17 +11,11 @@ public class SolversPerformanceTest {
 
   private Parser parser = new Parser(PuzzleAsArray::new);
 
-  private AnotherSolver anotherSolver = new AnotherSolver();
-  private ProperSolver properSolver = new ProperSolver();
-
-  @Test
-  public void testAnotherSolver() {
-    TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, anotherSolver);
-  }
+  private Solver solver = new Solver();
 
   @Test
   public void testProperSolver() {
-    TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, properSolver);
+    TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, solver);
   }
 
 }

@@ -1,6 +1,5 @@
 package com.vkostin.puzzle.kakuro;
 
-import com.vkostin.common.FluentCell;
 import com.vkostin.common.PerformanceTest;
 import com.vkostin.common.PuzzleAsArray;
 import com.vkostin.common.TestUtils;
@@ -15,13 +14,13 @@ public class SolversPerformanceTest {
   private Solver solver = new Solver();
   private FluentSolver fluentSolver = new FluentSolver();
 
-  @Test
+  @Test(timeout = 60000)
   public void testProperSolver() {
     TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, solver);
   }
 
-  @Test
-  public void testFluentSolver() throws Exception {
+  @Test(timeout = 60000)
+  public void testFluentSolver() {
     TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, fluentSolver);
   }
 

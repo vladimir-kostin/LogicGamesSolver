@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 public class ValueCell implements Cell {
 
+  //TODO needs to be tested separately
   public static boolean doValueCellsFailToMeetExpectation(
           int expectedValueSum
           , Collection<ValueCell> valueCells

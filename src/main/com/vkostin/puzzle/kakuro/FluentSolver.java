@@ -62,10 +62,10 @@ public class FluentSolver implements Solver {
     }
 
     private boolean isAnyRuleBrokenToAbove(final FluentCell cell) {
-      FluentCell taskCellAbove = cell.neighbourTo(Direction.UP);
-      while (taskCellAbove.cell() instanceof ValueCell) {
+      FluentCell taskCellAbove = cell;
+      do {
         taskCellAbove = taskCellAbove.neighbourTo(Direction.UP);
-      }
+      } while(taskCellAbove.cell() instanceof ValueCell);
 
       List<ValueCell> valueCellsBelow = new ArrayList<>();
       for (FluentCell below = taskCellAbove.neighbourTo(Direction.DOWN);
@@ -82,10 +82,10 @@ public class FluentSolver implements Solver {
     }
 
     private boolean isAnyRuleBrokenToTheLeft(final FluentCell cell) {
-      FluentCell taskCellToTheLeft = cell.neighbourTo(Direction.LEFT);
-      while (taskCellToTheLeft.cell() instanceof ValueCell) {
+      FluentCell taskCellToTheLeft = cell;
+      do {
         taskCellToTheLeft = taskCellToTheLeft.neighbourTo(Direction.LEFT);
-      }
+      } while (taskCellToTheLeft.cell() instanceof ValueCell);
 
       List<ValueCell> valueCellToTheRight = new ArrayList<>();
       for (FluentCell toTheRight = taskCellToTheLeft.neighbourTo(Direction.RIGHT);

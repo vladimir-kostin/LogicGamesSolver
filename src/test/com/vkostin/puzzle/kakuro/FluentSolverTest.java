@@ -13,41 +13,47 @@ public class FluentSolverTest {
 
   private FluentSolver fluentSolver = new FluentSolver();
 
-  @Test
-  public void solve0() {
-    Puzzle input = parser.parse(TestData.PUZZLE____);
-    Puzzle expected = parser.parse(TestData.SOLUTION____);
+  private void testSingleCase(TestParameter parameter) {
+    Puzzle input = parser.parse(parameter.puzzle());
+    Puzzle expected = parser.parse(parameter.solution());
 
     Puzzle result = fluentSolver.solve(input);
 
-    assertEquals(expected, result);
+    assertEquals("Error solving: kakuro " + parameter.number(), expected, result);
+  }
+
+  private TestParameter getParamenterByNumber(int number) {
+    return TestData.ALL_TEST_DATA.stream()
+            .filter(tp -> tp.number() == number)
+            .findAny()
+            .orElseThrow(() -> new IllegalArgumentException("cannot find: kakuro " + number));
+  }
+
+  @Test
+  public void solve0() {
+    testSingleCase(getParamenterByNumber(0));
   }
 
   @Test
   public void solve1() {
-    Puzzle input = parser.parse(TestData.PUZZLE___1);
-    Puzzle expected = parser.parse(TestData.SOLUTION___1);
-
-    Puzzle result = fluentSolver.solve(input);
-
-    assertEquals(expected, result);
+    testSingleCase(getParamenterByNumber(1));
   }
 
   @Test
   public void solve8() {
-    Puzzle input = parser.parse(TestData.PUZZLE___8);
-    Puzzle expected = parser.parse(TestData.SOLUTION___8);
-
-    Puzzle result = fluentSolver.solve(input);
-
-    assertEquals(expected, result);
+    testSingleCase(getParamenterByNumber(8));
   }
 
   @Test
+  public void solve20() {
+    testSingleCase(getParamenterByNumber(20));
+  }
+
+  @Test(timeout = 60000)
   public void solveAll() {
     for (TestParameter p : TestData.ALL_TEST_DATA) {
       System.out.println("Solving: " + p.number() + "...");
-      fluentSolver.solve(parser.parse(p.puzzle()));
+      testSingleCase(p);
       System.out.println("Solved: " + p.number() + ".");
     }
   }

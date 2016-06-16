@@ -30,6 +30,10 @@ public class FluentSolver implements com.vkostin.common.Solver {
               .collect(Collectors.toList());
     }
 
+    private ValueCell valueCellAt(int row, int col) {
+      return (ValueCell) _puzzle.getCellAt(row, col);
+    }
+
     @Override
     protected FluentCell findUnsolvedCell() {
       return _valueCells.stream()
@@ -61,7 +65,7 @@ public class FluentSolver implements com.vkostin.common.Solver {
     private boolean doesColumnContainError(final int col) {
       List<ValueCell> valueCells = new ArrayList<>();
       for (int rowIndex = 0; rowIndex < _puzzle.getRowCount() - 1; rowIndex++) {
-        valueCells.add((ValueCell) _puzzle.getCellAt(rowIndex, col));
+        valueCells.add(valueCellAt(rowIndex, col));
       }
 
       int expectedSumOfValues = ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount()-1, col)).getSumOfValuesAbove();
@@ -71,7 +75,7 @@ public class FluentSolver implements com.vkostin.common.Solver {
     private boolean areAllProperValueUniqueInRow(final int row) {
       List<ValueCell> valueCellsWithProperValues = new ArrayList<>();
       for (int colIndex = 0; colIndex < _puzzle.getRowLength(); colIndex++) {
-        Optional.of((ValueCell) _puzzle.getCellAt(row, colIndex))
+        Optional.of(valueCellAt(row, colIndex))
                 .filter(Rules::hasProperValue)
                 .ifPresent(valueCellsWithProperValues::add);
       }
@@ -85,7 +89,7 @@ public class FluentSolver implements com.vkostin.common.Solver {
     }
 
     private boolean valuesInContiguousCellsAreDifferent(final FluentCell cell) {
-      int value = cell.cell().as(ValueCell.class).getValue();
+      int value = ((ValueCell)cell.cell()).getValue();
       if (!threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(value, cell.address().row()-1, cell.address().col()-1)) return false;
       if (!threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(value, cell.address().row()+1, cell.address().col()-1)) return false;
 
@@ -96,7 +100,7 @@ public class FluentSolver implements com.vkostin.common.Solver {
       if (0 > rowIndex || _puzzle.getRowCount() - 1 <= rowIndex) return true;
 
       for (int colIndex = Math.max(lowestColumnIndex, 0); colIndex <= Math.min(lowestColumnIndex + 2, _puzzle.getRowLength() - 1); colIndex++) {
-        if (Optional.of((ValueCell) _puzzle.getCellAt(rowIndex, colIndex))
+        if (Optional.of(valueCellAt(rowIndex, colIndex))
                 .filter(Rules::hasProperValue)
                 .map(ValueCell::getValue)
                 .filter(value -> valueToCheck == value)

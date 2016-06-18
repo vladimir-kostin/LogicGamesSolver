@@ -1,10 +1,10 @@
 package com.vkostin.common;
 
-public abstract class AbstractFluentCheckSingleChangeSolverInstanse {
+public abstract class AbstractFluentCheckSingleChangeSolverInstance {
   protected final Puzzle _puzzle;
   protected final FluentPuzzle _fluentPuzzle;
 
-  public AbstractFluentCheckSingleChangeSolverInstanse(final Puzzle puzzle) {
+  public AbstractFluentCheckSingleChangeSolverInstance(final Puzzle puzzle) {
     _puzzle = puzzle;
     _fluentPuzzle = new FluentPuzzle(puzzle);
   }
@@ -25,7 +25,6 @@ public abstract class AbstractFluentCheckSingleChangeSolverInstanse {
     clearValue(unsolvedCell);
     return null;
   }
-
 
   protected FluentCell findUnsolvedCell() {
     return _fluentPuzzle.cells().stream()

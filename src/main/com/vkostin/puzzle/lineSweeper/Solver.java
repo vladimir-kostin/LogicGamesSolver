@@ -11,7 +11,7 @@ public class Solver implements com.vkostin.common.Solver {
   @Override
   public Puzzle solve(Puzzle puzzle) { return new SolverInstance(puzzle).solve(); }
 
-  public static class SolverInstance extends AbstractCheckSingleChangeSolverInstanse {
+  public static class SolverInstance extends AbstractCheckSingleChangeSolverInstance {
 
     private final List<PathWay> _assumptions;
     private final FluentPuzzle _fluentPuzzle;
@@ -127,6 +127,13 @@ public class Solver implements com.vkostin.common.Solver {
               cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex()),
               cellWithCoordinatesOrNullAt(cell.rowIndex() + 1, cell.columnIndex() + 1)
       ).filter(Objects::nonNull);
+    }
+
+    private CellWithCoordinates cellWithCoordinatesOrNullAt(int rowIndex, int columnIndex) {
+      if (0 > rowIndex || _puzzle.getRowCount() <= rowIndex
+              || 0 > columnIndex || _puzzle.getRowLength() <= columnIndex) return null;
+
+      return new CellWithCoordinates(_puzzle.getCellAt(rowIndex, columnIndex), rowIndex, columnIndex);
     }
 
     private boolean isRuleBrokenForTaskCellWithPathsAround(CellWithCoordinates<Cell> taskCell) {

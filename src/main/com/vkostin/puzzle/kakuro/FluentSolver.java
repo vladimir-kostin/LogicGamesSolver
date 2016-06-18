@@ -15,7 +15,7 @@ public class FluentSolver implements Solver {
     return new SolverInstance(puzzle).solve();
   }
 
-  static class SolverInstance extends AbstractFluentCheckSingleChangeSolverInstanse {
+  static class SolverInstance extends AbstractFluentCheckSingleChangeSolverInstance {
 
     final private List<Integer> _assumptions;
     final private List<FluentCell> _valueCells;

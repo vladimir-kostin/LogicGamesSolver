@@ -15,7 +15,7 @@ public class Solver implements com.vkostin.common.Solver {
     return new SolverInstance(puzzle).solve();
   }
 
-  static class SolverInstance extends AbstractCheckSingleChangeSolverInstanse {
+  static class SolverInstance extends AbstractCheckSingleChangeSolverInstance {
     final private List<Integer> _assumptions;
     public SolverInstance(Puzzle puzzle) {
       super(puzzle);

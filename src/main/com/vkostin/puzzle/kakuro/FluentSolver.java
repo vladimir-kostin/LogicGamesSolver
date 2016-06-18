@@ -18,24 +18,12 @@ public class FluentSolver implements Solver {
   static class SolverInstance extends AbstractFluentCheckSingleChangeSolverInstance {
 
     final private List<Integer> _assumptions;
-    final private List<FluentCell> _valueCells;
 
     public SolverInstance(final Puzzle puzzle) {
       super(puzzle);
       _assumptions = IntStream.rangeClosed(Rules.MIN_ALLOWED_VALUE, Rules.MAX_ALLOWED_VALUE)
               .boxed()
               .collect(Collectors.toList());
-      _valueCells = _fluentPuzzle.cells().stream()
-              .filter(cell -> cell.cell() instanceof ValueCell)
-              .collect(Collectors.toList());
-    }
-
-    @Override
-    protected FluentCell findUnsolvedCell() {
-      return _valueCells.stream()
-              .filter(this::isValueCellUnsolved)
-              .findFirst()
-              .orElse(null);
     }
 
     @Override

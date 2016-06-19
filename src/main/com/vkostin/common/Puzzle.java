@@ -1,18 +1,18 @@
 package com.vkostin.common;
 
 public interface Puzzle {
-  int getRowCount();
-  int getRowLength();
-  Cell getCellAt(int rowIndex, int columnIndex);
+  int rowCount();
+  int rowLength();
+  Cell at(int rowIndex, int columnIndex);
 
   default boolean isEqualToPuzzle(Puzzle other) {
-    if (getRowCount() != other.getRowCount()) return false;
-    if (getRowLength() != other.getRowLength()) return false;
+    if (rowCount() != other.rowCount()) return false;
+    if (rowLength() != other.rowLength()) return false;
 
-    for (int rowIndex = 0; rowIndex < getRowCount(); rowIndex++) {
-      for (int columnIndex = 0; columnIndex < getRowLength(); columnIndex++) {
-        if (!getCellAt(rowIndex, columnIndex).equals(
-                other.getCellAt(rowIndex, columnIndex))) {
+    for (int rowIndex = 0; rowIndex < rowCount(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < rowLength(); columnIndex++) {
+        if (!at(rowIndex, columnIndex).equals(
+                other.at(rowIndex, columnIndex))) {
           return false;
         }
       }

@@ -30,7 +30,7 @@ public class FluentSolver implements com.vkostin.common.Solver {
     }
 
     private ValueCell valueCellAt(int row, int col) {
-      return (ValueCell) _puzzle.getCellAt(row, col);
+      return (ValueCell) _puzzle.at(row, col);
     }
 
     @Override
@@ -55,17 +55,17 @@ public class FluentSolver implements com.vkostin.common.Solver {
 
     private boolean doesColumnContainError(final int col) {
       List<ValueCell> valueCells = new ArrayList<>();
-      for (int rowIndex = 0; rowIndex < _puzzle.getRowCount() - 1; rowIndex++) {
+      for (int rowIndex = 0; rowIndex < _puzzle.rowCount() - 1; rowIndex++) {
         valueCells.add(valueCellAt(rowIndex, col));
       }
 
-      int expectedSumOfValues = ((TaskCell)_puzzle.getCellAt(_puzzle.getRowCount()-1, col)).getSumOfValuesAbove();
+      int expectedSumOfValues = ((TaskCell)_puzzle.at(_puzzle.rowCount()-1, col)).getSumOfValuesAbove();
       return ValueCell.doValueCellsFailToMeetExpectation(expectedSumOfValues, valueCells, Rules::hasProperValue, true);
     }
 
     private boolean areAllProperValueUniqueInRow(final int row) {
       List<ValueCell> valueCellsWithProperValues = new ArrayList<>();
-      for (int colIndex = 0; colIndex < _puzzle.getRowLength(); colIndex++) {
+      for (int colIndex = 0; colIndex < _puzzle.rowLength(); colIndex++) {
         Optional.of(valueCellAt(row, colIndex))
                 .filter(Rules::hasProperValue)
                 .ifPresent(valueCellsWithProperValues::add);
@@ -88,9 +88,9 @@ public class FluentSolver implements com.vkostin.common.Solver {
     }
 
     private boolean threeConsecutiveValueCellsInRowDoNotHaveValuesEqualTo(final int valueToCheck, final int rowIndex, final int lowestColumnIndex) {
-      if (0 > rowIndex || _puzzle.getRowCount() - 1 <= rowIndex) return true;
+      if (0 > rowIndex || _puzzle.rowCount() - 1 <= rowIndex) return true;
 
-      for (int colIndex = Math.max(lowestColumnIndex, 0); colIndex <= Math.min(lowestColumnIndex + 2, _puzzle.getRowLength() - 1); colIndex++) {
+      for (int colIndex = Math.max(lowestColumnIndex, 0); colIndex <= Math.min(lowestColumnIndex + 2, _puzzle.rowLength() - 1); colIndex++) {
         if (Optional.of(valueCellAt(rowIndex, colIndex))
                 .filter(Rules::hasProperValue)
                 .map(ValueCell::getValue)

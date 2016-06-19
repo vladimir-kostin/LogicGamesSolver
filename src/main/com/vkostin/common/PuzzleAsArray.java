@@ -13,11 +13,11 @@ public class PuzzleAsArray implements Puzzle {
   }
 
   @Override
-  public int getRowCount() { return cells.length; }
+  public int rowCount() { return cells.length; }
   @Override
-  public int getRowLength() { return cells[0].length; }
+  public int rowLength() { return cells[0].length; }
   @Override
-  public Cell getCellAt(int rowIndex, int columnIndex) { return cells[rowIndex][columnIndex]; }
+  public Cell at(int rowIndex, int columnIndex) { return cells[rowIndex][columnIndex]; }
 
   @Override
   public boolean equals(Object o) {

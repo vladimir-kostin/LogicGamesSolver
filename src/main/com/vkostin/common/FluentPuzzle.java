@@ -13,19 +13,19 @@ public class FluentPuzzle {
 
   private List<FluentCell> buildFluentCells(Puzzle puzzle) {
     List<FluentCell> fluentCells = new ArrayList<>();
-    for (int rowIndex = 0; rowIndex < puzzle.getRowCount(); rowIndex++) {
-      for (int colIndex = 0; colIndex < puzzle.getRowLength(); colIndex++) {
-        fluentCells.add(new FluentCell(this, puzzle.getCellAt(rowIndex, colIndex), new CellAddress(rowIndex, colIndex)));
+    for (int rowIndex = 0; rowIndex < puzzle.rowCount(); rowIndex++) {
+      for (int colIndex = 0; colIndex < puzzle.rowLength(); colIndex++) {
+        fluentCells.add(new FluentCell(this, puzzle.at(rowIndex, colIndex), new CellAddress(rowIndex, colIndex)));
       }
     }
     return fluentCells;
   }
 
   public FluentCell at(CellAddress address) {
-    if (0 > address.row() || _puzzle.getRowCount() <= address.row()
-            || 0 > address.col() || _puzzle.getRowLength() <= address.col()) return null;
+    if (0 > address.row() || _puzzle.rowCount() <= address.row()
+            || 0 > address.col() || _puzzle.rowLength() <= address.col()) return null;
 
-    int index = address.row() * _puzzle.getRowLength() + address.col();
+    int index = address.row() * _puzzle.rowLength() + address.col();
     return _cells.get(index);
   }
 

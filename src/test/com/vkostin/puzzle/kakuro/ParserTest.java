@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 public class ParserTest {
 
-  private Function<Cell[][], Puzzle> createPuzzle = PuzzleAsList::new;
+  private Function<Cell[][], Puzzle> createPuzzle = PuzzleAsArray::new;
   private com.vkostin.puzzle.kakuro.Parser parser;
 
   @Before

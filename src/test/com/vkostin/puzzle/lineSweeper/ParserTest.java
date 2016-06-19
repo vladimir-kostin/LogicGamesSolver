@@ -1,9 +1,6 @@
 package com.vkostin.puzzle.lineSweeper;
 
-import com.vkostin.common.Cell;
-import com.vkostin.common.Puzzle;
-import com.vkostin.common.PuzzleAsList;
-import com.vkostin.common.PuzzleBuilder;
+import com.vkostin.common.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +8,7 @@ import org.junit.Test;
 import java.util.function.Function;
 
 public class ParserTest {
-  private Function<Cell[][], Puzzle> createPuzzle = PuzzleAsList::new;
+  private Function<Cell[][], Puzzle> createPuzzle = PuzzleAsArray::new;
   private Parser parser;
 
   @Before

@@ -33,7 +33,7 @@ public abstract class AbstractFluentCheckSingleChangeSolverInstance {
             .orElse(null);
   }
 
-  private Puzzle finalizeSolvedPuzzle(final Puzzle puzzle) { return puzzle; }
+  protected Puzzle finalizeSolvedPuzzle(final Puzzle puzzle) { return puzzle; }
 
   protected abstract boolean isValueCellUnsolved(FluentCell cell);
   protected abstract Iterable<? extends Object> assumptionsToBeMade();

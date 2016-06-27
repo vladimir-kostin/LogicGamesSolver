@@ -11,6 +11,7 @@ public abstract class AnotherSolverInstance<VC extends AValueCell<V>, V extends 
 
   public AnotherSolverInstance(final Puzzle puzzle) {
     this._puzzle = puzzle;
+    // TODO: either parser MUST parse to proper class, or conversion upon new CFluentPuzzle
     this._fluentPuzzle = new CFluentPuzzle(puzzle);
     _valueCells = this._fluentPuzzle.cells().stream()
             .filter(c -> null != c.cell().as(valueCellClass()))
@@ -40,7 +41,7 @@ public abstract class AnotherSolverInstance<VC extends AValueCell<V>, V extends 
 
   private Optional<CFluentCell<VC>> findUnsolvedCell() {
     return _valueCells.stream()
-            .filter(vc -> null != vc.cell().value())
+            .filter(vc -> null == vc.cell().value())
             .findFirst();
   }
 

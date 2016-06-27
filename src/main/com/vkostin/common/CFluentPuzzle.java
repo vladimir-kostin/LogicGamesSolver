@@ -11,8 +11,8 @@ public class CFluentPuzzle {
     this._cells = Collections.unmodifiableList(buildFluentValueCells(puzzle));
   }
 
-  private List<CFluentCell> buildFluentValueCells(final Puzzle puzzle) {
-    List<CFluentCell> cells = new ArrayList<>();
+  private List<CFluentCell<? extends Cell>> buildFluentValueCells(final Puzzle puzzle) {
+    List<CFluentCell<? extends Cell>> cells = new ArrayList<>();
     for (int row = 0; row < _puzzle.rowCount(); row++) {
       for (int col = 0; col < _puzzle.rowLength(); col++) {
         cells.add(new CFluentCell<>(this, puzzle.at(row, col), new CellAddress(row, col)));

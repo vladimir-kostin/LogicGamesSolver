@@ -2,6 +2,8 @@ package com.vkostin.puzzle.kakuro;
 
 import com.vkostin.common.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class AnotherSolver implements Solver {
@@ -34,16 +36,47 @@ public class AnotherSolver implements Solver {
     }
 
     private boolean isAnyRuleBrokenToAbove(final CFluentCell<IntegerValueCell> cell) {
-      CFluentCell<CRules.KakuroTaskCell> taskCellAbove;
       Optional<CFluentCell<? extends Cell>> cellAbove = Optional.of(cell);
       do {
-        cellAbove.map(c -> c.neighbourTo(Direction.UP));
-      } while (cellAbove.)
-      return false;
+        cellAbove = cellAbove.flatMap(CFluentCell::neighbourUpwards);
+      } while (cellAbove.filter(c -> c.cell() instanceof ValueCell).isPresent());
+      CFluentCell<CRules.KakuroTaskCell> taskCellAbove = (CFluentCell<CRules.KakuroTaskCell>) cellAbove.get();
+
+      List<ValueCell> valueCellsBelow = new ArrayList<>();
+      for (Optional<CFluentCell<? extends Cell>> below = cellAbove.flatMap(CFluentCell::neighbourDownwards);
+           below.map(CFluentCell::cell).filter(c -> c instanceof ValueCell).isPresent();
+           below = below.flatMap(CFluentCell::neighbourDownwards)) {
+
+        valueCellsBelow.add((ValueCell) below.map(CFluentCell::cell).get());
+      }
+
+      return ValueCell.doValueCellsFailToMeetExpectation(
+              taskCellAbove.cell().task().sumOfValuesBelow()
+              , valueCellsBelow
+              , Rules::hasProperValue
+              , false);
     }
 
     private boolean isAnyRuleBrokenToTheLeft(final CFluentCell<IntegerValueCell> cell) {
-      return false;
+      Optional<CFluentCell<? extends Cell>> cellToTheLeft = Optional.of(cell);
+      do {
+        cellToTheLeft = cellToTheLeft.flatMap(CFluentCell::neighbourToTheLeft);
+      } while (cellToTheLeft.filter(c -> c.cell() instanceof ValueCell).isPresent());
+      CFluentCell<CRules.KakuroTaskCell> taskCellToTheLeft = (CFluentCell<CRules.KakuroTaskCell>) cellToTheLeft.get();
+
+      List<ValueCell> valueCellsToTheRight = new ArrayList<>();
+      for (Optional<CFluentCell<? extends Cell>> onTheRight = cellToTheLeft.flatMap(CFluentCell::neighbourToTheRight);
+              onTheRight.map(CFluentCell::cell).filter(c -> c instanceof ValueCell).isPresent();
+              onTheRight = onTheRight.flatMap(CFluentCell::neighbourToTheRight)) {
+
+        valueCellsToTheRight.add((ValueCell) onTheRight.map(CFluentCell::cell).get());
+      }
+
+      return ValueCell.doValueCellsFailToMeetExpectation(
+              taskCellToTheLeft.cell().task().sumOfValuesOnTheRight()
+              , valueCellsToTheRight
+              , Rules::hasProperValue
+              , false);
     }
 
   }

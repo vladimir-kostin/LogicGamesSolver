@@ -62,4 +62,11 @@ public class ValueCell implements Cell {
   @Override
   public int hashCode() { return Objects.hash(value); }
 
+  @Override
+  public String toString() {
+    return "ValueCell{" +
+            "value=" + value +
+            '}';
+  }
+
 }

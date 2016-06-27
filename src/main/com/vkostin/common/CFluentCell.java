@@ -25,4 +25,20 @@ public class CFluentCell<C extends Cell> {
     return _puzzle.at(_address.neighbourAddressTo(direction));
   }
 
+  public Optional<CFluentCell<? extends Cell>> neighbourDownwards() {
+    return neighbourTo(Direction.DOWN);
+  }
+
+  public Optional<CFluentCell<? extends Cell>> neighbourUpwards() {
+    return neighbourTo(Direction.UP);
+  }
+
+  public Optional<CFluentCell<? extends Cell>> neighbourToTheLeft() {
+    return neighbourTo(Direction.DOWN);
+  }
+
+  public Optional<CFluentCell<? extends Cell>> neighbourToTheRight() {
+    return neighbourTo(Direction.UP);
+  }
+
 }

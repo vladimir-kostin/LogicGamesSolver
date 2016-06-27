@@ -29,4 +29,13 @@ class TaskCell implements Cell {
 
   @Override
   public int hashCode() { return Objects.hash(sumOfValuesBelow, sumOfValuesOnTheRight); }
+
+  @Override
+  public String toString() {
+    return "TaskCell{" +
+            "sumOfValuesBelow=" + sumOfValuesBelow +
+            ", sumOfValuesOnTheRight=" + sumOfValuesOnTheRight +
+            '}';
+  }
+
 }

@@ -34,11 +34,11 @@ public class CFluentCell<C extends Cell> {
   }
 
   public Optional<CFluentCell<? extends Cell>> neighbourToTheLeft() {
-    return neighbourTo(Direction.DOWN);
+    return neighbourTo(Direction.LEFT);
   }
 
   public Optional<CFluentCell<? extends Cell>> neighbourToTheRight() {
-    return neighbourTo(Direction.UP);
+    return neighbourTo(Direction.RIGHT);
   }
 
 }

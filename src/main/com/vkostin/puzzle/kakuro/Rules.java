@@ -1,6 +1,10 @@
 package com.vkostin.puzzle.kakuro;
 
+import com.vkostin.common.IntegerValue;
+import com.vkostin.common.IntegerValueCell;
 import com.vkostin.common.ValueCell;
+
+import java.util.Optional;
 
 class Rules {
   public static final int MIN_ALLOWED_VALUE = 1;
@@ -16,6 +20,16 @@ class Rules {
 
   public static boolean hasUnsolvedValue(ValueCell valueCell) {
     return !hasProperValue(valueCell);
+  }
+
+  public static boolean hasProperValue(IntegerValueCell cell) {
+    int value = Optional.of(cell)
+            .map(IntegerValueCell::value)
+            .map(IntegerValue::value)
+            .orElse(UNSOLVED_VALUE);
+
+    return MIN_ALLOWED_VALUE <= value
+            && MAX_ALLOWED_VALUE >= value;
   }
 
 }

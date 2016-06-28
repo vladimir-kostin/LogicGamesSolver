@@ -39,18 +39,18 @@ public class AnotherSolver implements Solver {
       Optional<CFluentCell<? extends Cell>> cellAbove = Optional.of(cell);
       do {
         cellAbove = cellAbove.flatMap(CFluentCell::neighbourUpwards);
-      } while (cellAbove.filter(c -> c.cell() instanceof ValueCell).isPresent());
+      } while (cellAbove.filter(c -> c.cell() instanceof IntegerValueCell).isPresent());
       CFluentCell<CRules.KakuroTaskCell> taskCellAbove = (CFluentCell<CRules.KakuroTaskCell>) cellAbove.get();
 
-      List<ValueCell> valueCellsBelow = new ArrayList<>();
+      List<IntegerValueCell> valueCellsBelow = new ArrayList<>();
       for (Optional<CFluentCell<? extends Cell>> below = cellAbove.flatMap(CFluentCell::neighbourDownwards);
-           below.map(CFluentCell::cell).filter(c -> c instanceof ValueCell).isPresent();
+           below.map(CFluentCell::cell).filter(c -> c instanceof IntegerValueCell).isPresent();
            below = below.flatMap(CFluentCell::neighbourDownwards)) {
 
-        valueCellsBelow.add((ValueCell) below.map(CFluentCell::cell).get());
+        valueCellsBelow.add((IntegerValueCell) below.map(CFluentCell::cell).get());
       }
 
-      return ValueCell.doValueCellsFailToMeetExpectation(
+      return IntegerValueCell.doCellsFailToMeetExpectation(
               taskCellAbove.cell().task().sumOfValuesBelow()
               , valueCellsBelow
               , Rules::hasProperValue
@@ -61,18 +61,18 @@ public class AnotherSolver implements Solver {
       Optional<CFluentCell<? extends Cell>> cellToTheLeft = Optional.of(cell);
       do {
         cellToTheLeft = cellToTheLeft.flatMap(CFluentCell::neighbourToTheLeft);
-      } while (cellToTheLeft.filter(c -> c.cell() instanceof ValueCell).isPresent());
+      } while (cellToTheLeft.filter(c -> c.cell() instanceof IntegerValueCell).isPresent());
       CFluentCell<CRules.KakuroTaskCell> taskCellToTheLeft = (CFluentCell<CRules.KakuroTaskCell>) cellToTheLeft.get();
 
-      List<ValueCell> valueCellsToTheRight = new ArrayList<>();
+      List<IntegerValueCell> valueCellsToTheRight = new ArrayList<>();
       for (Optional<CFluentCell<? extends Cell>> onTheRight = cellToTheLeft.flatMap(CFluentCell::neighbourToTheRight);
-              onTheRight.map(CFluentCell::cell).filter(c -> c instanceof ValueCell).isPresent();
+              onTheRight.map(CFluentCell::cell).filter(c -> c instanceof IntegerValueCell).isPresent();
               onTheRight = onTheRight.flatMap(CFluentCell::neighbourToTheRight)) {
 
-        valueCellsToTheRight.add((ValueCell) onTheRight.map(CFluentCell::cell).get());
+        valueCellsToTheRight.add((IntegerValueCell) onTheRight.map(CFluentCell::cell).get());
       }
 
-      return ValueCell.doValueCellsFailToMeetExpectation(
+      return IntegerValueCell.doCellsFailToMeetExpectation(
               taskCellToTheLeft.cell().task().sumOfValuesOnTheRight()
               , valueCellsToTheRight
               , Rules::hasProperValue

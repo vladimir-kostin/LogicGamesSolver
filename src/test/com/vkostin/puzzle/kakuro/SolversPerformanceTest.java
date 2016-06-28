@@ -20,7 +20,21 @@ public class SolversPerformanceTest {
 
   @Test(timeout = 60000)
   public void testAnotherSolver() {
-    TestUtils.assertSolving(TestData.ALL_TEST_DATA, parser, anotherSolver);
+    TestUtils.assertSolving(TestData.ALL_TEST_DATA, new AnotherParser(PuzzleAsArray::new), anotherSolver);
+  }
+
+  @Test(timeout = 60000)
+  public void testFluentSolver10times() {
+    for (int j = 0; j < 10; j++) {
+      testFluentSolver();
+    }
+  }
+
+  @Test(timeout = 60000)
+  public void testAnotherSolver10times() {
+    for (int j = 0; j < 10; j++) {
+      testAnotherSolver();
+    }
   }
 
 }
